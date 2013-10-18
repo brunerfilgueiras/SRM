@@ -54,6 +54,7 @@ public class EntradaSearchView extends javax.swing.JFrame {
 
         jLabel1.setText("Número:");
 
+        jbConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         jbConsultar.setText("Consultar");
 
         jbIncluir.setText("Incluir");
@@ -119,7 +120,7 @@ public class EntradaSearchView extends javax.swing.JFrame {
                             .addComponent(jbAlterar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jbExcluir)))
-                    .addContainerGap(434, Short.MAX_VALUE)))
+                    .addContainerGap(414, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,11 +144,10 @@ public class EntradaSearchView extends javax.swing.JFrame {
                         .addComponent(jbIncluir)
                         .addComponent(jbAlterar)
                         .addComponent(jbExcluir))
-                    .addContainerGap(308, Short.MAX_VALUE)))
+                    .addContainerGap(306, Short.MAX_VALUE)))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirActionPerformed

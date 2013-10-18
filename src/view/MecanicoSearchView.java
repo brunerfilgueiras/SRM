@@ -46,7 +46,6 @@ public class MecanicoSearchView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jtParametro.setText("jTextField1");
         jtParametro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtParametroActionPerformed(evt);

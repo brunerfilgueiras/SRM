@@ -111,8 +111,26 @@ public class UsuarioDAO {
     
     
     
-    public boolean login (){
-        return true;
+    public Usuario login(Usuario usuario){
+       EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate(); 
+     List<Usuario> resultado = new ArrayList<Usuario>();
+       
+      
+       Criteria crit = session.createCriteria(Usuario.class);
+      crit.add(Restrictions.ilike("login", usuario.getLogin()));
+      crit.add(Restrictions.ilike("senha", usuario.getSenha()));
+      resultado =  crit.list();   
+        
+    if(resultado == null) {   
+       return resultado.get(0); 
+    }else{
+       return resultado.get(0);  
+    }   
+        
+        
+        
+       
     }
     
     

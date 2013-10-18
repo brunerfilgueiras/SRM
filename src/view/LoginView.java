@@ -4,6 +4,7 @@
  */
 package view;
 
+import dao.UsuarioDAO;
 import model.Usuario;
 
 /**
@@ -46,7 +47,10 @@ public class LoginView extends javax.swing.JFrame {
 
         jLabel2.setText("Login:");
 
+<<<<<<< HEAD
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\SRM\\icons\\Login.png")); // NOI18N
+=======
+>>>>>>> 35295323c1cc3883ee0b2874ebd5da07e78d98e0
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,9 +120,17 @@ public class LoginView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Usuario logado = Usuario.getInstacia();
-        logado.setPerfil("Administrador");
+       logado.setNomeCompleto(null);
         
-        if(true){
+        logado.setLogin(jtLogin.getText());
+        logado.setSenha(jtSenha.getText());
+        
+        UsuarioDAO  usuarioDAO = UsuarioDAO.getInstacia();
+        
+       
+        logado = usuarioDAO.login(logado);
+        
+        if(logado.getNomeCompleto()!=null){
         
             SRMView janelaPrincipal = new SRMView(logado);
             janelaPrincipal.setVisible(true);

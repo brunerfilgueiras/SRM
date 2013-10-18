@@ -4,6 +4,9 @@
  */
 package view;
 
+import controller.MecanicoController;
+import model.Mecanico;
+
 /**
  *
  * @author secinfor-04
@@ -42,10 +45,6 @@ public class MecanicoEditView extends javax.swing.JFrame {
         jLabel1.setText("Nome Completo:");
 
         jLabel2.setText("Nome de Guerra:");
-
-        jtNomeCompleto.setText("jTextField1");
-
-        jtNomeGuerra.setText("jTextField1");
 
         jcbPosto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um item", "Cel", "Ten Cel", "Maj", "Cap", "1º Ten", "2º Ten", "Asp", "S Ten", "1º Sgt", "2º Sgt", "3º Sgt", "Cb", "Sd" }));
         jcbPosto.addActionListener(new java.awt.event.ActionListener() {
@@ -115,10 +114,52 @@ public class MecanicoEditView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
+        
+        this.dispose();
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jbSairActionPerformed
 
     private void jcbPostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPostoActionPerformed
+        
+        
+        
+         MecanicoController mecanicoController = MecanicoController.getInstacia();
+       
+     mecanico = Mecanico.getInstacia();
+       
+     
+     if(campoObrigatorio()==null){
+      usuario.setPerfil((String) jcbPerfil.getSelectedItem());
+      usuario.setPosto((String) jcbPosto.getSelectedItem());
+      usuario.setLogin(jtLogin.getText());
+      usuario.setNomeCompleto(jtNomeCompleto.getText());
+      usuario.setNomeGuerra(jtNomeGuerra.getText());
+      usuario.setSenha(jtSenha.getText()); 
+        
+        
+      
+      
+      if(usuarioController.persistir(usuario)){
+          
+          JOptionPane.showMessageDialog(jtNomeCompleto, "Usuario Gravado Com sucesso!", null, 1);
+          
+          this.dispose();
+      }else{
+          
+          JOptionPane.showMessageDialog(jtNomeCompleto, "Falha ao Salvar Usuario!!", null, 2);
+      }
+        
+     }else{  
+         
+        JOptionPane.showMessageDialog(jtNomeCompleto, campoObrigatorio(), null, 2); 
+     }
+        
+        
+        
+        
+        
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbPostoActionPerformed
 
@@ -141,6 +182,44 @@ public class MecanicoEditView extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+    // metodo que valida Campo em Branco
+    private String campoObrigatorio(){
+       
+        String vazio = "Campo Obrigatorio Em Branco ou Não Selecionado: ";
+       boolean msg = false;
+       
+        if(jtNomeCompleto.getText().equals("")){
+          
+            vazio = vazio + "\n Nome Completo ";
+            
+        msg = true; 
+        }
+        if(jtNomeGuerra.getText().equals("")){
+          
+            vazio = vazio + "\n Nome de Guerra ";
+            
+          msg = true;
+        }
+      
+        if(jcbPosto.getSelectedItem().equals("Selecione um item")){
+          
+            vazio = vazio + " \n Posto/Graduação ";
+            
+         msg = true; 
+        }
+             
+        if(msg){
+        
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
