@@ -4,6 +4,10 @@
  */
 package view;
 
+import dao.MecanicoDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Mecanico;
 import model.Usuario;
 
 /**
@@ -11,7 +15,8 @@ import model.Usuario;
  * @author secinfor-04
  */
 public class MecanicoSearchView extends javax.swing.JFrame {
-
+    private List<Mecanico> mecanicos;
+    private Mecanico mecanico;
     /**
      * Creates new form MecanicoSearchView
      */
@@ -19,6 +24,7 @@ public class MecanicoSearchView extends javax.swing.JFrame {
     public MecanicoSearchView(Usuario usuario){
         initComponents();
         permissao(usuario);
+        carregaTabela();
     }
     public MecanicoSearchView() {
         initComponents();
@@ -159,6 +165,7 @@ public class MecanicoSearchView extends javax.swing.JFrame {
 
         MecanicoEditView janelaMecanico = new MecanicoEditView();
         janelaMecanico.setVisible(true);// TODO add your handling code here:
+        this.dispose();
         
     }//GEN-LAST:event_jbIncluirActionPerformed
 
@@ -208,6 +215,24 @@ public class MecanicoSearchView extends javax.swing.JFrame {
       if (!usuario.getPerfil().equals("Administrador")){
         jbExcluir.setVisible(false);
     }
+    }
+    
+     //caregadados na tabela
+    private void carregaTabela(){
+        MecanicoDAO mecanicoDAO = MecanicoDAO.getInstacia();
+        mecanicos = mecanicoDAO.listaTodos();
+    
+       DefaultTableModel modelo = (DefaultTableModel) jtMecanicos.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<mecanicos.size();i++){
+         
+         mecanico = mecanicos.get(i);
+        
+         modelo.addRow(new String[]{mecanico.getId().toString(), mecanico.getNomeCompleto(), mecanico.getNomeGuerra(),mecanico.getPosto()});
+    
+       }
+      
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
