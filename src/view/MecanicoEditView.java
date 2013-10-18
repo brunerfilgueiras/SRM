@@ -5,6 +5,7 @@
 package view;
 
 import controller.MecanicoController;
+import javax.swing.JOptionPane;
 import model.Mecanico;
 
 /**
@@ -12,7 +13,7 @@ import model.Mecanico;
  * @author secinfor-04
  */
 public class MecanicoEditView extends javax.swing.JFrame {
-
+Mecanico mecanico;
     /**
      * Creates new form MecanicoEditView
      */
@@ -61,6 +62,11 @@ public class MecanicoEditView extends javax.swing.JFrame {
         });
 
         jbGravar.setText("Gravar");
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,36 +130,7 @@ public class MecanicoEditView extends javax.swing.JFrame {
         
         
         
-         MecanicoController mecanicoController = MecanicoController.getInstacia();
-       
-     mecanico = Mecanico.getInstacia();
-       
-     
-     if(campoObrigatorio()==null){
-      usuario.setPerfil((String) jcbPerfil.getSelectedItem());
-      usuario.setPosto((String) jcbPosto.getSelectedItem());
-      usuario.setLogin(jtLogin.getText());
-      usuario.setNomeCompleto(jtNomeCompleto.getText());
-      usuario.setNomeGuerra(jtNomeGuerra.getText());
-      usuario.setSenha(jtSenha.getText()); 
         
-        
-      
-      
-      if(usuarioController.persistir(usuario)){
-          
-          JOptionPane.showMessageDialog(jtNomeCompleto, "Usuario Gravado Com sucesso!", null, 1);
-          
-          this.dispose();
-      }else{
-          
-          JOptionPane.showMessageDialog(jtNomeCompleto, "Falha ao Salvar Usuario!!", null, 2);
-      }
-        
-     }else{  
-         
-        JOptionPane.showMessageDialog(jtNomeCompleto, campoObrigatorio(), null, 2); 
-     }
         
         
         
@@ -162,6 +139,43 @@ public class MecanicoEditView extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbPostoActionPerformed
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+         MecanicoController mecanicoController = MecanicoController.getInstacia();
+       
+     mecanico = Mecanico.getInstacia();
+       
+     
+     if(campoObrigatorio()==null){
+      
+      mecanico.setPosto((String) jcbPosto.getSelectedItem());
+     
+      mecanico.setNomeCompleto(jtNomeCompleto.getText());
+      mecanico.setNomeGuerra(jtNomeGuerra.getText());
+    
+        
+        
+      
+      
+      if(mecanicoController.persistir(mecanico)){
+          
+          JOptionPane.showMessageDialog(jtNomeCompleto, "Mecanico Gravado Com sucesso!", null, 1);
+          
+          this.dispose();
+      }else{
+          
+          JOptionPane.showMessageDialog(jtNomeCompleto, "Falha ao Salvar Mecanico!!", null, 2);
+      }
+        
+     }else{  
+         
+        JOptionPane.showMessageDialog(jtNomeCompleto, campoObrigatorio(), null, 2); 
+     }
+    }//GEN-LAST:event_jbGravarActionPerformed
 
     /**
      * @param args the command line arguments
