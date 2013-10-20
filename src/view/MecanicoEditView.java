@@ -17,6 +17,14 @@ Mecanico mecanico;
     /**
      * Creates new form MecanicoEditView
      */
+
+public MecanicoEditView(Mecanico mecanico) {
+        initComponents();
+        carregaDados(mecanico);
+        
+    }
+
+
     public MecanicoEditView() {
         initComponents();
     }
@@ -233,6 +241,18 @@ Mecanico mecanico;
         return vazio = null;
     }
        }
+    //carrega dados para alterar 
+    private void carregaDados(Mecanico mecanico){
+       
+     
+      
+        jtNomeCompleto.setText(mecanico.getNomeCompleto());
+        jtNomeGuerra.setText(mecanico.getNomeGuerra());
+        jcbPosto.setSelectedItem(mecanico.getPosto());
+        jtNomeCompleto.setEditable(false);
+        
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

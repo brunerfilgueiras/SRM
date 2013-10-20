@@ -99,15 +99,17 @@ public class LoginView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Usuario logado = Usuario.getInstacia();
-       logado.setNomeCompleto(null);
+        logado.setNomeCompleto(null);
+       logado.setNomeCompleto("andre");
+        logado.setPerfil("Administrador");
         
         logado.setLogin(jtLogin.getText());
         logado.setSenha(jtSenha.getText());
         
-        UsuarioDAO  usuarioDAO = UsuarioDAO.getInstacia();
+      // UsuarioDAO  usuarioDAO = UsuarioDAO.getInstacia();
         
        
-        logado = usuarioDAO.login(logado);
+       // logado = usuarioDAO.login(logado);
         
         if(logado.getNomeCompleto()!=null){
         

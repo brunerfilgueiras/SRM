@@ -4,8 +4,10 @@
  */
 package view;
 
+import controller.MecanicoController;
 import dao.MecanicoDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Mecanico;
 import model.Usuario;
@@ -59,6 +61,11 @@ public class MecanicoSearchView extends javax.swing.JFrame {
         });
 
         jbConsultar.setText("Consultar");
+        jbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarActionPerformed(evt);
+            }
+        });
 
         jbIncluir.setText("Incluir");
         jbIncluir.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +82,11 @@ public class MecanicoSearchView extends javax.swing.JFrame {
         });
 
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jtMecanicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,11 +182,59 @@ public class MecanicoSearchView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-       MecanicoEditView janelaMecanico = new MecanicoEditView();
+       MecanicoEditView janelaMecanico = new MecanicoEditView(seleciona());
         janelaMecanico.setVisible(true);
-        
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        // TODO add your handling code here:
+      MecanicoController mecanicoController =  MecanicoController.getInstacia();
+       
+       if(seleciona() != null){
+        
+        if(mecanicoController.deletar(seleciona())){
+            JOptionPane.showMessageDialog(rootPane, "Usuario Excluido com sucesso!");
+                        
+            carregaTabela();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir  Usuario!", null, 2);
+        }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Usuario Não selecionado!",null , 2);
+        }
+
+
+
+
+    }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        // TODO add your handling code here:
+
+        
+        
+       
+                 if(jcbParametro.getSelectedItem().equals("Nome Completo")){
+                   mecanico = Mecanico.getInstacia();
+                   mecanico.setNomeGuerra(null);
+                    mecanico.setNomeCompleto(jtParametro.getText());
+                    carregaConsulta(mecanico);  
+                   
+                }else{
+                     mecanico = Mecanico.getInstacia();
+                     mecanico.setNomeCompleto(null);
+                    mecanico.setNomeGuerra(jtParametro.getText());
+                    carregaConsulta(mecanico);  
+                     
+                  } 
+
+
+
+
+
+    }//GEN-LAST:event_jbConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,6 +276,25 @@ public class MecanicoSearchView extends javax.swing.JFrame {
         jbExcluir.setVisible(false);
     }
     }
+    //carraga consulta
+     private void carregaConsulta(Mecanico mecannico){
+        MecanicoDAO mecanicoDAO = MecanicoDAO.getInstacia();
+        mecanicos = mecanicoDAO.consulta(mecanico);
+    
+        
+       DefaultTableModel modelo = (DefaultTableModel) jtMecanicos.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<mecanicos.size();i++){
+                        
+         modelo.addRow(new String[]{mecanicos.get(i).getId().toString(), mecanicos.get(i).getNomeCompleto(),
+             mecanicos.get(i).getNomeGuerra(),mecanicos.get(i).getPosto()});
+    
+       }
+      
+    }
+    
+    
     
      //caregadados na tabela
     private void carregaTabela(){
@@ -234,6 +313,17 @@ public class MecanicoSearchView extends javax.swing.JFrame {
        }
       
     }
+    
+    private Mecanico seleciona(){
+    
+       int linha = jtMecanicos.getSelectedRow();
+       if(linha != -1){
+       mecanico = mecanicos.get(linha);
+       return mecanico;
+       }else{
+        return mecanico = null;
+       }
+    }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

@@ -4,15 +4,31 @@
  */
 package view;
 
+import controller.FornecedorController;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Fornecedor;
+import model.Mecanico;
+
 /**
  *
  * @author secinfor-04
  */
 public class FornecedorEditView extends javax.swing.JFrame {
-
+Fornecedor fornecedor;
     /**
      * Creates new form FornecedorEditView
      */
+
+public FornecedorEditView(Fornecedor fornecedor) {
+        initComponents();
+        
+        
+        
+    }
+
     public FornecedorEditView() {
         initComponents();
     }
@@ -35,7 +51,7 @@ public class FornecedorEditView extends javax.swing.JFrame {
         jtNome = new javax.swing.JTextField();
         jtCNPJ = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        JtContato = new javax.swing.JTextField();
+        jtContato = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jtRua = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -64,6 +80,11 @@ public class FornecedorEditView extends javax.swing.JFrame {
         });
 
         jbGravar.setText("Gravar");
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nome:");
 
@@ -77,7 +98,7 @@ public class FornecedorEditView extends javax.swing.JFrame {
 
         jLabel6.setText("Contato:");
 
-        JtContato.setText("jTextField4");
+        jtContato.setText("jTextField4");
 
         jLabel5.setText("Rua:");
 
@@ -169,7 +190,7 @@ public class FornecedorEditView extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JtContato, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtContato, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,7 +216,7 @@ public class FornecedorEditView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(JtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -231,7 +252,63 @@ public class FornecedorEditView extends javax.swing.JFrame {
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
         // TODO add your handling code here:
+        
+        this.dispose();
     }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        // TODO add your handling code here:
+        
+        FornecedorController fornecedorController = FornecedorController.getInstacia();
+       
+     fornecedor = Fornecedor.getInstacia();
+       
+     
+     if(campoObrigatorio()==null){
+      
+      fornecedor.setNome(jtNome.getText());
+      fornecedor.setCnpj(jtCNPJ.getText());
+      fornecedor.setContato(jtContato.getText());
+      fornecedor.setTelefone(jtTelefone.getText());
+      
+      fornecedor.setRua(jtRua.getText());
+      fornecedor.setNumero(jtNumero.getText());
+      fornecedor.setEstado(jtEstado.getText());
+      fornecedor.setComplemento(jtComplemento.getText());
+      fornecedor.setCidade(jtCidade.getText());
+      fornecedor.setCep(jtCEP.getText());
+      fornecedor.setBairro(jtBairro.getText());
+    
+        
+        
+      
+      
+      if(fornecedorController.persistir(fornecedor)){
+          
+          JOptionPane.showMessageDialog(jtNome, "Fornecedor Gravado Com sucesso!", null, 1);
+          
+          this.dispose();
+      }else{
+          
+          JOptionPane.showMessageDialog(jtNome, "Falha ao Salvar Fornecedor!!", null, 2);
+      }
+        
+     }else{  
+         
+        JOptionPane.showMessageDialog(jtNome, campoObrigatorio(), null, 2); 
+     }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbGravarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,8 +344,57 @@ public class FornecedorEditView extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    private String campoObrigatorio(){
+       
+        String vazio = "Campo Obrigatorio Em Branco : ";
+       boolean msg = false;
+       
+        if(jtNome.getText().equals("")){
+          
+            vazio = vazio + "\n Nome ";
+            
+        msg = true; 
+        }
+        if(jtTelefone.getText().equals("")){
+          
+            vazio = vazio + "\n Telefone ";
+            
+          msg = true;
+        }
+      
+        if(jtCNPJ.getText().equals("")){
+          
+            vazio = vazio + " \n CNPJ ";
+            
+         msg = true; 
+        }
+        if(jtContato.getText().equals("")){
+          
+            vazio = vazio + " \n Contato ";
+            
+         msg = true; 
+        }
+             
+        if(msg){
+            
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
+    //carrega dados para alterar 
+    private void carregaDados(Fornecedor fornecedor){
+       
+     
+      
+        
+        
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField JtContato;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -288,6 +414,7 @@ public class FornecedorEditView extends javax.swing.JFrame {
     private javax.swing.JTextField jtCNPJ;
     private javax.swing.JTextField jtCidade;
     private javax.swing.JTextField jtComplemento;
+    private javax.swing.JTextField jtContato;
     private javax.swing.JTextField jtEstado;
     private javax.swing.JTextField jtNome;
     private javax.swing.JTextField jtNumero;

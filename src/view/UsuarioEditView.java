@@ -245,7 +245,7 @@ public UsuarioEditView(Usuario usuario){
     //carrega dados para alterar 
     private void carregaDados(Usuario usuario){
        
-     
+        this.usuario = usuario;
         jtLogin.setText(usuario.getLogin());
         jtNomeCompleto.setText(usuario.getNomeCompleto());
         jtNomeGuerra.setText(usuario.getNomeGuerra());

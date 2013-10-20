@@ -37,10 +37,10 @@ public class Mecanico implements Serializable {
     @Column(name = "posto")
     private String posto;
     @Basic(optional = false)
-    @Column(name = "nome_guerra")
+    @Column(name = "nomeGuerra")
     private String nomeGuerra;
     @Basic(optional = false)
-    @Column(name = "nome_completo")
+    @Column(name = "nomeCompleto")
     private String nomeCompleto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMecanico")
     private Collection<Saida> saidaCollection;
