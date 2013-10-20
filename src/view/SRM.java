@@ -15,8 +15,8 @@ public class SRM {
      */
     public static void main(String[] args) {
      
-        LoginView janelaLogin = new LoginView();
-        janelaLogin.setVisible(true);
+       LoginView janelaLogin = new LoginView();
+       janelaLogin.setVisible(true);
         
         // TODO code application logic here
     }
