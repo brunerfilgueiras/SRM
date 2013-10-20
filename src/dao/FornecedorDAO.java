@@ -87,7 +87,7 @@ public class FornecedorDAO {
                
                }else{
                         Criteria crit = session.createCriteria(Fornecedor.class);
-                        crit.add(Restrictions.ilike("nomeGuerra", fornecedor.getCnpj(), MatchMode.ANYWHERE));
+                        crit.add(Restrictions.ilike("cnpj", fornecedor.getCnpj(), MatchMode.ANYWHERE));
                         resultado = crit.list();
                    
                }

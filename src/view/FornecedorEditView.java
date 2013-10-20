@@ -24,7 +24,7 @@ Fornecedor fornecedor;
 
 public FornecedorEditView(Fornecedor fornecedor) {
         initComponents();
-        
+        carregaDados(fornecedor);
         
         
     }
@@ -388,7 +388,18 @@ public FornecedorEditView(Fornecedor fornecedor) {
     //carrega dados para alterar 
     private void carregaDados(Fornecedor fornecedor){
        
-     
+      jtNome.setText(fornecedor.getNome());
+      jtCNPJ.setText(fornecedor.getCnpj());
+      jtContato.setText( fornecedor.getContato());
+      jtTelefone.setText(fornecedor.getTelefone());
+      
+      jtRua.setText(fornecedor.getRua());
+      jtNumero.setText(fornecedor.getNumero());
+      jtEstado.setText(fornecedor.getEstado());
+      jtComplemento.setText(fornecedor.getComplemento());
+      jtCidade.setText(fornecedor.getCidade());
+      jtCEP.setText(fornecedor.getCep());
+      jtBairro.setText(fornecedor.getBairro());
       
         
         
