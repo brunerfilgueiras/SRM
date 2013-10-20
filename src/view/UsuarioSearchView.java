@@ -315,6 +315,7 @@ public class UsuarioSearchView extends javax.swing.JFrame {
        DefaultTableModel modelo = (DefaultTableModel) jtUsuarios.getModel();
        modelo.setNumRows(0);
        
+      
        for(int i = 0; i<usuarios.size();i++){
          
          usuario = usuarios.get(i);
@@ -322,7 +323,10 @@ public class UsuarioSearchView extends javax.swing.JFrame {
          modelo.addRow(new String[]{usuario.getId().toString(), usuario.getNomeCompleto(), usuario.getNomeGuerra(),usuario.getPosto()});
     
        }
-      
+       
+       
+       
+       
     }
     
     //seleciona linha e retorna um usuario
