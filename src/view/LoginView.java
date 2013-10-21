@@ -42,10 +42,6 @@ public class LoginView extends javax.swing.JFrame {
 
         jLabel2.setText("Login:");
 
-        jtLogin.setText("jTextField1");
-
-        jtSenha.setText("jTextField2");
-
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

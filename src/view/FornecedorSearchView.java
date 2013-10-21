@@ -4,10 +4,13 @@
  */
 package view;
 
+import controller.FornecedorController;
 import dao.FornecedorDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Fornecedor;
+import model.Montadora;
 import model.Usuario;
 
 /**
@@ -69,8 +72,11 @@ private List<Fornecedor> fornecedores;
         });
 
         jbExcluir.setText("Excluir");
-
-        jtNumero.setText("jTextField1");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jbConsultar.setText("Consultar");
 
@@ -161,12 +167,30 @@ private List<Fornecedor> fornecedores;
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
 
-        FornecedorEditView janelaFornecedor = new FornecedorEditView(fornecedor);
+        FornecedorEditView janelaFornecedor = new FornecedorEditView(seleciona());
         janelaFornecedor.setVisible(true);
         this.dispose();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        // TODO add your handling code here:
+       FornecedorController fornecedorController = FornecedorController.getInstacia();
+        
+        if(seleciona() != null){
+        
+        if(fornecedorController.deletar(seleciona())){
+            JOptionPane.showMessageDialog(rootPane, "Fornecedor Excluido com sucesso!");
+                        
+            carregaTabela();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir o Fornecedor!");
+        }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Fornecedor Não selecionada!");
+        }
+    }//GEN-LAST:event_jbExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,6 +251,17 @@ private List<Fornecedor> fornecedores;
        }
       
     }
+     // seleciona linha da tabela
+     private Fornecedor seleciona(){
+         fornecedor = null;
+       int linha = jtFornecedores.getSelectedRow();
+       if(linha != -1){
+       fornecedor = fornecedores.get(linha);
+       return fornecedor;
+       }else{
+        return fornecedor = null;
+       }
+    }     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

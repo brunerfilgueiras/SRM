@@ -17,7 +17,7 @@ import model.Mecanico;
  * @author secinfor-04
  */
 public class FornecedorEditView extends javax.swing.JFrame {
-Fornecedor fornecedor;
+private Fornecedor fornecedor = Fornecedor.getInstacia();;
     /**
      * Creates new form FornecedorEditView
      */
@@ -25,7 +25,7 @@ Fornecedor fornecedor;
 public FornecedorEditView(Fornecedor fornecedor) {
         initComponents();
         carregaDados(fornecedor);
-        
+     this.fornecedor = fornecedor;   
         
     }
 
@@ -61,12 +61,12 @@ public FornecedorEditView(Fornecedor fornecedor) {
         jLabel9 = new javax.swing.JLabel();
         jtEstado = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jtCEP = new javax.swing.JFormattedTextField();
-        jtTelefone = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
         jtNumero = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jtComplemento = new javax.swing.JTextField();
+        jtTelefone = new javax.swing.JTextField();
+        jtCEP = new javax.swing.JTextField();
 
         jLabel4.setText("jLabel4");
 
@@ -92,51 +92,21 @@ public FornecedorEditView(Fornecedor fornecedor) {
 
         jLabel3.setText("Telefone:");
 
-        jtNome.setText("jTextField1");
-
-        jtCNPJ.setText("jTextField2");
-
         jLabel6.setText("Contato:");
-
-        jtContato.setText("jTextField4");
 
         jLabel5.setText("Rua:");
 
-        jtRua.setText("jTextField5");
-
         jLabel7.setText("Bairro:");
-
-        jtBairro.setText("jTextField6");
 
         jLabel8.setText("Cidade:");
 
-        jtCidade.setText("jTextField7");
-
         jLabel9.setText("Estado:");
-
-        jtEstado.setText("jTextField8");
 
         jLabel10.setText("Cep:");
 
-        try {
-            jtCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            jtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         jLabel11.setText("Número:");
 
-        jtNumero.setText("jTextField3");
-
         jLabel12.setText("Complemento:");
-
-        jtComplemento.setText("jTextField9");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,9 +155,7 @@ public FornecedorEditView(Fornecedor fornecedor) {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtCidade)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(jtCEP)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtContato, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,7 +229,7 @@ public FornecedorEditView(Fornecedor fornecedor) {
         
         FornecedorController fornecedorController = FornecedorController.getInstacia();
        
-     fornecedor = Fornecedor.getInstacia();
+    
        
      
      if(campoObrigatorio()==null){
@@ -421,7 +389,7 @@ public FornecedorEditView(Fornecedor fornecedor) {
     private javax.swing.JButton jbGravar;
     private javax.swing.JButton jbSair;
     private javax.swing.JTextField jtBairro;
-    private javax.swing.JFormattedTextField jtCEP;
+    private javax.swing.JTextField jtCEP;
     private javax.swing.JTextField jtCNPJ;
     private javax.swing.JTextField jtCidade;
     private javax.swing.JTextField jtComplemento;
@@ -430,6 +398,6 @@ public FornecedorEditView(Fornecedor fornecedor) {
     private javax.swing.JTextField jtNome;
     private javax.swing.JTextField jtNumero;
     private javax.swing.JTextField jtRua;
-    private javax.swing.JFormattedTextField jtTelefone;
+    private javax.swing.JTextField jtTelefone;
     // End of variables declaration//GEN-END:variables
 }
