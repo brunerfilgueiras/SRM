@@ -13,14 +13,14 @@ import model.Usuario;
  * @author secinfor-04
  */
 public class UsuarioEditView extends javax.swing.JFrame {
-Usuario usuario;
+Usuario  usuario = Usuario.getInstacia();
     /**
      * Creates new form UsuarioEditView
      */
 public UsuarioEditView(Usuario usuario){
     initComponents();
     carregaDados(usuario);
-    
+    this.usuario = usuario;
 }
 
 
@@ -164,7 +164,7 @@ public UsuarioEditView(Usuario usuario){
     
      UsuarioController usuarioController = UsuarioController.getInstacia();
        
-     usuario = Usuario.getInstacia();
+    
        
      
      if(campoObrigatorio()==null){

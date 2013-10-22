@@ -13,7 +13,7 @@ import model.Montadora;
  * @author secinfor-04
  */
 public class MontadoraEditView extends javax.swing.JFrame {
-
+Montadora montadora = Montadora.getInstacia();
     /**
      * Creates new form MontadoraEditView
      */
@@ -97,7 +97,7 @@ public class MontadoraEditView extends javax.swing.JFrame {
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
 
-Montadora montadora = Montadora.getInstacia();
+
 MontadoraController montadoraController = MontadoraController.getInstacia();
    if(campoObrigatorio()==null){    
    montadora.setNome(jtNome.getText());

@@ -13,7 +13,7 @@ import model.Mecanico;
  * @author secinfor-04
  */
 public class MecanicoEditView extends javax.swing.JFrame {
-Mecanico mecanico;
+private Mecanico mecanico = Mecanico.getInstacia();;
     /**
      * Creates new form MecanicoEditView
      */
@@ -21,7 +21,7 @@ Mecanico mecanico;
 public MecanicoEditView(Mecanico mecanico) {
         initComponents();
         carregaDados(mecanico);
-        
+        this.mecanico = mecanico;
     }
 
 
@@ -155,7 +155,7 @@ public MecanicoEditView(Mecanico mecanico) {
         
          MecanicoController mecanicoController = MecanicoController.getInstacia();
        
-     mecanico = Mecanico.getInstacia();
+     
        
      
      if(campoObrigatorio()==null){

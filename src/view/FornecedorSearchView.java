@@ -47,7 +47,7 @@ private List<Fornecedor> fornecedores;
         jbIncluir = new javax.swing.JButton();
         jbAlterar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
-        jtNumero = new javax.swing.JTextField();
+        jtParametro = new javax.swing.JTextField();
         jbConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtFornecedores = new javax.swing.JTable();
@@ -79,6 +79,11 @@ private List<Fornecedor> fornecedores;
         });
 
         jbConsultar.setText("Consultar");
+        jbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarActionPerformed(evt);
+            }
+        });
 
         jtFornecedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +130,7 @@ private List<Fornecedor> fornecedores;
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jcbParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -135,7 +140,7 @@ private List<Fornecedor> fornecedores;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,6 +196,28 @@ private List<Fornecedor> fornecedores;
             JOptionPane.showMessageDialog(rootPane, "Fornecedor Não selecionada!");
         }
     }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        // TODO add your handling code here:
+        if(!jtParametro.getText().equals("")){
+     if(jcbParametro.getSelectedItem().equals("Nome")){
+                   fornecedor = Fornecedor.getInstacia();
+                   fornecedor.setCnpj(null);
+                    fornecedor.setNome(jtParametro.getText());
+                    carregaConsulta(fornecedor);  
+                   
+                }else{
+                     fornecedor = fornecedor.getInstacia();
+                     fornecedor.setNome(null);
+                    fornecedor.setCnpj(jtParametro.getText());
+                    carregaConsulta(fornecedor);  
+                     
+                  }
+  }else{carregaTabela();}
+        
+        
+        
+    }//GEN-LAST:event_jbConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +291,24 @@ private List<Fornecedor> fornecedores;
     }     
     
     
+     //carraga consulta
+     private void carregaConsulta(Fornecedor fornecedor){
+        FornecedorDAO fornecedorDAO = FornecedorDAO.getInstacia();
+        fornecedores = fornecedorDAO.consulta(fornecedor);
+    
+        
+       DefaultTableModel modelo = (DefaultTableModel) jtFornecedores.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<fornecedores.size();i++){
+                        
+         modelo.addRow(new String[]{fornecedor.getId().toString(), fornecedor.getNome(), fornecedor.getCnpj(),
+                                    fornecedor.getContato(), fornecedor.getTelefone()});
+    
+       }
+      
+    }
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -274,6 +319,6 @@ private List<Fornecedor> fornecedores;
     private javax.swing.JButton jbIncluir;
     private javax.swing.JComboBox jcbParametro;
     private javax.swing.JTable jtFornecedores;
-    private javax.swing.JTextField jtNumero;
+    private javax.swing.JTextField jtParametro;
     // End of variables declaration//GEN-END:variables
 }

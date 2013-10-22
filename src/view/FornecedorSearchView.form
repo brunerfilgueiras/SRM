@@ -42,7 +42,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jcbParametro" min="-2" pref="172" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jtNumero" min="-2" pref="215" max="-2" attributes="0"/>
+                              <Component id="jtParametro" min="-2" pref="215" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -58,7 +58,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtParametro" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcbParametro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -104,12 +104,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtNumero">
+    <Component class="javax.swing.JTextField" name="jtParametro">
     </Component>
     <Component class="javax.swing.JButton" name="jbConsultar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Consultar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbConsultarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
