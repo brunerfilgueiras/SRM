@@ -4,7 +4,12 @@
  */
 package view;
 
+import dao.OrdemDeServicoDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.OrdemDeServico;
 import model.Usuario;
+import util.DateTimeUtil;
 
 /**
  *
@@ -12,6 +17,11 @@ import model.Usuario;
  */
 public class OrdemDeServicoSearchView extends javax.swing.JFrame {
 
+    private List<OrdemDeServico> ordensDeServico;
+    private OrdemDeServico ordemDeServico;
+    
+    
+    
     /**
      * Creates new form OrdemDeServicoSearchView
      */
@@ -41,7 +51,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         jbAlterar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtMecanicos = new javax.swing.JTable();
+        jtOrdensDeServico = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -74,7 +84,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
 
         jbExcluir.setText("Excluir");
 
-        jtMecanicos.setModel(new javax.swing.table.DefaultTableModel(
+        jtOrdensDeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -93,9 +103,9 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jtMecanicos);
-        jtMecanicos.getColumnModel().getColumn(3).setResizable(false);
-        jtMecanicos.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane1.setViewportView(jtOrdensDeServico);
+        jtOrdensDeServico.getColumnModel().getColumn(3).setResizable(false);
+        jtOrdensDeServico.getColumnModel().getColumn(4).setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,6 +220,56 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         jbExcluir.setVisible(false);
     }
     }
+    //carraga consulta
+     private void carregaConsulta(Mecanico mecannico){
+        MecanicoDAO mecanicoDAO = MecanicoDAO.getInstacia();
+        mecanicos = mecanicoDAO.consulta(mecanico);
+    
+        
+       DefaultTableModel modelo = (DefaultTableModel) jtOrdensDeServico.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<mecanicos.size();i++){
+                        
+         modelo.addRow(new String[]{mecanicos.get(i).getId().toString(), mecanicos.get(i).getNomeCompleto(),
+             mecanicos.get(i).getNomeGuerra(),mecanicos.get(i).getPosto()});
+    
+       }
+      
+    }
+    
+    
+    
+     //caregadados na tabela
+    private void carregaTabela(){
+        OrdemDeServicoDAO ordemDeServicoDAO = OrdemDeServicoDAO.getInstacia();
+        ordemDeServico = (OrdemDeServico) ordemDeServicoDAO.listaTodas();
+    
+        DateTimeUrtil dataUtil = DateTimeUtil.getInstancia();
+        
+       DefaultTableModel modelo = (DefaultTableModel) jtOrdensDeServico.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<ordensDeServico.size();i++){
+         
+         ordemDeServico = ordemDeServico.get(i);
+        
+         modelo.addRow(new String[]{ordemDeServico.getId().toString(), ordemDeServico.getOm(), ordemDeServico.getViatura(), dataUtil.ordemDeServico.getDataSaida()});
+    
+       }
+      
+    }
+    
+    private OrdemDeServico seleciona(){
+    
+       int linha = jtOrdensDeServico.getSelectedRow();
+       if(linha != -1){
+       ordemDeServico = ordensDeServico.get(linha);
+       return ordemDeServico;
+       }else{
+        return ordemDeServico = null;
+       }
+    }  
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -220,7 +280,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
     private javax.swing.JButton jbConsultar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbIncluir;
-    private javax.swing.JTable jtMecanicos;
+    private javax.swing.JTable jtOrdensDeServico;
     private javax.swing.JTextField jtParametro;
     // End of variables declaration//GEN-END:variables
 }

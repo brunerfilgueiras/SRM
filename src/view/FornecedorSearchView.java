@@ -301,7 +301,8 @@ private List<Fornecedor> fornecedores;
        modelo.setNumRows(0);
        
        for(int i = 0; i<fornecedores.size();i++){
-                        
+         
+           fornecedor = fornecedores.get(i);
          modelo.addRow(new String[]{fornecedor.getId().toString(), fornecedor.getNome(), fornecedor.getCnpj(),
                                     fornecedor.getContato(), fornecedor.getTelefone()});
     

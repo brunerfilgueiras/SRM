@@ -4,15 +4,30 @@
  */
 package view;
 
+import controller.OrdemDeServicoController;
+import javax.swing.JOptionPane;
+import model.OrdemDeServico;
+import util.DateTimeUtil;
+
 /**
  *
  * @author secinfor-04
  */
 public class OrdemDeServicoEditView extends javax.swing.JFrame {
 
+    
+    private OrdemDeServico ordemDeServico = OrdemDeServico.getInstacia();
     /**
      * Creates new form OrdemDeServicoEditView
      */
+    public OrdemDeServicoEditView(OrdemDeServico ordemDeServico) {
+        initComponents();
+        this.ordemDeServico = ordemDeServico;
+        
+        
+    }
+    
+    
     public OrdemDeServicoEditView() {
         initComponents();
     }
@@ -66,14 +81,6 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
 
         jLabel7.setText("Observações:");
 
-        jtOS.setText("jTextField1");
-
-        jtOM.setText("jTextField1");
-
-        jtEB.setText("jTextField1");
-
-        jtViatura.setText("jTextField1");
-
         jtDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jtDataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
@@ -84,6 +91,11 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jtaObservacoes);
 
         jbGravar.setText("Gravar");
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
 
         jbSair.setText("Sair");
         jbSair.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +194,57 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
 this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jbSairActionPerformed
 
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        // TODO add your handling code here:
+       DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+       OrdemDeServicoController ordemDeServicoController = OrdemDeServicoController.getInstacia();
+       
+     
+       
+     
+     if(campoObrigatorio()==null){
+      
+      ordemDeServico.setDataEntrada(dataUtil.parse("dd/MM/yyyy",jtDataEntrada.getText()));
+      
+      if(ordemDeServico.getId() != null)
+      ordemDeServico.setDataSaida(dataUtil.parse("dd/MM/yyyy",jtDataSaida.getText()));
+      
+      
+      ordemDeServico.setEbPlaca(jtEB.getText());
+      ordemDeServico.setObservacoes(jtaObservacoes.getText());
+     
+      ordemDeServico.setViatura(jtViatura.getText());
+      ordemDeServico.setOm(jtOM.getText());
+     
+     
+         
+        
+      
+      
+      if(ordemDeServicoController.persistir(ordemDeServico)){
+          
+          
+          JOptionPane.showMessageDialog(null, "Mecanico Gravado Com sucesso!", null, 1);
+          
+          this.dispose();
+      }else{
+          
+          JOptionPane.showMessageDialog(null, "Falha ao Salvar Mecanico!!", null, 2);
+      }
+        
+     }else{  
+         
+        JOptionPane.showMessageDialog(null, campoObrigatorio(), null, 2); 
+     } 
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbGravarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -216,6 +279,75 @@ this.dispose();        // TODO add your handling code here:
             }
         });
     }
+    
+    //carrega dados para alterar 
+    private void carregaDados(OrdemDeServico ordemDeServico){
+        
+        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        
+        
+        
+        
+        jtOM.setText(ordemDeServico.getOm());
+        jtEB.setText(ordemDeServico.getEbPlaca());
+        jtOS.setText(ordemDeServico.getId().toString());
+        jtViatura.setText(ordemDeServico.getViatura());
+        jtaObservacoes.setText(ordemDeServico.getObservacoes());
+        jtDataEntrada.setText(dataUtil.parseDateToStrSQL(ordemDeServico.getDataEntrada()));
+        
+        
+       
+        
+    }
+    
+    
+    
+    
+    
+    // metodo que valida Campo em Branco
+    private String campoObrigatorio(){
+       
+        boolean msg = false;
+        
+        String vazio = "Campo Obrigatorio Em Branco: ";
+        if(jtOM.getText().equals("")){
+          
+            vazio = vazio + "Nome";
+            msg = true;
+        }
+         
+            if(jtEB.getText().equals("")){
+                
+                vazio = vazio + "/b EB / Placa";
+                msg = true;
+            }
+              
+                if(jtViatura.getText().equals("")){
+                
+                vazio = vazio + "/b Viatura";
+                msg = true;
+                }
+                  
+                    
+                if(jtDataEntrada.getText().equals("")){
+                
+                vazio = vazio + "/b Data de Entrada";  
+                  msg = true;  
+                }
+         
+         if(msg){   
+        
+        return vazio ;
+        
+         }else{
+             
+           return vazio = null;  
+             
+         }
+       }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
