@@ -4,7 +4,8 @@
  */
 package view;
 
-import model.Usuario;
+import model.Usuario; 
+
 
 /**
  *
@@ -589,7 +590,8 @@ public class SRMView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbUsuarioActionPerformed
 
     private void jbAbrirRelatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirRelatActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:       
+       
         
         // fazer um if selecteditem da combo, para abrir cada tela
     }//GEN-LAST:event_jbAbrirRelatActionPerformed
