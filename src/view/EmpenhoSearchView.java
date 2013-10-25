@@ -51,48 +51,44 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         jlTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pesquisa de empenho");
         setResizable(false);
-        getContentPane().setLayout(null);
 
         jlNum.setText("Número:");
-        getContentPane().add(jlNum);
-        jlNum.setBounds(10, 57, 41, 14);
-        getContentPane().add(jtNumero);
-        jtNumero.setBounds(55, 54, 215, 20);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(0, 90, 740, 10);
 
         jbConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         jbConsultar.setText("Consultar");
-        getContentPane().add(jbConsultar);
-        jbConsultar.setBounds(10, 101, 99, 25);
+        jbConsultar.setMaximumSize(new java.awt.Dimension(105, 25));
+        jbConsultar.setMinimumSize(new java.awt.Dimension(105, 25));
+        jbConsultar.setPreferredSize(new java.awt.Dimension(105, 25));
 
         jbIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluir.setText("Incluir");
+        jbIncluir.setMaximumSize(new java.awt.Dimension(95, 25));
+        jbIncluir.setMinimumSize(new java.awt.Dimension(95, 25));
+        jbIncluir.setPreferredSize(new java.awt.Dimension(95, 25));
         jbIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbIncluirActionPerformed(evt);
             }
         });
-        getContentPane().add(jbIncluir);
-        jbIncluir.setBounds(115, 101, 81, 25);
 
         jbAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Admin.png"))); // NOI18N
         jbAlterar.setText("Alterar");
+        jbAlterar.setMaximumSize(new java.awt.Dimension(95, 25));
+        jbAlterar.setMinimumSize(new java.awt.Dimension(95, 25));
+        jbAlterar.setPreferredSize(new java.awt.Dimension(95, 25));
         jbAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbAlterar);
-        jbAlterar.setBounds(202, 101, 85, 25);
 
         jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete (2).png"))); // NOI18N
         jbExcluir.setText("Excluir");
-        getContentPane().add(jbExcluir);
-        jbExcluir.setBounds(293, 101, 83, 25);
-        getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(0, 137, 740, 10);
+        jbExcluir.setMaximumSize(new java.awt.Dimension(95, 25));
+        jbExcluir.setMinimumSize(new java.awt.Dimension(95, 25));
+        jbExcluir.setPreferredSize(new java.awt.Dimension(95, 25));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,22 +118,79 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(5).setResizable(false);
         jTable1.getColumnModel().getColumn(6).setResizable(false);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 158, 720, 147);
-
         jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         jbSair.setText("Sair");
-        getContentPane().add(jbSair);
-        jbSair.setBounds(659, 332, 71, 25);
-        getContentPane().add(jSeparator3);
-        jSeparator3.setBounds(0, 311, 740, 10);
-        getContentPane().add(jSeparator4);
-        jSeparator4.setBounds(0, 40, 740, 10);
+        jbSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSairActionPerformed(evt);
+            }
+        });
 
         jlTitulo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlTitulo.setText("Pesquisa de Empenho");
-        getContentPane().add(jlTitulo);
-        jlTitulo.setBounds(10, 10, 210, 14);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jlNum)
+                .addGap(4, 4, 4)
+                .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(659, 659, 659)
+                .addComponent(jbSair))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlNum))
+                    .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jbSair))
+        );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-756)/2, (screenSize.height-406)/2, 756, 406);
@@ -158,6 +211,11 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
+
+    private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jbSairActionPerformed
 
     /**
      * @param args the command line arguments
