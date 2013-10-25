@@ -23,7 +23,7 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
     public OrdemDeServicoEditView(OrdemDeServico ordemDeServico) {
         initComponents();
         this.ordemDeServico = ordemDeServico;
-        
+        carregaDados(ordemDeServico);
         
     }
     
@@ -293,8 +293,8 @@ this.dispose();        // TODO add your handling code here:
         jtOS.setText(ordemDeServico.getId().toString());
         jtViatura.setText(ordemDeServico.getViatura());
         jtaObservacoes.setText(ordemDeServico.getObservacoes());
-        jtDataEntrada.setText(dataUtil.parseDateToStrSQL(ordemDeServico.getDataEntrada()));
-        
+        jtDataEntrada.setText(dataUtil.parseDate(ordemDeServico.getDataEntrada()));
+        jtDataSaida.setText(dataUtil.parseDate(ordemDeServico.getDataSaida()));
         
        
         

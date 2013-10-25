@@ -4,8 +4,10 @@
  */
 package view;
 
+import controller.OrdemDeServicoController;
 import dao.OrdemDeServicoDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.OrdemDeServico;
 import model.Usuario;
@@ -27,8 +29,8 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
      */
     public OrdemDeServicoSearchView(Usuario usuario){
       initComponents();
-      
       permissao(usuario);
+      carregaTabela();
     }
     
     public OrdemDeServicoSearchView() {
@@ -57,7 +59,6 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jtParametro.setText("jTextField1");
         jtParametro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtParametroActionPerformed(evt);
@@ -67,6 +68,11 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         jLabel1.setText("Número:");
 
         jbConsultar.setText("Consultar");
+        jbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarActionPerformed(evt);
+            }
+        });
 
         jbIncluir.setText("Incluir");
         jbIncluir.addActionListener(new java.awt.event.ActionListener() {
@@ -83,20 +89,25 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         });
 
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jtOrdensDeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "OS", "OM", "Viatura", "Data Saida", "Data Entrada"
+                "OS", "OM", "Viatura", "Data Saida", "Data Entrada"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -104,8 +115,8 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtOrdensDeServico);
+        jtOrdensDeServico.getColumnModel().getColumn(2).setResizable(false);
         jtOrdensDeServico.getColumnModel().getColumn(3).setResizable(false);
-        jtOrdensDeServico.getColumnModel().getColumn(4).setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,14 +182,54 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
 
         OrdemDeServicoEditView janelaOrdemDeServico = new OrdemDeServicoEditView();
         janelaOrdemDeServico.setVisible(true);// TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-       OrdemDeServicoEditView janelaOrdemDeServico = new OrdemDeServicoEditView();
+       OrdemDeServicoEditView janelaOrdemDeServico = new OrdemDeServicoEditView(seleciona());
         janelaOrdemDeServico.setVisible(true);
-
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        // TODO add your handling code here:
+      if(jtParametro.getText().equals("")){
+          
+      }else{
+                  
+                    ordemDeServico.setId(Long.parseLong(jtParametro.getText()));
+                    carregaConsulta(ordemDeServico);  
+      }         
+        
+        
+        
+    }//GEN-LAST:event_jbConsultarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        // TODO add your handling code here:
+        OrdemDeServicoController ordemDeServicoController =  OrdemDeServicoController.getInstacia();
+       
+       if(seleciona() != null){
+        
+        if(ordemDeServicoController.deletar(seleciona())){
+            JOptionPane.showMessageDialog(rootPane, "Ordem De Servico Excluida com sucesso!");
+                        
+            carregaTabela();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir  Ordem De Servico!", null, 2);
+        }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Ordem De Servico Não selecionada!",null , 2);
+        }
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,18 +272,18 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
     }
     }
     //carraga consulta
-     private void carregaConsulta(Mecanico mecannico){
-        MecanicoDAO mecanicoDAO = MecanicoDAO.getInstacia();
-        mecanicos = mecanicoDAO.consulta(mecanico);
-    
+     private void carregaConsulta(OrdemDeServico ordemDeServico){
+        OrdemDeServicoDAO ordemDeServicoDAO = OrdemDeServicoDAO.getInstacia();
+        ordensDeServico = ordemDeServicoDAO.consulta(ordemDeServico);
+    DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
         
        DefaultTableModel modelo = (DefaultTableModel) jtOrdensDeServico.getModel();
        modelo.setNumRows(0);
        
-       for(int i = 0; i<mecanicos.size();i++){
+       for(int i = 0; i<ordensDeServico.size();i++){
                         
-         modelo.addRow(new String[]{mecanicos.get(i).getId().toString(), mecanicos.get(i).getNomeCompleto(),
-             mecanicos.get(i).getNomeGuerra(),mecanicos.get(i).getPosto()});
+        modelo.addRow(new String[]{ordemDeServico.getId().toString(), ordemDeServico.getOm(), ordemDeServico.getViatura(),dataUtil.parseDate(ordemDeServico.getDataSaida()), dataUtil.parseDate(ordemDeServico.getDataEntrada())});
+     
     
        }
       
@@ -243,21 +294,22 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
      //caregadados na tabela
     private void carregaTabela(){
         OrdemDeServicoDAO ordemDeServicoDAO = OrdemDeServicoDAO.getInstacia();
-        ordemDeServico = (OrdemDeServico) ordemDeServicoDAO.listaTodas();
+        ordensDeServico = ordemDeServicoDAO.listaTodas();
     
-        DateTimeUrtil dataUtil = DateTimeUtil.getInstancia();
+        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
         
        DefaultTableModel modelo = (DefaultTableModel) jtOrdensDeServico.getModel();
        modelo.setNumRows(0);
        
        for(int i = 0; i<ordensDeServico.size();i++){
          
-         ordemDeServico = ordemDeServico.get(i);
+         ordemDeServico = ordensDeServico.get(i);
         
-         modelo.addRow(new String[]{ordemDeServico.getId().toString(), ordemDeServico.getOm(), ordemDeServico.getViatura(), dataUtil.ordemDeServico.getDataSaida()});
-    
+         
+             modelo.addRow(new String[]{ordemDeServico.getId().toString(), ordemDeServico.getOm(), ordemDeServico.getViatura(),dataUtil.parseDate(ordemDeServico.getDataSaida()), dataUtil.parseDate(ordemDeServico.getDataEntrada())});
+     
        }
-      
+             
     }
     
     private OrdemDeServico seleciona(){
