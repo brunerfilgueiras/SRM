@@ -72,25 +72,14 @@ public class SRMView extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
         jpRelat = new javax.swing.JPanel();
+        jcbRelatorios = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jpHelp = new javax.swing.JPanel();
         jbAjuda = new javax.swing.JButton();
         jbSobre = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         menuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        miRelatorioEmpenhoDetalhado = new javax.swing.JMenuItem();
-        miRelatorioProdutoB = new javax.swing.JMenuItem();
-        miRelatorioEntrada = new javax.swing.JMenuItem();
-        miRelatorioEstoque = new javax.swing.JMenuItem();
-        miRelatorioEmpenho = new javax.swing.JMenuItem();
-        miRelatorioFornecedor = new javax.swing.JMenuItem();
-        miRelatorioMontadora = new javax.swing.JMenuItem();
-        miRelatorioMecanico = new javax.swing.JMenuItem();
-        miRelatorioOrdemDeServico = new javax.swing.JMenuItem();
-        miRelatorioProdutoPeriodo = new javax.swing.JMenuItem();
-        miRelatorioProdutoSaida = new javax.swing.JMenuItem();
-        miRelatorioProdutoMontadora = new javax.swing.JMenuItem();
-        miRelatorioSaida = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SRM Sistema de Reserva de Materiais");
@@ -107,7 +96,7 @@ public class SRMView extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGap(0, 434, Short.MAX_VALUE)
         );
 
         jbEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coins_add.png"))); // NOI18N
@@ -120,18 +109,43 @@ public class SRMView extends javax.swing.JFrame {
 
         jbForn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lorry_add.png"))); // NOI18N
         jbForn.setToolTipText("Incluir fornecedor");
+        jbForn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFornActionPerformed(evt);
+            }
+        });
 
         jbMec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_add.png"))); // NOI18N
         jbMec.setToolTipText("Incluir mecânico");
+        jbMec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMecActionPerformed(evt);
+            }
+        });
 
         jbMont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/car_add.png"))); // NOI18N
         jbMont.setToolTipText("Incluir montadora");
+        jbMont.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMontActionPerformed(evt);
+            }
+        });
 
         jbProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/package_add.png"))); // NOI18N
         jbProd.setToolTipText("Incluir produto");
+        jbProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbProdActionPerformed(evt);
+            }
+        });
 
         jbUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/vcard_add.png"))); // NOI18N
         jbUsuario.setToolTipText("Incluir usuário");
+        jbUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -378,15 +392,40 @@ public class SRMView extends javax.swing.JFrame {
 
         jtpPrincipal.addTab("Cadastro", jpCad);
 
+        jcbRelatorios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Crédito Detalhado Empenho", "Entrada Produto 'B'", "Entrada Por Período", "Estoque Geral", "Empenho", "Fornecedores", "Montadora", "Mecânico", "Ordem de Serviço", "Produto Por Período", "Produtos Por Saída", "Produtos Por Montadora", "Saída Por Período" }));
+
+        jLabel1.setText("Selecione o relatório:");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Folder (2).png"))); // NOI18N
+        jButton1.setToolTipText("Abrir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpRelatLayout = new javax.swing.GroupLayout(jpRelat);
         jpRelat.setLayout(jpRelatLayout);
         jpRelatLayout.setHorizontalGroup(
             jpRelatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 898, Short.MAX_VALUE)
+            .addGroup(jpRelatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(12, 12, 12)
+                .addComponent(jcbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(561, Short.MAX_VALUE))
         );
         jpRelatLayout.setVerticalGroup(
             jpRelatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 72, Short.MAX_VALUE)
+            .addGroup(jpRelatLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jpRelatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jtpPrincipal.addTab("Relatório", jpRelat);
@@ -425,69 +464,6 @@ public class SRMView extends javax.swing.JFrame {
 
         jtpPrincipal.addTab("Help", jpHelp);
 
-        jMenu1.setText("Relatório");
-
-        miRelatorioEmpenhoDetalhado.setText("Crédito Detalhado Empenho");
-        miRelatorioEmpenhoDetalhado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miRelatorioEmpenhoDetalhadoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(miRelatorioEmpenhoDetalhado);
-
-        miRelatorioProdutoB.setText("Entrada Produto 'B'");
-        miRelatorioProdutoB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miRelatorioProdutoBActionPerformed(evt);
-            }
-        });
-        jMenu1.add(miRelatorioProdutoB);
-
-        miRelatorioEntrada.setText("Entrada Por Período");
-        jMenu1.add(miRelatorioEntrada);
-
-        miRelatorioEstoque.setText("Estoque Geral");
-        miRelatorioEstoque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miRelatorioEstoqueActionPerformed(evt);
-            }
-        });
-        jMenu1.add(miRelatorioEstoque);
-
-        miRelatorioEmpenho.setText("Empenho");
-        jMenu1.add(miRelatorioEmpenho);
-
-        miRelatorioFornecedor.setText("Fornecedores");
-        jMenu1.add(miRelatorioFornecedor);
-
-        miRelatorioMontadora.setText("Montadora");
-        jMenu1.add(miRelatorioMontadora);
-
-        miRelatorioMecanico.setText("Mecânico");
-        jMenu1.add(miRelatorioMecanico);
-
-        miRelatorioOrdemDeServico.setText("Ordem de Serviço");
-        jMenu1.add(miRelatorioOrdemDeServico);
-
-        miRelatorioProdutoPeriodo.setText("Produto Por Período");
-        jMenu1.add(miRelatorioProdutoPeriodo);
-
-        miRelatorioProdutoSaida.setText("Produtos Por Saída");
-        jMenu1.add(miRelatorioProdutoSaida);
-
-        miRelatorioProdutoMontadora.setText("Produtos Por Montadora");
-        miRelatorioProdutoMontadora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miRelatorioProdutoMontadoraActionPerformed(evt);
-            }
-        });
-        jMenu1.add(miRelatorioProdutoMontadora);
-
-        miRelatorioSaida.setText("Saída Por Período");
-        jMenu1.add(miRelatorioSaida);
-
-        menuBar.add(jMenu1);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -511,24 +487,6 @@ public class SRMView extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-919)/2, (screenSize.height-637)/2, 919, 637);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void miRelatorioEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioEstoqueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_miRelatorioEstoqueActionPerformed
-
-    private void miRelatorioProdutoMontadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioProdutoMontadoraActionPerformed
-RelatorioProdutoMontadoraView janelaRelatorioProdutoMontadora = new RelatorioProdutoMontadoraView();
-janelaRelatorioProdutoMontadora.setVisible(true);
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_miRelatorioProdutoMontadoraActionPerformed
-
-    private void miRelatorioEmpenhoDetalhadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioEmpenhoDetalhadoActionPerformed
-       RelatorioEmpenhoDetalhadoView janelaRelatorioEmpenhoDetalhado = new RelatorioEmpenhoDetalhadoView();
-       janelaRelatorioEmpenhoDetalhado.setVisible(true);
-       
-       // TODO add your handling code here:
-    }//GEN-LAST:event_miRelatorioEmpenhoDetalhadoActionPerformed
 
     private void jbSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSairMouseClicked
         // TODO add your handling code here:
@@ -593,16 +551,48 @@ janelaRelatorioProdutoMontadora.setVisible(true);
         janelaUsuario.setVisible(true);
     }//GEN-LAST:event_jbcadUsuaroActionPerformed
 
-    private void miRelatorioProdutoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioProdutoBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_miRelatorioProdutoBActionPerformed
-
     private void jbEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEmpActionPerformed
         // TODO add your handling code here:
         EmpenhoEditView janelaEmpenho = new EmpenhoEditView();
         janelaEmpenho.setVisible(true);
         
     }//GEN-LAST:event_jbEmpActionPerformed
+
+    private void jbFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFornActionPerformed
+        // TODO add your handling code here:
+        FornecedorEditView janelaFornecedor = new FornecedorEditView();
+        janelaFornecedor.setVisible(true);
+    }//GEN-LAST:event_jbFornActionPerformed
+
+    private void jbMecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMecActionPerformed
+        // TODO add your handling code here:
+        MecanicoEditView janelaMecanico = new MecanicoEditView();
+        janelaMecanico.setVisible(true);
+    }//GEN-LAST:event_jbMecActionPerformed
+
+    private void jbMontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMontActionPerformed
+        // TODO add your handling code here:
+        MontadoraEditView janelaMontadora = new MontadoraEditView();
+        janelaMontadora.setVisible(true);
+    }//GEN-LAST:event_jbMontActionPerformed
+
+    private void jbProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProdActionPerformed
+        // TODO add your handling code here:
+        ProdutoEditView janelaProduto = new ProdutoEditView();
+        janelaProduto.setVisible(true);
+    }//GEN-LAST:event_jbProdActionPerformed
+
+    private void jbUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUsuarioActionPerformed
+        // TODO add your handling code here:
+        UsuarioEditView janelaUsuario = new UsuarioEditView();
+        janelaUsuario.setVisible(true);
+    }//GEN-LAST:event_jbUsuarioActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        // fazer um if selecteditem da combo, para abrir cada tela
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -651,29 +641,15 @@ janelaRelatorioProdutoMontadora.setVisible(true);
        jbCadMont.setVisible(false);
        jbCadProd.setVisible(false);
        jbCadForn.setVisible(false);
-       miRelatorioEmpenho.setVisible(false);
-       miRelatorioEmpenhoDetalhado.setVisible(false);
-       miRelatorioEntrada.setVisible(false);
-       miRelatorioEstoque.setVisible(false);    
-       miRelatorioFornecedor.setVisible(false);       
-       miRelatorioMontadora.setVisible(false);       
-       miRelatorioProdutoB.setVisible(false);       
-       miRelatorioProdutoMontadora .setVisible(false);       
-       miRelatorioProdutoPeriodo.setVisible(false);        
-       miRelatorioProdutoSaida.setVisible(false);
-       miRelatorioSaida.setVisible(false); 
+       jcbRelatorios.setVisible(false);
+       
                
        break;} 
        case "Estoquista" : {      
          
        jbCadOS.setVisible(false);
        jbCadMec.setVisible(false);
-       miRelatorioEmpenho.setVisible(false);
-       miRelatorioEmpenhoDetalhado.setVisible(false);
-       miRelatorioFornecedor.setVisible(false);       
-       miRelatorioProdutoB.setVisible(false);       
-       miRelatorioOrdemDeServico.setVisible(false);
-       miRelatorioMecanico.setVisible(false);
+       jcbRelatorios.setVisible(false);       
        jbCadForn.setVisible(false);
        jbCadEmp.setVisible(false);     
         
@@ -685,7 +661,8 @@ janelaRelatorioProdutoMontadora.setVisible(true);
    }
   } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
@@ -716,6 +693,7 @@ janelaRelatorioProdutoMontadora.setVisible(true);
     private javax.swing.JButton jbSobre;
     private javax.swing.JButton jbUsuario;
     private javax.swing.JButton jbcadUsuaro;
+    private javax.swing.JComboBox jcbRelatorios;
     private javax.swing.JPanel jpArquivo;
     private javax.swing.JPanel jpCad;
     private javax.swing.JPanel jpHelp;
@@ -723,18 +701,5 @@ janelaRelatorioProdutoMontadora.setVisible(true);
     private javax.swing.JPanel jpRelat;
     private javax.swing.JTabbedPane jtpPrincipal;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem miRelatorioEmpenho;
-    private javax.swing.JMenuItem miRelatorioEmpenhoDetalhado;
-    private javax.swing.JMenuItem miRelatorioEntrada;
-    private javax.swing.JMenuItem miRelatorioEstoque;
-    private javax.swing.JMenuItem miRelatorioFornecedor;
-    private javax.swing.JMenuItem miRelatorioMecanico;
-    private javax.swing.JMenuItem miRelatorioMontadora;
-    private javax.swing.JMenuItem miRelatorioOrdemDeServico;
-    private javax.swing.JMenuItem miRelatorioProdutoB;
-    private javax.swing.JMenuItem miRelatorioProdutoMontadora;
-    private javax.swing.JMenuItem miRelatorioProdutoPeriodo;
-    private javax.swing.JMenuItem miRelatorioProdutoSaida;
-    private javax.swing.JMenuItem miRelatorioSaida;
     // End of variables declaration//GEN-END:variables
 }
