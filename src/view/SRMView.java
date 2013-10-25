@@ -40,21 +40,43 @@ public class SRMView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jbEmp = new javax.swing.JButton();
+        jbForn = new javax.swing.JButton();
+        jbMec = new javax.swing.JButton();
+        jbMont = new javax.swing.JButton();
+        jbProd = new javax.swing.JButton();
+        jbUsuario = new javax.swing.JButton();
+        jtpPrincipal = new javax.swing.JTabbedPane();
+        jpArquivo = new javax.swing.JPanel();
+        jbLogout = new javax.swing.JButton();
+        jbSair = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jpMov = new javax.swing.JPanel();
+        jbCadEntrada = new javax.swing.JButton();
+        jbCadSaida = new javax.swing.JButton();
+        jbCadOS = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jpCad = new javax.swing.JPanel();
+        jbCadEmp = new javax.swing.JButton();
+        jbCadForn = new javax.swing.JButton();
+        jbCadMec = new javax.swing.JButton();
+        jbCadMont = new javax.swing.JButton();
+        jbCadProd = new javax.swing.JButton();
+        jbcadUsuaro = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        jpRelat = new javax.swing.JPanel();
+        jpHelp = new javax.swing.JPanel();
+        jbAjuda = new javax.swing.JButton();
+        jbSobre = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
         menuBar = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        miLogout = new javax.swing.JMenuItem();
-        miSair = new javax.swing.JMenuItem();
-        fileMenu = new javax.swing.JMenu();
-        miEntrada = new javax.swing.JMenuItem();
-        miSaida = new javax.swing.JMenuItem();
-        miOrdemDeServico = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        miEmpenho = new javax.swing.JMenuItem();
-        miFornecedor = new javax.swing.JMenuItem();
-        miMecanico = new javax.swing.JMenuItem();
-        miMontadora = new javax.swing.JMenuItem();
-        miProduto = new javax.swing.JMenuItem();
-        miUsuario = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         miRelatorioEmpenhoDetalhado = new javax.swing.JMenuItem();
         miRelatorioProdutoB = new javax.swing.JMenuItem();
@@ -69,113 +91,339 @@ public class SRMView extends javax.swing.JFrame {
         miRelatorioProdutoSaida = new javax.swing.JMenuItem();
         miRelatorioProdutoMontadora = new javax.swing.JMenuItem();
         miRelatorioSaida = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SRM Sistema de Reserva de Materiais");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        jMenu2.setText("Arquivo");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        miLogout.setText("Logout");
-        jMenu2.add(miLogout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+        );
 
-        miSair.setText("Sair");
-        jMenu2.add(miSair);
-
-        menuBar.add(jMenu2);
-
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Movimentação");
-
-        miEntrada.setMnemonic('e');
-        miEntrada.setText("Entrada");
-        miEntrada.addActionListener(new java.awt.event.ActionListener() {
+        jbEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coins_add.png"))); // NOI18N
+        jbEmp.setToolTipText("Incluir empenho");
+        jbEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miEntradaActionPerformed(evt);
+                jbEmpActionPerformed(evt);
             }
         });
-        fileMenu.add(miEntrada);
 
-        miSaida.setMnemonic('s');
-        miSaida.setText("Saída");
-        miSaida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSaidaActionPerformed(evt);
+        jbForn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lorry_add.png"))); // NOI18N
+        jbForn.setToolTipText("Incluir fornecedor");
+
+        jbMec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_add.png"))); // NOI18N
+        jbMec.setToolTipText("Incluir mecânico");
+
+        jbMont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/car_add.png"))); // NOI18N
+        jbMont.setToolTipText("Incluir montadora");
+
+        jbProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/package_add.png"))); // NOI18N
+        jbProd.setToolTipText("Incluir produto");
+
+        jbUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/vcard_add.png"))); // NOI18N
+        jbUsuario.setToolTipText("Incluir usuário");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbEmp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbForn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbMec)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbMont)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbProd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbUsuario)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbEmp)
+                    .addComponent(jbForn)
+                    .addComponent(jbMec)
+                    .addComponent(jbMont)
+                    .addComponent(jbProd)
+                    .addComponent(jbUsuario))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jbLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/door_out.png"))); // NOI18N
+        jbLogout.setText("Logout");
+
+        jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
+        jbSair.setText("Sair");
+        jbSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbSairMouseClicked(evt);
             }
         });
-        fileMenu.add(miSaida);
-
-        miOrdemDeServico.setMnemonic('o');
-        miOrdemDeServico.setText("Ordem de Serviço");
-        miOrdemDeServico.addActionListener(new java.awt.event.ActionListener() {
+        jbSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miOrdemDeServicoActionPerformed(evt);
+                jbSairActionPerformed(evt);
             }
         });
-        fileMenu.add(miOrdemDeServico);
 
-        menuBar.add(fileMenu);
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Cadastro");
+        javax.swing.GroupLayout jpArquivoLayout = new javax.swing.GroupLayout(jpArquivo);
+        jpArquivo.setLayout(jpArquivoLayout);
+        jpArquivoLayout.setHorizontalGroup(
+            jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpArquivoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbLogout)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSair)
+                .addContainerGap(718, Short.MAX_VALUE))
+        );
+        jpArquivoLayout.setVerticalGroup(
+            jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpArquivoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jbLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1))
+                .addContainerGap())
+        );
 
-        miEmpenho.setMnemonic('p');
-        miEmpenho.setText("Empenho");
-        miEmpenho.addActionListener(new java.awt.event.ActionListener() {
+        jtpPrincipal.addTab("Arquivo", jpArquivo);
+
+        jbCadEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_add.png"))); // NOI18N
+        jbCadEntrada.setText("Entrada");
+        jbCadEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miEmpenhoActionPerformed(evt);
+                jbCadEntradaActionPerformed(evt);
             }
         });
-        editMenu.add(miEmpenho);
 
-        miFornecedor.setMnemonic('d');
-        miFornecedor.setText("Fornecedor");
-        miFornecedor.addActionListener(new java.awt.event.ActionListener() {
+        jbCadSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_delete.png"))); // NOI18N
+        jbCadSaida.setText("Saída");
+        jbCadSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFornecedorActionPerformed(evt);
+                jbCadSaidaActionPerformed(evt);
             }
         });
-        editMenu.add(miFornecedor);
 
-        miMecanico.setText("Mecânico");
-        miMecanico.addActionListener(new java.awt.event.ActionListener() {
+        jbCadOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table_add.png"))); // NOI18N
+        jbCadOS.setText("Ordem de serviço");
+        jbCadOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miMecanicoActionPerformed(evt);
+                jbCadOSActionPerformed(evt);
             }
         });
-        editMenu.add(miMecanico);
 
-        miMontadora.setText("Montadora");
-        miMontadora.addActionListener(new java.awt.event.ActionListener() {
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout jpMovLayout = new javax.swing.GroupLayout(jpMov);
+        jpMov.setLayout(jpMovLayout);
+        jpMovLayout.setHorizontalGroup(
+            jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpMovLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbCadEntrada)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadSaida)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadOS)
+                .addContainerGap(553, Short.MAX_VALUE))
+        );
+        jpMovLayout.setVerticalGroup(
+            jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpMovLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
+                    .addComponent(jbCadEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jbCadSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator3)
+                    .addComponent(jbCadOS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jtpPrincipal.addTab("Movimentação", jpMov);
+
+        jbCadEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coins.png"))); // NOI18N
+        jbCadEmp.setText("Empenho");
+        jbCadEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miMontadoraActionPerformed(evt);
+                jbCadEmpActionPerformed(evt);
             }
         });
-        editMenu.add(miMontadora);
 
-        miProduto.setMnemonic('y');
-        miProduto.setText("Produto");
-        miProduto.addActionListener(new java.awt.event.ActionListener() {
+        jbCadForn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lorry.png"))); // NOI18N
+        jbCadForn.setText("Fornecedor");
+        jbCadForn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miProdutoActionPerformed(evt);
+                jbCadFornActionPerformed(evt);
             }
         });
-        editMenu.add(miProduto);
 
-        miUsuario.setMnemonic('t');
-        miUsuario.setText("Usuário");
-        miUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jbCadMec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user.png"))); // NOI18N
+        jbCadMec.setText("Mecânico");
+        jbCadMec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miUsuarioActionPerformed(evt);
+                jbCadMecActionPerformed(evt);
             }
         });
-        editMenu.add(miUsuario);
 
-        menuBar.add(editMenu);
+        jbCadMont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/car.png"))); // NOI18N
+        jbCadMont.setText("Montadora");
+        jbCadMont.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadMontActionPerformed(evt);
+            }
+        });
+
+        jbCadProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/package.png"))); // NOI18N
+        jbCadProd.setText("Produto");
+        jbCadProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadProdActionPerformed(evt);
+            }
+        });
+
+        jbcadUsuaro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/vcard.png"))); // NOI18N
+        jbcadUsuaro.setText("Usuário");
+        jbcadUsuaro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbcadUsuaroActionPerformed(evt);
+            }
+        });
+
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout jpCadLayout = new javax.swing.GroupLayout(jpCad);
+        jpCad.setLayout(jpCadLayout);
+        jpCadLayout.setHorizontalGroup(
+            jpCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbCadEmp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadForn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadMec)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadMont)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadProd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbcadUsuaro)
+                .addContainerGap(232, Short.MAX_VALUE))
+        );
+        jpCadLayout.setVerticalGroup(
+            jpCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbCadEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jbcadUsuaro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator5)
+                    .addComponent(jbCadForn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator6)
+                    .addComponent(jbCadMec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator7)
+                    .addComponent(jbCadMont, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator8)
+                    .addComponent(jbCadProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator9))
+                .addContainerGap())
+        );
+
+        jtpPrincipal.addTab("Cadastro", jpCad);
+
+        javax.swing.GroupLayout jpRelatLayout = new javax.swing.GroupLayout(jpRelat);
+        jpRelat.setLayout(jpRelatLayout);
+        jpRelatLayout.setHorizontalGroup(
+            jpRelatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 898, Short.MAX_VALUE)
+        );
+        jpRelatLayout.setVerticalGroup(
+            jpRelatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 72, Short.MAX_VALUE)
+        );
+
+        jtpPrincipal.addTab("Relatório", jpRelat);
+
+        jbAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/help.png"))); // NOI18N
+        jbAjuda.setText("Ajuda");
+
+        jbSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Display.png"))); // NOI18N
+        jbSobre.setText("Sobre");
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout jpHelpLayout = new javax.swing.GroupLayout(jpHelp);
+        jpHelp.setLayout(jpHelpLayout);
+        jpHelpLayout.setHorizontalGroup(
+            jpHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpHelpLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbAjuda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSobre)
+                .addContainerGap(712, Short.MAX_VALUE))
+        );
+        jpHelpLayout.setVerticalGroup(
+            jpHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHelpLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator4)
+                    .addComponent(jbSobre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbAjuda, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jtpPrincipal.addTab("Help", jpHelp);
 
         jMenu1.setText("Relatório");
 
@@ -188,6 +436,11 @@ public class SRMView extends javax.swing.JFrame {
         jMenu1.add(miRelatorioEmpenhoDetalhado);
 
         miRelatorioProdutoB.setText("Entrada Produto 'B'");
+        miRelatorioProdutoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRelatorioProdutoBActionPerformed(evt);
+            }
+        });
         jMenu1.add(miRelatorioProdutoB);
 
         miRelatorioEntrada.setText("Entrada Por Período");
@@ -235,87 +488,33 @@ public class SRMView extends javax.swing.JFrame {
 
         menuBar.add(jMenu1);
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jtpPrincipal)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 578, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jtpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-816)/2, (screenSize.height-637)/2, 816, 637);
+        setBounds((screenSize.width-919)/2, (screenSize.height-637)/2, 919, 637);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void miEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEntradaActionPerformed
-EntradaSearchView janelaEntrada = new EntradaSearchView(usuario);
-janelaEntrada.setVisible(true);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_miEntradaActionPerformed
-
-    private void miSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaidaActionPerformed
-SaidaSearchView janelaSaida = new SaidaSearchView(usuario);
-janelaSaida.setVisible(true);
-// TODO add your handling code here:
-    }//GEN-LAST:event_miSaidaActionPerformed
-
-    private void miOrdemDeServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOrdemDeServicoActionPerformed
-OrdemDeServicoSearchView janelaOrdemDeServico = new OrdemDeServicoSearchView(usuario);
-janelaOrdemDeServico.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_miOrdemDeServicoActionPerformed
-
-    private void miEmpenhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEmpenhoActionPerformed
-EmpenhoSearchView janelaEmpenho = new EmpenhoSearchView(usuario);
-janelaEmpenho.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_miEmpenhoActionPerformed
-
-    private void miProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miProdutoActionPerformed
-      ProdutoSearchView janelaProduto = new ProdutoSearchView(usuario);
-      janelaProduto.setVisible(true);
-    }//GEN-LAST:event_miProdutoActionPerformed
-
-    private void miFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFornecedorActionPerformed
-FornecedorSearchView janelaFornecedor = new FornecedorSearchView(usuario);
-janelaFornecedor.setVisible(true);
-    }//GEN-LAST:event_miFornecedorActionPerformed
-
-    private void miMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMecanicoActionPerformed
-MecanicoSearchView janelaMecanico = new MecanicoSearchView(usuario);
-janelaMecanico.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_miMecanicoActionPerformed
-
-    private void miMontadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMontadoraActionPerformed
-  MontadoraSearchView janelaMontadora = new MontadoraSearchView(usuario);
-  janelaMontadora.setVisible(true);// TODO addm your handling code here:
-    }//GEN-LAST:event_miMontadoraActionPerformed
 
     private void miRelatorioEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioEstoqueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_miRelatorioEstoqueActionPerformed
-
-    private void miUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUsuarioActionPerformed
- UsuarioSearchView janelaUsuario = new UsuarioSearchView(usuario);
- janelaUsuario.setVisible(true);
- // TODO add your handling code here:
-    }//GEN-LAST:event_miUsuarioActionPerformed
 
     private void miRelatorioProdutoMontadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioProdutoMontadoraActionPerformed
 RelatorioProdutoMontadoraView janelaRelatorioProdutoMontadora = new RelatorioProdutoMontadoraView();
@@ -330,6 +529,80 @@ janelaRelatorioProdutoMontadora.setVisible(true);
        
        // TODO add your handling code here:
     }//GEN-LAST:event_miRelatorioEmpenhoDetalhadoActionPerformed
+
+    private void jbSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSairMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSairMouseClicked
+
+    private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbCadEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadEntradaActionPerformed
+        // TODO add your handling code here:
+        EntradaSearchView janelaEntrada = new EntradaSearchView(usuario);
+        janelaEntrada.setVisible(true);
+    }//GEN-LAST:event_jbCadEntradaActionPerformed
+
+    private void jbCadSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadSaidaActionPerformed
+        // TODO add your handling code here:
+        SaidaSearchView janelaSaida = new SaidaSearchView(usuario);
+        janelaSaida.setVisible(true);
+    }//GEN-LAST:event_jbCadSaidaActionPerformed
+
+    private void jbCadOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadOSActionPerformed
+        // TODO add your handling code here:
+        OrdemDeServicoSearchView janelaOrdemDeServico = new OrdemDeServicoSearchView(usuario);
+        janelaOrdemDeServico.setVisible(true);
+    }//GEN-LAST:event_jbCadOSActionPerformed
+
+    private void jbCadEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadEmpActionPerformed
+        // TODO add your handling code here:
+        EmpenhoSearchView janelaEmpenho = new EmpenhoSearchView(usuario);
+        janelaEmpenho.setVisible(true);
+    }//GEN-LAST:event_jbCadEmpActionPerformed
+
+    private void jbCadFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadFornActionPerformed
+        // TODO add your handling code here:
+        FornecedorSearchView janelaFornecedor = new FornecedorSearchView(usuario);
+        janelaFornecedor.setVisible(true);
+    }//GEN-LAST:event_jbCadFornActionPerformed
+
+    private void jbCadMecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadMecActionPerformed
+        // TODO add your handling code here:
+        MecanicoSearchView janelaMecanico = new MecanicoSearchView(usuario);
+        janelaMecanico.setVisible(true);
+    }//GEN-LAST:event_jbCadMecActionPerformed
+
+    private void jbCadMontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadMontActionPerformed
+        // TODO add your handling code here:
+        MontadoraSearchView janelaMontadora = new MontadoraSearchView(usuario);
+        janelaMontadora.setVisible(true);
+    }//GEN-LAST:event_jbCadMontActionPerformed
+
+    private void jbCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadProdActionPerformed
+        // TODO add your handling code here:
+        ProdutoSearchView janelaProduto = new ProdutoSearchView(usuario);
+        janelaProduto.setVisible(true);
+    }//GEN-LAST:event_jbCadProdActionPerformed
+
+    private void jbcadUsuaroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcadUsuaroActionPerformed
+        // TODO add your handling code here:
+        UsuarioSearchView janelaUsuario = new UsuarioSearchView(usuario);
+        janelaUsuario.setVisible(true);
+    }//GEN-LAST:event_jbcadUsuaroActionPerformed
+
+    private void miRelatorioProdutoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioProdutoBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miRelatorioProdutoBActionPerformed
+
+    private void jbEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEmpActionPerformed
+        // TODO add your handling code here:
+        EmpenhoEditView janelaEmpenho = new EmpenhoEditView();
+        janelaEmpenho.setVisible(true);
+        
+    }//GEN-LAST:event_jbEmpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -372,12 +645,12 @@ janelaRelatorioProdutoMontadora.setVisible(true);
         switch (usuario.getPerfil()){
        case "Garagem"   :{
        
-       miEntrada.setVisible(false);
-       miSaida.setVisible(false);    
-       miEmpenho.setVisible(false);
-       miMontadora.setVisible(false);
-       miProduto.setVisible(false);
-       miFornecedor.setVisible(false);
+       jbCadEmp.setVisible(false);
+       jbCadSaida.setVisible(false);    
+       jbCadEmp.setVisible(false);
+       jbCadMont.setVisible(false);
+       jbCadProd.setVisible(false);
+       jbCadForn.setVisible(false);
        miRelatorioEmpenho.setVisible(false);
        miRelatorioEmpenhoDetalhado.setVisible(false);
        miRelatorioEntrada.setVisible(false);
@@ -391,24 +664,19 @@ janelaRelatorioProdutoMontadora.setVisible(true);
        miRelatorioSaida.setVisible(false); 
                
        break;} 
-       case "Estoquista" : {
-       
-           
-       
-       miOrdemDeServico.setVisible(false);
-       miMecanico.setVisible(false);
+       case "Estoquista" : {      
+         
+       jbCadOS.setVisible(false);
+       jbCadMec.setVisible(false);
        miRelatorioEmpenho.setVisible(false);
        miRelatorioEmpenhoDetalhado.setVisible(false);
        miRelatorioFornecedor.setVisible(false);       
        miRelatorioProdutoB.setVisible(false);       
        miRelatorioOrdemDeServico.setVisible(false);
        miRelatorioMecanico.setVisible(false);
-       miFornecedor.setVisible(false);
-       miEmpenho.setVisible(false);       
-      
-           
-           
-       
+       jbCadForn.setVisible(false);
+       jbCadEmp.setVisible(false);     
+        
        break;}
        default :{
        
@@ -417,22 +685,44 @@ janelaRelatorioProdutoMontadora.setVisible(true);
    }
   } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JButton jbAjuda;
+    private javax.swing.JButton jbCadEmp;
+    private javax.swing.JButton jbCadEntrada;
+    private javax.swing.JButton jbCadForn;
+    private javax.swing.JButton jbCadMec;
+    private javax.swing.JButton jbCadMont;
+    private javax.swing.JButton jbCadOS;
+    private javax.swing.JButton jbCadProd;
+    private javax.swing.JButton jbCadSaida;
+    private javax.swing.JButton jbEmp;
+    private javax.swing.JButton jbForn;
+    private javax.swing.JButton jbLogout;
+    private javax.swing.JButton jbMec;
+    private javax.swing.JButton jbMont;
+    private javax.swing.JButton jbProd;
+    private javax.swing.JButton jbSair;
+    private javax.swing.JButton jbSobre;
+    private javax.swing.JButton jbUsuario;
+    private javax.swing.JButton jbcadUsuaro;
+    private javax.swing.JPanel jpArquivo;
+    private javax.swing.JPanel jpCad;
+    private javax.swing.JPanel jpHelp;
+    private javax.swing.JPanel jpMov;
+    private javax.swing.JPanel jpRelat;
+    private javax.swing.JTabbedPane jtpPrincipal;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem miEmpenho;
-    private javax.swing.JMenuItem miEntrada;
-    private javax.swing.JMenuItem miFornecedor;
-    private javax.swing.JMenuItem miLogout;
-    private javax.swing.JMenuItem miMecanico;
-    private javax.swing.JMenuItem miMontadora;
-    private javax.swing.JMenuItem miOrdemDeServico;
-    private javax.swing.JMenuItem miProduto;
     private javax.swing.JMenuItem miRelatorioEmpenho;
     private javax.swing.JMenuItem miRelatorioEmpenhoDetalhado;
     private javax.swing.JMenuItem miRelatorioEntrada;
@@ -446,8 +736,5 @@ janelaRelatorioProdutoMontadora.setVisible(true);
     private javax.swing.JMenuItem miRelatorioProdutoPeriodo;
     private javax.swing.JMenuItem miRelatorioProdutoSaida;
     private javax.swing.JMenuItem miRelatorioSaida;
-    private javax.swing.JMenuItem miSaida;
-    private javax.swing.JMenuItem miSair;
-    private javax.swing.JMenuItem miUsuario;
     // End of variables declaration//GEN-END:variables
 }
