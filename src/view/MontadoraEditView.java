@@ -128,9 +128,6 @@ MontadoraController montadoraController = MontadoraController.getInstacia();
    if(montadoraController.persistir(montadora)){
       JOptionPane.showMessageDialog(rootPane, "Montadora Gravada Com sucesso");
       
-      
-      
-      
       this.dispose();
    }else{
       JOptionPane.showMessageDialog(rootPane, "Falha ao Gravar a Montadora");
