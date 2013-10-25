@@ -40,8 +40,8 @@ public class SRMView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jpCorpo = new javax.swing.JPanel();
+        jpRodape = new javax.swing.JPanel();
         jbEmp = new javax.swing.JButton();
         jbForn = new javax.swing.JButton();
         jbMec = new javax.swing.JButton();
@@ -73,8 +73,8 @@ public class SRMView extends javax.swing.JFrame {
         jSeparator9 = new javax.swing.JSeparator();
         jpRelat = new javax.swing.JPanel();
         jcbRelatorios = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jlRelat = new javax.swing.JLabel();
+        jbAbrirRelat = new javax.swing.JButton();
         jpHelp = new javax.swing.JPanel();
         jbAjuda = new javax.swing.JButton();
         jbSobre = new javax.swing.JButton();
@@ -86,17 +86,17 @@ public class SRMView extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpCorpo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jpCorpoLayout = new javax.swing.GroupLayout(jpCorpo);
+        jpCorpo.setLayout(jpCorpoLayout);
+        jpCorpoLayout.setHorizontalGroup(
+            jpCorpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 434, Short.MAX_VALUE)
+        jpCorpoLayout.setVerticalGroup(
+            jpCorpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 458, Short.MAX_VALUE)
         );
 
         jbEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coins_add.png"))); // NOI18N
@@ -147,11 +147,11 @@ public class SRMView extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpRodapeLayout = new javax.swing.GroupLayout(jpRodape);
+        jpRodape.setLayout(jpRodapeLayout);
+        jpRodapeLayout.setHorizontalGroup(
+            jpRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRodapeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbEmp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,11 +166,11 @@ public class SRMView extends javax.swing.JFrame {
                 .addComponent(jbUsuario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jpRodapeLayout.setVerticalGroup(
+            jpRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRodapeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbEmp)
                     .addComponent(jbForn)
                     .addComponent(jbMec)
@@ -224,7 +224,7 @@ public class SRMView extends javax.swing.JFrame {
 
         jtpPrincipal.addTab("Arquivo", jpArquivo);
 
-        jbCadEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_add.png"))); // NOI18N
+        jbCadEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_put.png"))); // NOI18N
         jbCadEntrada.setText("Entrada");
         jbCadEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +232,7 @@ public class SRMView extends javax.swing.JFrame {
             }
         });
 
-        jbCadSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_delete.png"))); // NOI18N
+        jbCadSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_remove.png"))); // NOI18N
         jbCadSaida.setText("Saída");
         jbCadSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +240,7 @@ public class SRMView extends javax.swing.JFrame {
             }
         });
 
-        jbCadOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table_add.png"))); // NOI18N
+        jbCadOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table.png"))); // NOI18N
         jbCadOS.setText("Ordem de serviço");
         jbCadOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,13 +394,13 @@ public class SRMView extends javax.swing.JFrame {
 
         jcbRelatorios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Crédito Detalhado Empenho", "Entrada Produto 'B'", "Entrada Por Período", "Estoque Geral", "Empenho", "Fornecedores", "Montadora", "Mecânico", "Ordem de Serviço", "Produto Por Período", "Produtos Por Saída", "Produtos Por Montadora", "Saída Por Período" }));
 
-        jLabel1.setText("Selecione o relatório:");
+        jlRelat.setText("Selecione o relatório:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Folder (2).png"))); // NOI18N
-        jButton1.setToolTipText("Abrir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbAbrirRelat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Folder (2).png"))); // NOI18N
+        jbAbrirRelat.setToolTipText("Abrir");
+        jbAbrirRelat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbAbrirRelatActionPerformed(evt);
             }
         });
 
@@ -410,11 +410,11 @@ public class SRMView extends javax.swing.JFrame {
             jpRelatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpRelatLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jlRelat)
                 .addGap(12, 12, 12)
                 .addComponent(jcbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jbAbrirRelat)
                 .addContainerGap(561, Short.MAX_VALUE))
         );
         jpRelatLayout.setVerticalGroup(
@@ -423,8 +423,8 @@ public class SRMView extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jpRelatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(jlRelat)
+                    .addComponent(jbAbrirRelat))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -470,8 +470,8 @@ public class SRMView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpCorpo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jtpPrincipal)
         );
         layout.setVerticalGroup(
@@ -479,13 +479,13 @@ public class SRMView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jtpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpCorpo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jpRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-919)/2, (screenSize.height-637)/2, 919, 637);
+        setBounds((screenSize.width-919)/2, (screenSize.height-661)/2, 919, 661);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSairMouseClicked
@@ -588,11 +588,11 @@ public class SRMView extends javax.swing.JFrame {
         janelaUsuario.setVisible(true);
     }//GEN-LAST:event_jbUsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbAbrirRelatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirRelatActionPerformed
         // TODO add your handling code here:
         
         // fazer um if selecteditem da combo, para abrir cada tela
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbAbrirRelatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -661,10 +661,6 @@ public class SRMView extends javax.swing.JFrame {
    }
   } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -674,6 +670,7 @@ public class SRMView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JButton jbAbrirRelat;
     private javax.swing.JButton jbAjuda;
     private javax.swing.JButton jbCadEmp;
     private javax.swing.JButton jbCadEntrada;
@@ -694,11 +691,14 @@ public class SRMView extends javax.swing.JFrame {
     private javax.swing.JButton jbUsuario;
     private javax.swing.JButton jbcadUsuaro;
     private javax.swing.JComboBox jcbRelatorios;
+    private javax.swing.JLabel jlRelat;
     private javax.swing.JPanel jpArquivo;
     private javax.swing.JPanel jpCad;
+    private javax.swing.JPanel jpCorpo;
     private javax.swing.JPanel jpHelp;
     private javax.swing.JPanel jpMov;
     private javax.swing.JPanel jpRelat;
+    private javax.swing.JPanel jpRodape;
     private javax.swing.JTabbedPane jtpPrincipal;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
