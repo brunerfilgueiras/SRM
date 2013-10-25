@@ -76,6 +76,7 @@ public class SRMView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SRM Sistema de Reserva de Materiais");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         jMenu2.setText("Arquivo");
 
@@ -260,8 +261,8 @@ public class SRMView extends javax.swing.JFrame {
             .addGap(0, 578, Short.MAX_VALUE)
         );
 
-        pack();
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-816)/2, (screenSize.height-637)/2, 816, 637);
     }// </editor-fold>//GEN-END:initComponents
 
     private void miEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEntradaActionPerformed
