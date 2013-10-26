@@ -31,7 +31,7 @@ import javax.persistence.Table;
 public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
-    @Column(name = "numero_peca")
+    @Column(name = "numeroPeca")
     private String numeroPeca;
     @Basic(optional = false)
     @Column(name = "descricao")
