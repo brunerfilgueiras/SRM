@@ -5,12 +5,8 @@
 package view;
 
 import controller.FornecedorController;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Fornecedor;
-import model.Mecanico;
 
 /**
  *
