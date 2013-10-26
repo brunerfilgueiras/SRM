@@ -62,7 +62,7 @@ public class OrdemDeServicoDAO {
         try{ 
         
             Criteria crit = session.createCriteria(OrdemDeServico.class);
-            crit.add(Restrictions.ilike("id", ordemDeServico.getId()));
+            crit.add(Restrictions.eq("id",ordemDeServico.getId()));
             resultado = crit.list();
        
           return resultado; 

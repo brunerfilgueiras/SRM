@@ -31,14 +31,14 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "OrdemDeServico.findAll", query = "SELECT o FROM OrdemDeServico o")})
 public class OrdemDeServico implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Column(name = "data_saida")
+    @Column(name = "dataSaida")
     @Temporal(TemporalType.DATE)
     private Date dataSaida;
     @Basic(optional = false)
-    @Column(name = "eb_placa")
+    @Column(name = "ebPlaca")
     private String ebPlaca;
     @Basic(optional = false)
-    @Column(name = "data_entrada")
+    @Column(name = "dataEntrada")
     @Temporal(TemporalType.DATE)
     private Date dataEntrada;
     @Column(name = "observacoes")

@@ -6,6 +6,7 @@ package view;
 
 import controller.OrdemDeServicoController;
 import dao.OrdemDeServicoDAO;
+import java.math.BigInteger;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -227,9 +228,13 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
     private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
         // TODO add your handling code here:
       if(jtParametro.getText().equals("")){
+       
+          
+          
+          
           
       }else{
-                  
+                 
                     ordemDeServico.setId(Long.parseLong(jtParametro.getText()));
                     carregaConsulta(ordemDeServico);  
       }         
@@ -318,7 +323,10 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
        modelo.setNumRows(0);
        
        for(int i = 0; i<ordensDeServico.size();i++){
-                        
+       
+           ordemDeServico = ordensDeServico.get(i);
+           
+           
         modelo.addRow(new String[]{ordemDeServico.getId().toString(), ordemDeServico.getOm(), ordemDeServico.getViatura(),dataUtil.parseDate(ordemDeServico.getDataSaida()), dataUtil.parseDate(ordemDeServico.getDataEntrada())});
      
     
