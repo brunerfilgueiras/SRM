@@ -47,19 +47,22 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jcbMontadora" max="32767" attributes="0"/>
-                              <Component id="jtNumeroPeca" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                              <Component id="jtLocalizacao" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                          <Component id="jtDescricao" alignment="0" pref="288" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jcbMontadora" max="32767" attributes="0"/>
+                                  <Component id="jtNumeroPeca" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="jtLocalizacao" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jtQuantidade" min="-2" pref="115" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jtfValor" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="jtfValor" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jtDescricao" alignment="0" pref="288" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -167,11 +170,8 @@
     <Component class="javax.swing.JComboBox" name="jcbMontadora">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="1">
+            <StringItem index="0" value="Selecione um Item"/>
           </StringArray>
         </Property>
       </Properties>
@@ -183,6 +183,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Gravar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbGravarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbSair">
       <Properties>
@@ -195,13 +198,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSairActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jtfValor">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="R$ #####,##" subtype="-1" type="5"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -213,6 +209,8 @@
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfValor">
     </Component>
   </SubComponents>
 </Form>

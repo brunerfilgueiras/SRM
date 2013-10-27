@@ -359,6 +359,7 @@ public class MecanicoSearchView extends javax.swing.JFrame {
       
     }
     
+    //seleciona Mecanico na tabela
     private Mecanico seleciona(){
     
        int linha = jtMecanicos.getSelectedRow();

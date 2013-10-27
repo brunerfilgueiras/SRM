@@ -4,6 +4,12 @@
  */
 package view;
 
+import controller.ProdutoController;
+import dao.ProdutoDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Produto;
 import model.Usuario;
 
 /**
@@ -12,12 +18,19 @@ import model.Usuario;
  */
 public class ProdutoSearchView extends javax.swing.JFrame {
 
+    private List<Produto> produtos;
+    private Produto produto;
+    
+    
+    
+    
     /**
      * Creates new form ProdutoSearchView
      */
     public ProdutoSearchView(Usuario usuario){
         initComponents();
        permissao(usuario);
+       carregaTabela();
     }
     
     
@@ -63,6 +76,11 @@ public class ProdutoSearchView extends javax.swing.JFrame {
 
         jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete (2).png"))); // NOI18N
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jbAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Admin.png"))); // NOI18N
         jbAlterar.setText("Alterar");
@@ -82,6 +100,11 @@ public class ProdutoSearchView extends javax.swing.JFrame {
 
         jbConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         jbConsultar.setText("Consultar");
+        jbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarActionPerformed(evt);
+            }
+        });
 
         jtMecanicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,7 +114,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nome Completo", "Nome Guerra", "Posto / Graduação"
+                "ID", "Número da Peça", "Descrição", "Montadora"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -143,10 +166,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
                                         .addComponent(jbAlterar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbExcluir)))
-                                .addGap(0, 257, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(0, 257, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jbSair))
@@ -185,8 +205,8 @@ public class ProdutoSearchView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-678)/2, (screenSize.height-491)/2, 678, 491);
+        setSize(new java.awt.Dimension(678, 491));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtParametroActionPerformed
@@ -194,7 +214,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
     }//GEN-LAST:event_jtParametroActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-        ProdutoEditView janelaProduto = new ProdutoEditView();
+        ProdutoEditView janelaProduto = new ProdutoEditView(seleciona());
         janelaProduto.setVisible(true);
 
         // TODO add your handling code here:
@@ -212,6 +232,52 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        // TODO add your handling code here:
+        
+        ProdutoController produtoController =  ProdutoController.getInstacia();
+       
+       if(seleciona() != null){
+        
+        if(produtoController.deletar(seleciona())){
+            JOptionPane.showMessageDialog(rootPane, "Produto Excluido com sucesso!");
+                        
+            carregaTabela();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir  Produto!", null, 2);
+        }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Produto Não selecionado!",null , 2);
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        // TODO add your handling code here:
+        
+        if(jcbParametro.getSelectedItem().equals("Numero Ficha")){
+                   produto = Produto.getInstacia();
+                   produto.setDescricao(null);
+                    produto.setNumeroPeca(jtParametro.getText());
+                    carregaConsulta(produto);  
+                   
+                }else{
+                     produto = Produto.getInstacia();
+                     produto.setNumeroPeca(null);
+                    produto.setDescricao(jtParametro.getText());
+                    carregaConsulta(produto);  
+                     
+                  }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +318,68 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         jbExcluir.setVisible(false);
     }
     }
+    
+    //carraga consulta
+     private void carregaConsulta(Produto produto){
+        ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
+        produtos = produtoDAO.consulta(produto);
+    
+        
+       DefaultTableModel modelo = (DefaultTableModel) jtMecanicos.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<produtos.size();i++){
+                        
+         modelo.addRow(new String[]{produtos.get(i).getId().toString(), produtos.get(i).getNumeroPeca(), produtos.get(i).getDescricao(),
+             produtos.get(i).getIdMontadora().getNome()});
+    
+       }
+      
+    }
+    
+    
+    
+     //caregadados na tabela
+    private void carregaTabela(){
+       
+        ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
+        produtos = produtoDAO.listaTodos();
+    
+       DefaultTableModel modelo = (DefaultTableModel) jtMecanicos.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<produtos.size();i++){
+         
+         produto = produtos.get(i);
+        
+         modelo.addRow(new String[]{produtos.get(i).getId().toString(), produtos.get(i).getNumeroPeca(), produtos.get(i).getDescricao(),
+             produtos.get(i).getIdMontadora().getNome()});
+         
+       }
+      
+    }
+    
+    private Produto seleciona(){
+    
+       int linha = jtMecanicos.getSelectedRow();
+       if(linha != -1){
+       produto = produtos.get(linha);
+       return produto;
+       }else{
+        return produto = null;
+       }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

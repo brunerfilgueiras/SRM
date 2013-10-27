@@ -4,17 +4,38 @@
  */
 package view;
 
+import controller.ProdutoController;
+import dao.MontadoraDAO;
+import java.awt.Component;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Montadora;
+import model.Produto;
+
 /**
  *
  * @author secinfor-04
  */
 public class ProdutoEditView extends javax.swing.JFrame {
 
+   private Produto produto = Produto.getInstacia();
+   private List  montadoras;
+    
     /**
      * Creates new form ProdutoEditView
      */
+    public ProdutoEditView(Produto produto) {
+        initComponents();
+        carregaComboBox();
+        carregaDados(produto);
+        this.produto = produto;
+        
+    }
+    
+    
     public ProdutoEditView() {
         initComponents();
+        carregaComboBox();
     }
 
     /**
@@ -40,10 +61,10 @@ public class ProdutoEditView extends javax.swing.JFrame {
         jcbMontadora = new javax.swing.JComboBox();
         jbGravar = new javax.swing.JButton();
         jbSair = new javax.swing.JButton();
-        jtfValor = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jtfValor = new javax.swing.JTextField();
 
         jLabel5.setText("jLabel5");
 
@@ -63,10 +84,15 @@ public class ProdutoEditView extends javax.swing.JFrame {
 
         jLabel7.setText("Valor:");
 
-        jcbMontadora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbMontadora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Item" }));
 
         jbGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Success.png"))); // NOI18N
         jbGravar.setText("Gravar");
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
 
         jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         jbSair.setText("Sair");
@@ -75,12 +101,6 @@ public class ProdutoEditView extends javax.swing.JFrame {
                 jbSairActionPerformed(evt);
             }
         });
-
-        try {
-            jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$ #####,##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Cadastro de Produtos");
@@ -101,17 +121,19 @@ public class ProdutoEditView extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jcbMontadora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtNumeroPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbMontadora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtNumeroPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)))
+                                .addComponent(jtfValor))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jbGravar)
@@ -162,14 +184,55 @@ public class ProdutoEditView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-395)/2, (screenSize.height-276)/2, 395, 276);
+        setSize(new java.awt.Dimension(395, 276));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
     
         this.dispose();        
     }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        // TODO add your handling code here:
+    
+           
+    if(campoObrigatorio()==null){
+      
+     
+     produto.setIdMontadora(selecionada());
+     produto.setDescricao(jtDescricao.getText());
+     produto.setLocalizacao(jtLocalizacao.getText());
+     produto.setNumeroPeca(jtNumeroPeca.getText());
+     produto.setQuantidade(Integer.parseInt(jtQuantidade.getText()));
+     produto.setValor(Float.parseFloat(jtfValor.getText()));
+    
+     
+           
+      ProdutoController produtoController = ProdutoController.getInstacia();
+      
+      if(produtoController.persistir(produto)){
+          
+          JOptionPane.showMessageDialog(null, "Produto Gravado Com sucesso!", null, 1);
+          
+          this.dispose();
+      }else{
+          
+          JOptionPane.showMessageDialog(null, "Falha ao Salvar Produto!!", null, 2);
+      }
+        
+     }else{  
+         
+        JOptionPane.showMessageDialog(null, campoObrigatorio(), null, 2); 
+     }    
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbGravarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,6 +253,103 @@ public class ProdutoEditView extends javax.swing.JFrame {
             }
         });
     }
+    
+    // metodo que valida Campo em Branco
+    private String campoObrigatorio(){
+       
+        String vazio = "Campo Obrigatorio Em Branco ou Não Selecionado: ";
+       boolean msg = false;
+       
+        if(jtNumeroPeca.getText().equals("")){
+          
+            vazio = vazio + "\n Numero da Peça ";
+            
+        msg = true; 
+        }
+        if(jtDescricao.getText().equals("")){
+          
+            vazio = vazio + "\n Descrição ";
+            
+          msg = true;
+        }
+        if(jtLocalizacao.getText().equals("")){
+          
+            vazio = vazio + "\n Localização ";
+            
+          msg = true;
+        }
+        if(jtQuantidade.getText().equals("")){
+          
+            vazio = vazio + "\n Quantidade ";
+            
+          msg = true;
+        }
+        if(jtfValor.getText().equals("")){
+          
+            vazio = vazio + "\n Valor ";
+            
+          msg = true;
+        }
+        
+        if(jcbMontadora.getSelectedItem().equals("Selecione um item")){
+          
+            vazio = vazio + " \n Montadora ";
+            
+         msg = true; 
+        }
+             
+        if(msg){
+        
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
+    //carrega dados para alterar 
+    private void carregaDados(Produto produto){
+       
+     
+      
+        jtNumeroPeca.setText(produto.getNumeroPeca());
+        jtDescricao.setText(produto.getDescricao());
+        jtLocalizacao.setText(produto.getLocalizacao());
+        jtQuantidade.setText(Integer.toString(produto.getQuantidade()));
+        jtfValor.setText(Float.toString(produto.getValor()));
+        jcbMontadora.setSelectedItem(produto.getIdMontadora().getNome());
+        
+    }
+    
+    
+    private void carregaComboBox(){
+      MontadoraDAO montadoraDAO = MontadoraDAO.getInstacia();
+      montadoras =  montadoraDAO.listaTodas();
+    
+      for(int i = 0; i<montadoras.size();i++){
+        
+          Montadora montadora = (Montadora) montadoras.get(i);
+          
+       jcbMontadora.addItem(montadora.getNome());
+         
+    
+       }
+      
+  
+    }
+    
+    private Montadora selecionada(){
+        
+     Montadora montadora = Montadora.getInstacia();   
+       
+     montadora = (Montadora) montadoras.get(jcbMontadora.getSelectedIndex()-1);
+         
+         
+        return montadora; 
+     } 
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -208,6 +368,6 @@ public class ProdutoEditView extends javax.swing.JFrame {
     private javax.swing.JTextField jtLocalizacao;
     private javax.swing.JTextField jtNumeroPeca;
     private javax.swing.JTextField jtQuantidade;
-    private javax.swing.JFormattedTextField jtfValor;
+    private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
 }

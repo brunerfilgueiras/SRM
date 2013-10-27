@@ -75,6 +75,31 @@ public class MontadoraDAO {
         
       }   
     
+     public Montadora consultaId(Montadora montadora){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+      
+        try{ 
+        
+            Criteria crit = session.createCriteria(Montadora.class);
+            crit.add(Restrictions.eq("id", montadora.getId()));
+           
+       
+          return  (Montadora) crit.uniqueResult();
+        }catch(Exception e){
+                   
+          return  null ;
+          
+        }
+        
+      }
+     
+     
+     
+     
+     
     public List listaTodas(){
         
         EntityManager entityManager = PersistenceUtil.getEntityManager();
