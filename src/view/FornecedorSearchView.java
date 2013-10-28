@@ -311,11 +311,10 @@ static FornecedorSearchView instancia = null;
         // TODO add your handling code here:
         
         EmpenhoEditView janela = EmpenhoEditView.getInstacia();
-        
-        fornecedor = seleciona();
-     
+               
+        janela.adicionarFornecedor(seleciona());
         janela.setVisible(true);
-        
+        this.dispose();
     }//GEN-LAST:event_jbAdicionarActionPerformed
 
     /**

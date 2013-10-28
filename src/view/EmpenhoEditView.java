@@ -4,7 +4,14 @@
  */
 package view;
 
+import controller.EmpenhoController;
+import dao.EmpenhoDAO;
+import javax.swing.JOptionPane;
+import model.Empenho;
 import model.Fornecedor;
+import util.DateTimeUtil;
+
+
 
 /**
  *
@@ -13,9 +20,10 @@ import model.Fornecedor;
 public class EmpenhoEditView extends javax.swing.JFrame {
 
     private  Fornecedor adicionado = Fornecedor.getInstacia();
+    private Empenho empenho = Empenho.getInstacia();
     
     static EmpenhoEditView instancia = null;  
-   
+      
      public static EmpenhoEditView getInstacia(){
        if(  instancia == null){
          return instancia = new EmpenhoEditView();
@@ -24,13 +32,18 @@ public class EmpenhoEditView extends javax.swing.JFrame {
        }
      }
     
-    
+    public EmpenhoEditView(Empenho empenho) {
+        initComponents();
+        jtSaldo.setEditable(false);
+        
+    }
     
     /**
      * Creates new form EmpenhoEditView
      */
     public EmpenhoEditView() {
         initComponents();
+        jtSaldo.setEditable(false);
         
     }
 
@@ -92,6 +105,11 @@ public class EmpenhoEditView extends javax.swing.JFrame {
 
         jbGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/accept.png"))); // NOI18N
         jbGravar.setText("Gravar");
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
 
         jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         jbSair.setText("Sair");
@@ -214,19 +232,44 @@ public class EmpenhoEditView extends javax.swing.JFrame {
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_formWindowStateChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
    
         
-   if(adicionado == null){
-    jtFornecedor.setText(adicionado.getNome());
-    jtCNPJ.setText(adicionado.getCnpj());
-   }  
+   
         
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        // TODO add your handling code here:
+       EmpenhoController empenhoController = EmpenhoController.getInstacia();
+        
+        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        empenho.setNumero(jtNumero.getText());
+        empenho.setData(dataUtil.parse("YYYY/MM/dd", jtfData.getText()));
+        empenho.setValor(Float.parseFloat(jtValor.getText()));
+        empenho.setIdFornecedor(adicionado);
+    
+    
+    if(empenhoController.persistir(empenho)){
+          
+          JOptionPane.showMessageDialog(null, "Fornecedor Gravado Com sucesso!", null, 1);
+          
+          this.dispose();
+      }else{
+          
+          JOptionPane.showMessageDialog(null, "Falha ao Salvar Fornecedor!!", null, 2);
+      }
+        
+     
+
+
+
+    }//GEN-LAST:event_jbGravarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,13 +312,10 @@ public class EmpenhoEditView extends javax.swing.JFrame {
     public void adicionarFornecedor(Fornecedor fornecedor){
         
        adicionado = fornecedor; 
-       
-       
-     
-     
-     
-      
-    }
+      this.jtFornecedor.setText(adicionado.getNome());
+       this.jtCNPJ.setText(adicionado.getCnpj());
+    
+          }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
