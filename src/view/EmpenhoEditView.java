@@ -4,17 +4,34 @@
  */
 package view;
 
+import model.Fornecedor;
+
 /**
  *
  * @author secinfor-04
  */
 public class EmpenhoEditView extends javax.swing.JFrame {
 
+    private  Fornecedor adicionado = Fornecedor.getInstacia();
+    
+    static EmpenhoEditView instancia = null;  
+   
+     public static EmpenhoEditView getInstacia(){
+       if(  instancia == null){
+         return instancia = new EmpenhoEditView();
+         } else{ 
+         return instancia;
+       }
+     }
+    
+    
+    
     /**
      * Creates new form EmpenhoEditView
      */
     public EmpenhoEditView() {
         initComponents();
+        
     }
 
     /**
@@ -48,6 +65,16 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de empenho");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Número:");
 
@@ -76,6 +103,11 @@ public class EmpenhoEditView extends javax.swing.JFrame {
 
         jbIncluirFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluirFornecedor.setText("Incluir Fornecedor");
+        jbIncluirFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIncluirFornecedorActionPerformed(evt);
+            }
+        });
 
         jlCadEmpenho.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlCadEmpenho.setText("Cadastro de Empenho ");
@@ -158,17 +190,43 @@ public class EmpenhoEditView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGravar)
                     .addComponent(jbSair))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-478)/2, (screenSize.height-280)/2, 478, 280);
+        setSize(new java.awt.Dimension(478, 280));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbIncluirFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirFornecedorActionPerformed
+        // TODO add your handling code here:
+        
+   FornecedorSearchView janela = new FornecedorSearchView("");
+           janela.setVisible(true);
+        this.setVisible(false);
+        
+        
+    }//GEN-LAST:event_jbIncluirFornecedorActionPerformed
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+   
+        
+   if(adicionado == null){
+    jtFornecedor.setText(adicionado.getNome());
+    jtCNPJ.setText(adicionado.getCnpj());
+   }  
+        
+        
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -204,6 +262,22 @@ public class EmpenhoEditView extends javax.swing.JFrame {
             }
         });
     }
+    
+    /**
+     *
+     */
+    public void adicionarFornecedor(Fornecedor fornecedor){
+        
+       adicionado = fornecedor; 
+       
+       
+     
+     
+     
+      
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

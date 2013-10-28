@@ -4,6 +4,7 @@
  */
 package view;
 
+import model.Empenho;
 import model.Usuario;
 
 /**
@@ -22,8 +23,10 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
     }
     
     
+    
     public EmpenhoSearchView() {
         initComponents();
+        
     }
 
     /**
