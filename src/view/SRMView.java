@@ -80,7 +80,6 @@ public class SRMView extends javax.swing.JFrame {
         jbAjuda = new javax.swing.JButton();
         jbSobre = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
-        menuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SRM Sistema de Reserva de Materiais");
@@ -97,7 +96,7 @@ public class SRMView extends javax.swing.JFrame {
         );
         jpCorpoLayout.setVerticalGroup(
             jpCorpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGap(0, 469, Short.MAX_VALUE)
         );
 
         jbEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coins_add.png"))); // NOI18N
@@ -217,7 +216,7 @@ public class SRMView extends javax.swing.JFrame {
             .addGroup(jpArquivoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jbSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(jbLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1))
                 .addContainerGap())
@@ -276,7 +275,7 @@ public class SRMView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2)
-                    .addComponent(jbCadEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jbCadEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(jbCadSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator3)
                     .addComponent(jbCadOS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -377,7 +376,7 @@ public class SRMView extends javax.swing.JFrame {
             .addGroup(jpCadLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbCadEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jbCadEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(jbcadUsuaro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator5)
                     .addComponent(jbCadForn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -426,7 +425,7 @@ public class SRMView extends javax.swing.JFrame {
                     .addComponent(jcbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlRelat)
                     .addComponent(jbAbrirRelat))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jtpPrincipal.addTab("Relatório", jpRelat);
@@ -459,13 +458,11 @@ public class SRMView extends javax.swing.JFrame {
                 .addGroup(jpHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator4)
                     .addComponent(jbSobre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbAjuda, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                    .addComponent(jbAjuda, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jtpPrincipal.addTab("Help", jpHelp);
-
-        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -478,7 +475,8 @@ public class SRMView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jtpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jtpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpCorpo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -702,6 +700,5 @@ public class SRMView extends javax.swing.JFrame {
     private javax.swing.JPanel jpRelat;
     private javax.swing.JPanel jpRodape;
     private javax.swing.JTabbedPane jtpPrincipal;
-    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }
