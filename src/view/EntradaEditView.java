@@ -4,7 +4,10 @@
  */
 package view;
 
+import controller.EntradaController;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Empenho;
 import model.Entrada;
@@ -18,11 +21,14 @@ import util.DateTimeUtil;
  */
 public class EntradaEditView extends javax.swing.JFrame {
 
-    private List <ItensEntrada>  itensEntradaLista;
-    private Entrada entrada;
+    private List <ItensEntrada>  itensEntradaLista = new ArrayList();
+    private Entrada entrada = Entrada.getInstacia();
     private Produto produtoAdd;
     private Empenho empenhoAdd;
-    private Float VTotal ;
+    private Float VTotal = new Float(0) ;
+    private int index = 0;
+    
+    
     
     static EntradaEditView instancia = null;  
       
@@ -115,6 +121,8 @@ public class EntradaEditView extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jbIncluirEmpenho = new javax.swing.JButton();
         jtfData = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jtNumeroNota = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
 
@@ -150,16 +158,9 @@ public class EntradaEditView extends javax.swing.JFrame {
                 "Número Peça", "Descrição", "Quantidade", "Valor"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, true, true
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -182,6 +183,11 @@ public class EntradaEditView extends javax.swing.JFrame {
 
         jbGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Success.png"))); // NOI18N
         jbGravar.setText("Gravar");
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
 
         Sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         Sair.setText("Sair");
@@ -201,6 +207,8 @@ public class EntradaEditView extends javax.swing.JFrame {
                 jbIncluirEmpenhoActionPerformed(evt);
             }
         });
+
+        jLabel8.setText("Nota Fiscal:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,9 +250,15 @@ public class EntradaEditView extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jbIncluirEmpenho))
                                             .addComponent(jtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbIncluirItem)))
+                                    .addComponent(jbIncluirItem)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jtNumeroNota))
+                                        .addComponent(jtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -282,7 +296,9 @@ public class EntradaEditView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jtNumeroNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbIncluirItem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -322,6 +338,8 @@ public class EntradaEditView extends javax.swing.JFrame {
 
     private void jbIncluirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirItemActionPerformed
         // TODO add your handling code here:
+    
+    
      ProdutoSearchView janelaProduto = new ProdutoSearchView("");   
      janelaProduto.setVisible(true);   
         
@@ -330,6 +348,51 @@ public class EntradaEditView extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jbIncluirItemActionPerformed
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        // TODO add your handling code here:
+        EntradaController entradaController = EntradaController.getInstacia();
+        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        
+        entrada.setIdEmpenho(empenhoAdd);
+        entrada.setData(dataUtil.parseDate(jtfData.getText()));
+        entrada.setValorTotal(Float.parseFloat(jtfValorTotal.getText()));
+        entrada.setNumeroNota(jtNumeroNota.getText());
+        
+       List gravar = entradaController.persistir(entrada);
+      if(gravar.get(0)== true){
+         if(jtNumero.getText().equals("")){
+          entrada = (Entrada) gravar.get(1);
+          jtNumero.setText(Long.toString(entrada.getId()));
+         }
+      
+       for(int i = 0 ; i <= itensEntradaLista.size()-1; i++)  {
+         ItensEntrada itensEntrada = itensEntradaLista.get(i);
+           itensEntrada.setIdEntrada(entrada);
+         itensEntradaLista.set(i, itensEntrada);
+         
+      
+         
+       } 
+          
+          
+          
+          
+       JOptionPane.showMessageDialog(null, "Entrada Gravado Com sucesso!", null, 1);
+          
+          this.dispose();
+      }else{
+          
+          JOptionPane.showMessageDialog(null, "Falha ao Salvar Entrada!!", null, 2);
+      }
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbGravarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,28 +440,31 @@ public class EntradaEditView extends javax.swing.JFrame {
           }
     
     public void adicionarProduto(Produto produto){
-     DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
-    if(modelo.getRowCount()!= 0){
-     VTotal = Float.parseFloat(modelo.getValueAt(modelo.getRowCount()-1, 3).toString());
-     entrada.setValorTotal(VTotal);
-     jtfValorTotal.setText(Float.toString(VTotal));
-    }   
+     
+   
         
       ItensEntrada itensEntrada = ItensEntrada.getInstacia();
+      
       produtoAdd = produto; 
+      String dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
+      itensEntrada.setQuantidade(Integer.parseInt(dado));
+      dado = JOptionPane.showInputDialog(rootPane, "informe o Valor", null);
+      itensEntrada.setValor(Float.parseFloat(dado));
+      VTotal = VTotal + (itensEntrada.getValor() * itensEntrada.getQuantidade());
       itensEntrada.setIdProduto(produto);
-      
-      
-      
+      DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
+      jtfValorTotal.setText(Float.toString(VTotal));   
+     modelo.addRow(new String[]{produto.getNumeroPeca(), produto.getDescricao(), Integer.toString(itensEntrada.getQuantidade()), Float.toString(itensEntrada.getValor())});
      
-     modelo.addRow(new String[]{produto.getNumeroPeca(), produto.getDescricao(), null, Float.toString(produto.getValor())});
-  
+     itensEntradaLista.add(modelo.getRowCount()-1, itensEntrada);
+     
+     
     
     }
    
       /*  
     private void carregaTabela(){
-      
+     
                        
        DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
        modelo.setNumRows(0);
@@ -431,6 +497,7 @@ public class EntradaEditView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -443,6 +510,7 @@ public class EntradaEditView extends javax.swing.JFrame {
     private javax.swing.JTextField jtFornecedor;
     private javax.swing.JTable jtItensEntrada;
     private javax.swing.JTextField jtNumero;
+    private javax.swing.JTextField jtNumeroNota;
     private javax.swing.JTextField jtfData;
     private javax.swing.JFormattedTextField jtfSaldo;
     private javax.swing.JFormattedTextField jtfValorTotal;

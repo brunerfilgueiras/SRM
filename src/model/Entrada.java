@@ -33,14 +33,14 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Entrada.findAll", query = "SELECT e FROM Entrada e")})
 public class Entrada implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Column(name = "numero_nota")
+    @Column(name = "numeroNota")
     private String numeroNota;
     @Basic(optional = false)
     @Column(name = "data")
     @Temporal(TemporalType.DATE)
     private Date data;
     @Basic(optional = false)
-    @Column(name = "valor_total")
+    @Column(name = "valorTotal")
     private float valorTotal;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
