@@ -4,17 +4,82 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Empenho;
+import model.Entrada;
+import model.ItensEntrada;
+import model.Produto;
+import util.DateTimeUtil;
+
 /**
  *
  * @author secinfor-04
  */
 public class EntradaEditView extends javax.swing.JFrame {
 
+    private List <ItensEntrada>  itensEntradaLista;
+    private Entrada entrada;
+    private Produto produtoAdd;
+    private Empenho empenhoAdd;
+    private Float VTotal ;
+    
+    static EntradaEditView instancia = null;  
+      
+     public static EntradaEditView getInstacia(){
+       if(  instancia == null){
+         return instancia = new EntradaEditView();
+         } else{ 
+         return instancia;
+       }
+     }
+     
+     
+     
+     public static EntradaEditView getInstacia(Entrada entrada){
+       if(  instancia == null){
+         return instancia = new EntradaEditView(entrada);
+         } else{ 
+         return instancia;
+       }
+     }
     /**
      * Creates new form EntradaEditView
      */
+     
+     
+    public EntradaEditView(Entrada entrada) {
+        
+        initComponents();
+   
+    jtCNPJ.setEditable(false);
+     jtEmpenho.setEditable(false);
+    jtFornecedor.setEditable(false);
+    
+    jtfData.setEditable(false);
+     jtfSaldo.setEditable(false);
+    jtfValorTotal.setEditable(false);
+    jtNumero.setEditable(false);
+    
+    } 
+    
+    
+    
     public EntradaEditView() {
         initComponents();
+        jtCNPJ.setEditable(false);
+     jtEmpenho.setEditable(false);
+    jtFornecedor.setEditable(false);
+    
+    jtfData.setEditable(false);
+     jtfSaldo.setEditable(false);
+    jtfValorTotal.setEditable(false);
+    jtNumero.setEditable(false);
+    DateTimeUtil dataUtil = DateTimeUtil.getInstancia();    
+    jtfData.setText(dataUtil.parse("dd/MM/YYYY", dataUtil.getCurrentDateTime()));
+    
+    
+    
     }
 
     /**
@@ -36,11 +101,8 @@ public class EntradaEditView extends javax.swing.JFrame {
         jtFornecedor = new javax.swing.JTextField();
         jtCNPJ = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jtfData = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         jtfSaldo = new javax.swing.JFormattedTextField();
-        jtItem = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jbIncluirItem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtItensEntrada = new javax.swing.JTable();
@@ -51,6 +113,8 @@ public class EntradaEditView extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
+        jbIncluirEmpenho = new javax.swing.JButton();
+        jtfData = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
 
@@ -68,18 +132,15 @@ public class EntradaEditView extends javax.swing.JFrame {
 
         jLabel6.setText("Data:");
 
-        try {
-            jtfData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         jLabel7.setText("Saldo:");
-
-        jLabel8.setText("Produto:");
 
         jbIncluirItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluirItem.setText("Incluir Item");
+        jbIncluirItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIncluirItemActionPerformed(evt);
+            }
+        });
 
         jtItensEntrada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,9 +150,16 @@ public class EntradaEditView extends javax.swing.JFrame {
                 "Número Peça", "Descrição", "Quantidade", "Valor"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, true, true
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -126,6 +194,14 @@ public class EntradaEditView extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Cadastro de Entrada");
 
+        jbIncluirEmpenho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
+        jbIncluirEmpenho.setText("Incluir Empenho");
+        jbIncluirEmpenho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIncluirEmpenhoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,8 +224,7 @@ public class EntradaEditView extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel8))
+                                    .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -157,22 +232,19 @@ public class EntradaEditView extends javax.swing.JFrame {
                                             .addComponent(jtNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                                             .addComponent(jtEmpenho))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jtfSaldo))))
-                                    .addComponent(jtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jtCNPJ, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel6))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbIncluirItem))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jtfSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jbIncluirEmpenho))
+                                            .addComponent(jtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbIncluirItem)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,7 +273,8 @@ public class EntradaEditView extends javax.swing.JFrame {
                         .addComponent(jtEmpenho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(jtfSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbIncluirEmpenho)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -211,17 +284,14 @@ public class EntradaEditView extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jbIncluirItem))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jbIncluirItem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jtfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,14 +300,36 @@ public class EntradaEditView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-561)/2, (screenSize.height-518)/2, 561, 518);
+        setSize(new java.awt.Dimension(561, 518));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_SairActionPerformed
+
+    private void jbIncluirEmpenhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirEmpenhoActionPerformed
+        // TODO add your handling code here:
+        EmpenhoSearchView janelaEmpenho = new EmpenhoSearchView("");
+        janelaEmpenho.setVisible(true);
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbIncluirEmpenhoActionPerformed
+
+    private void jbIncluirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirItemActionPerformed
+        // TODO add your handling code here:
+     ProdutoSearchView janelaProduto = new ProdutoSearchView("");   
+     janelaProduto.setVisible(true);   
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbIncluirItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +365,62 @@ public class EntradaEditView extends javax.swing.JFrame {
             }
         });
     }
+    //adiciona empenho a entrada
+    public void adicionarEmpenho(Empenho empenho){
+        
+       empenhoAdd = empenho; 
+        jtFornecedor.setText(empenhoAdd.getIdFornecedor().getNome());
+        jtCNPJ.setText(empenhoAdd.getIdFornecedor().getCnpj());
+        jtEmpenho.setText(empenhoAdd.getNumero());
+        jtfSaldo.setText(Float.toString(empenhoAdd.getSaldo()));
+    
+          }
+    
+    public void adicionarProduto(Produto produto){
+     DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
+    if(modelo.getRowCount()!= 0){
+     VTotal = Float.parseFloat(modelo.getValueAt(modelo.getRowCount()-1, 3).toString());
+     entrada.setValorTotal(VTotal);
+     jtfValorTotal.setText(Float.toString(VTotal));
+    }   
+        
+      ItensEntrada itensEntrada = ItensEntrada.getInstacia();
+      produtoAdd = produto; 
+      itensEntrada.setIdProduto(produto);
+      
+      
+      
+     
+     modelo.addRow(new String[]{produto.getNumeroPeca(), produto.getDescricao(), null, Float.toString(produto.getValor())});
+  
+    
+    }
+   
+      /*  
+    private void carregaTabela(){
+      
+                       
+       DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<empenhos.size();i++){
+         
+         empenho = empenhos.get(i);
+        
+        modelo.addRow(new String[]{empenho.getId().toString(), empenho.getNumero(), Float.toString(empenho.getValor()),
+         Float.toString(empenho.getSaldo()), dataUtil.parse("dd/MM/YYYY", empenho.getData()), empenho.getIdFornecedor().getNome(), empenho.getIdFornecedor().getCnpj()});
+    
+    
+       }
+      
+    }
+    
+    */
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sair;
     private javax.swing.JLabel jLabel1;
@@ -283,20 +431,19 @@ public class EntradaEditView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbGravar;
+    private javax.swing.JButton jbIncluirEmpenho;
     private javax.swing.JButton jbIncluirItem;
     private javax.swing.JTextField jtCNPJ;
     private javax.swing.JTextField jtEmpenho;
     private javax.swing.JTextField jtFornecedor;
-    private javax.swing.JTextField jtItem;
     private javax.swing.JTable jtItensEntrada;
     private javax.swing.JTextField jtNumero;
-    private javax.swing.JFormattedTextField jtfData;
+    private javax.swing.JTextField jtfData;
     private javax.swing.JFormattedTextField jtfSaldo;
     private javax.swing.JFormattedTextField jtfValorTotal;
     // End of variables declaration//GEN-END:variables

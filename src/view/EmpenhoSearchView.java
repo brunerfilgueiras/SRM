@@ -4,8 +4,14 @@
  */
 package view;
 
+import controller.EmpenhoController;
+import dao.EmpenhoDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Empenho;
 import model.Usuario;
+import util.DateTimeUtil;
 
 /**
  *
@@ -13,20 +19,33 @@ import model.Usuario;
  */
 public class EmpenhoSearchView extends javax.swing.JFrame {
 
+    private List<Empenho> empenhos;
+    private Empenho empenho = Empenho.getInstacia();
+    
+    
     /**
      * Creates new form EmpenhoSearchView
      */
     public EmpenhoSearchView(Usuario usuario) {
        initComponents();
     permissao(usuario);
+    carregaTabela();
+   
+    }
+     public EmpenhoSearchView(String arg) {
+       initComponents();
+    jbAlterar.setVisible(false);
+    jbExcluir.setVisible(false);
+    jbIncluir.setVisible(false);
+    
+    carregaTabela();
    
     }
     
     
-    
     public EmpenhoSearchView() {
         initComponents();
-        
+        carregaTabela();
     }
 
     /**
@@ -39,7 +58,7 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
     private void initComponents() {
 
         jlNum = new javax.swing.JLabel();
-        jtNumero = new javax.swing.JTextField();
+        jtParametro = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jbConsultar = new javax.swing.JButton();
         jbIncluir = new javax.swing.JButton();
@@ -47,11 +66,12 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         jbExcluir = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbEmpenhos = new javax.swing.JTable();
         jbSair = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jlTitulo = new javax.swing.JLabel();
+        jbAdicionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de empenho");
@@ -64,6 +84,11 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         jbConsultar.setMaximumSize(new java.awt.Dimension(105, 25));
         jbConsultar.setMinimumSize(new java.awt.Dimension(105, 25));
         jbConsultar.setPreferredSize(new java.awt.Dimension(105, 25));
+        jbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarActionPerformed(evt);
+            }
+        });
 
         jbIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluir.setText("Incluir");
@@ -92,8 +117,13 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         jbExcluir.setMaximumSize(new java.awt.Dimension(95, 25));
         jbExcluir.setMinimumSize(new java.awt.Dimension(95, 25));
         jbExcluir.setPreferredSize(new java.awt.Dimension(95, 25));
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbEmpenhos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -112,14 +142,14 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setResizable(false);
-        jTable1.getColumnModel().getColumn(1).setResizable(false);
-        jTable1.getColumnModel().getColumn(2).setResizable(false);
-        jTable1.getColumnModel().getColumn(3).setResizable(false);
-        jTable1.getColumnModel().getColumn(4).setResizable(false);
-        jTable1.getColumnModel().getColumn(5).setResizable(false);
-        jTable1.getColumnModel().getColumn(6).setResizable(false);
+        jScrollPane1.setViewportView(jtbEmpenhos);
+        jtbEmpenhos.getColumnModel().getColumn(0).setResizable(false);
+        jtbEmpenhos.getColumnModel().getColumn(1).setResizable(false);
+        jtbEmpenhos.getColumnModel().getColumn(2).setResizable(false);
+        jtbEmpenhos.getColumnModel().getColumn(3).setResizable(false);
+        jtbEmpenhos.getColumnModel().getColumn(4).setResizable(false);
+        jtbEmpenhos.getColumnModel().getColumn(5).setResizable(false);
+        jtbEmpenhos.getColumnModel().getColumn(6).setResizable(false);
 
         jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         jbSair.setText("Sair");
@@ -131,6 +161,14 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
 
         jlTitulo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlTitulo.setText("Pesquisa de Empenho");
+
+        jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
+        jbAdicionar.setText("Adicionar");
+        jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAdicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,7 +189,7 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(jlNum)
                                 .addGap(4, 4, 4)
-                                .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,7 +198,9 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbAdicionar))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(659, 659, 659)
                                 .addComponent(jbSair)))
@@ -182,7 +222,7 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jlNum))
-                    .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
@@ -190,7 +230,8 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                     .addComponent(jbAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbAdicionar))
                 .addGap(11, 11, 11)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,22 +242,23 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                 .addComponent(jbSair))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-766)/2, (screenSize.height-406)/2, 766, 406);
+        setSize(new java.awt.Dimension(766, 406));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirActionPerformed
        
-        EmpenhoEditView janelaEmpenho = new EmpenhoEditView();
+        EmpenhoEditView janelaEmpenho = EmpenhoEditView.getInstacia();
         janelaEmpenho.setVisible(true);
-        
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
     
-         EmpenhoEditView janelaEmpenho = new EmpenhoEditView();
+         EmpenhoEditView janelaEmpenho = EmpenhoEditView.getInstacia(seleciona());
         janelaEmpenho.setVisible(true);
+        this.dispose();
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
@@ -225,6 +267,59 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        // TODO add your handling code here:
+       EmpenhoController empenhoController = EmpenhoController.getInstacia();
+        
+        if(seleciona() != null){
+        
+        if(empenhoController.deletar(seleciona())){
+            JOptionPane.showMessageDialog(rootPane, "Empenho Excluido com sucesso!");
+                        
+            carregaTabela();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir o Empenho!");
+        }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Empenho Não selecionada!");
+        }  
+        
+        
+        
+    }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+      if(!jtParametro.getText().equals("")){
+     
+                     empenho = Empenho.getInstacia();
+                     
+                    empenho.setNumero(jtParametro.getText());
+                    carregaConsulta(empenho);  
+                     
+                  
+  }else{carregaTabela();} 
+        
+        
+ 
+        
+    }//GEN-LAST:event_jbConsultarActionPerformed
+
+    private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
+        // TODO add your handling code here:
+    EntradaEditView janelaEntrada = EntradaEditView.getInstacia();
+    janelaEntrada.adicionarEmpenho(seleciona());
+    janelaEntrada.setVisible(true);
+     this.dispose();
+        
+        
+        
+        
+    }//GEN-LAST:event_jbAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,13 +355,76 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
             }
         });
     }
+    
+     //carrega dados na tabela
+    private void carregaTabela(){
+      
+        EmpenhoDAO empenhoDAO = EmpenhoDAO.getInstacia();
+        empenhos = empenhoDAO.listaTodos();
+        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+                
+       DefaultTableModel modelo = (DefaultTableModel) jtbEmpenhos.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<empenhos.size();i++){
+         
+         empenho = empenhos.get(i);
+        
+        modelo.addRow(new String[]{empenho.getId().toString(), empenho.getNumero(), Float.toString(empenho.getValor()),
+         Float.toString(empenho.getSaldo()), dataUtil.parse("dd/MM/YYYY", empenho.getData()), empenho.getIdFornecedor().getNome(), empenho.getIdFornecedor().getCnpj()});
+    
+    
+       }
+      
+    }
+    
+    
+     // seleciona linha da tabela
+     private Empenho seleciona(){
+         empenho = null;
+       int linha = jtbEmpenhos.getSelectedRow();
+       if(linha != -1){
+       empenho = empenhos.get(linha);
+       return empenho;
+       }else{
+        return empenho = null;
+       }
+    }     
+    
+    
+     //carraga consulta
+     private void carregaConsulta(Empenho empenho){
+        EmpenhoDAO empenhoDAO = EmpenhoDAO.getInstacia();
+       empenhos = empenhoDAO.consulta(empenho);
+    DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        
+       DefaultTableModel modelo = (DefaultTableModel) jtbEmpenhos.getModel();
+       modelo.setNumRows(0);
+       
+       for(int i = 0; i<empenhos.size();i++){
+         
+           empenho = empenhos.get(i);
+         modelo.addRow(new String[]{empenho.getId().toString(), empenho.getNumero(), Float.toString(empenho.getValor()),
+         Float.toString(empenho.getSaldo()), dataUtil.parse("dd/MM/YYYY", empenho.getData()), empenho.getIdFornecedor().getNome(), empenho.getIdFornecedor().getCnpj()});
+    
+       }
+      
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbAdicionar;
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbConsultar;
     private javax.swing.JButton jbExcluir;
@@ -274,7 +432,8 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
     private javax.swing.JButton jbSair;
     private javax.swing.JLabel jlNum;
     private javax.swing.JLabel jlTitulo;
-    private javax.swing.JTextField jtNumero;
+    private javax.swing.JTextField jtParametro;
+    private javax.swing.JTable jtbEmpenhos;
     // End of variables declaration//GEN-END:variables
 
     private void permissao(Usuario usuario){

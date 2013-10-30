@@ -370,6 +370,9 @@ public FornecedorEditView(Fornecedor fornecedor) {
         return vazio = null;
     }
        }
+    
+    
+    
     //carrega dados para alterar 
     private void carregaDados(Fornecedor fornecedor){
        

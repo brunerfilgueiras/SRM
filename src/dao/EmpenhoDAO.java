@@ -77,7 +77,7 @@ public class EmpenhoDAO {
       }
      
      
-     public Empenho consulta(Empenho empenho){
+     public List<Empenho> consulta(Empenho empenho){
         
         EntityManager entityManager = PersistenceUtil.getEntityManager();
        Session session = (Session) entityManager.getDelegate();
@@ -89,7 +89,7 @@ public class EmpenhoDAO {
             crit.add(Restrictions.eq("numero", empenho.getNumero()));
            
        
-          return  (Empenho) crit.uniqueResult();
+          return   crit.list();
         }catch(Exception e){
                    
           return  null ;

@@ -30,6 +30,7 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
     
     public OrdemDeServicoEditView() {
         initComponents();
+        
     }
 
     /**

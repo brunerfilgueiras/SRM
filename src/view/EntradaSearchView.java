@@ -22,11 +22,11 @@ public class EntradaSearchView extends javax.swing.JFrame {
         
       }
     
-    
-    
     public EntradaSearchView() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,17 +183,17 @@ public class EntradaSearchView extends javax.swing.JFrame {
 
     private void jbIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirActionPerformed
 
-        EntradaEditView janelaEntrada = new EntradaEditView();
+        EntradaEditView janelaEntrada =  EntradaEditView.getInstacia();
         janelaEntrada.setVisible(true);
-
+this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
 
-        EntradaEditView janelaEntrada = new EntradaEditView();
+        EntradaEditView janelaEntrada = EntradaEditView.getInstacia(null);
         janelaEntrada.setVisible(true);
-
+this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
 

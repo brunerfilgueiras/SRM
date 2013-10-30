@@ -5,7 +5,6 @@
 package view;
 
 import controller.EmpenhoController;
-import dao.EmpenhoDAO;
 import javax.swing.JOptionPane;
 import model.Empenho;
 import model.Fornecedor;
@@ -32,9 +31,49 @@ public class EmpenhoEditView extends javax.swing.JFrame {
        }
      }
     
+     
+     public static EmpenhoEditView getInstacia(Empenho empenho){
+       if(  instancia == null){
+         return instancia = new EmpenhoEditView(empenho);
+         } else{ 
+         return instancia;
+       }
+     }
+     
+     
+     
+     
+     
+     
     public EmpenhoEditView(Empenho empenho) {
         initComponents();
         jtSaldo.setEditable(false);
+        jtNumero.setEditable(false);
+        jtFornecedor.setEditable(false);
+        jtfData.setEditable(false);
+        jtValor.setEditable(false);
+        jtCNPJ.setEditable(false);
+        
+        this.empenho = empenho;
+        this.adicionado = empenho.getIdFornecedor();
+        
+        if(empenho.getSaldo()!= empenho.getValor()){
+             
+            jbIncluirFornecedor.setEnabled(false);
+          jbGravar.setEnabled(false);
+            carregaDados(empenho);
+          JOptionPane.showMessageDialog(rootPane, "Empenho já utilizado impossivel edição!!!!", null, 2);
+             
+             
+             
+        }else{
+          jtNumero.setEditable(true);
+          
+          jtfData.setEditable(true);
+          jtValor.setEditable(true);
+          carregaDados(empenho); 
+        }
+        
         
     }
     
@@ -43,7 +82,13 @@ public class EmpenhoEditView extends javax.swing.JFrame {
      */
     public EmpenhoEditView() {
         initComponents();
-        jtSaldo.setEditable(false);
+       
+         jtSaldo.setEditable(false);
+        jtNumero.setEditable(false);
+        jtFornecedor.setEditable(false);
+        jtfData.setEditable(false);
+        jtValor.setEditable(false);
+        jtCNPJ.setEditable(false);
         
     }
 
@@ -96,6 +141,12 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         jLabel3.setText("CNPJ:");
 
         jLabel4.setText("Valor:");
+
+        jtValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtValorFocusLost(evt);
+            }
+        });
 
         jLabel5.setText("Saldo:");
 
@@ -248,10 +299,12 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         // TODO add your handling code here:
        EmpenhoController empenhoController = EmpenhoController.getInstacia();
         
+       
         DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
         empenho.setNumero(jtNumero.getText());
-        empenho.setData(dataUtil.parse("YYYY/MM/dd", jtfData.getText()));
+        empenho.setData(dataUtil.parse("dd/MM/YYYY", jtfData.getText()));
         empenho.setValor(Float.parseFloat(jtValor.getText()));
+        empenho.setSaldo(Float.parseFloat(jtSaldo.getText()));
         empenho.setIdFornecedor(adicionado);
     
     
@@ -270,6 +323,12 @@ public class EmpenhoEditView extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jbGravarActionPerformed
+
+    private void jtValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtValorFocusLost
+        // TODO add your handling code here:
+        jtSaldo.setText(jtValor.getText());
+                
+    }//GEN-LAST:event_jtValorFocusLost
 
     /**
      * @param args the command line arguments
@@ -309,13 +368,94 @@ public class EmpenhoEditView extends javax.swing.JFrame {
     /**
      *
      */
+    
+    //carrega dados para alterar 
+    private void carregaDados(Empenho empenho){
+       
+        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        
+        
+      jtFornecedor.setText(empenho.getIdFornecedor().getNome());
+      jtCNPJ.setText(empenho.getIdFornecedor().getCnpj());
+      jtfData.setText( dataUtil.parseDate(empenho.getData()));
+      jtValor.setText(Float.toString(empenho.getValor()));
+      jtSaldo.setText(Float.toString(empenho.getSaldo()));
+      jtNumero.setText(empenho.getNumero());
+      
+        
+        
+        
+    }
+    
+    
     public void adicionarFornecedor(Fornecedor fornecedor){
         
        adicionado = fornecedor; 
-      this.jtFornecedor.setText(adicionado.getNome());
-       this.jtCNPJ.setText(adicionado.getCnpj());
+        jtFornecedor.setText(adicionado.getNome());
+        jtCNPJ.setText(adicionado.getCnpj());
+        jtNumero.setEditable(true);
+        jtfData.setEditable(true);
+        jtValor.setEditable(true);
+      if(empenho != null){
+     
+          DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+          
+          
+      jtfData.setText( dataUtil.parseDate(empenho.getData()));
+      jtValor.setText(Float.toString(empenho.getValor()));
+      jtSaldo.setText(Float.toString(empenho.getSaldo()));
+       jtNumero.setText(empenho.getNumero());
+      } 
+      
     
           }
+    
+    
+    private String campoObrigatorio(){
+       
+        String vazio = "Campo Obrigatorio Em Branco : ";
+       boolean msg = false;
+       
+        if(jtValor.getText().equals("")){
+          
+            vazio = vazio + "\n Valor ";
+            
+        msg = true; 
+        }
+        if(jtfData.getText().equals("")){
+          
+            vazio = vazio + "\n Data ";
+            
+          msg = true;
+        }
+      
+        if(jtCNPJ.getText().equals("")){
+          
+            vazio = vazio + " \n CNPJ ";
+            
+         msg = true; 
+        }
+        if(jtNumero.getText().equals("")){
+          
+            vazio = vazio + " \n Numero ";
+            
+         msg = true; 
+        }
+             
+        if(msg){
+            
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
+    
+    
+    
+    
+    
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -43,7 +43,7 @@
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Component id="jlNum" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                              <Component id="jtNumero" min="-2" pref="215" max="-2" attributes="0"/>
+                              <Component id="jtParametro" min="-2" pref="215" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -54,6 +54,8 @@
                               <Component id="jbAlterar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jbExcluir" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jbAdicionar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="659" pref="659" max="-2" attributes="0"/>
@@ -84,7 +86,7 @@
                       <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                       <Component id="jlNum" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jtNumero" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtParametro" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
@@ -94,6 +96,7 @@
                   <Component id="jbExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbIncluir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbAdicionar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -113,7 +116,7 @@
         <Property name="text" type="java.lang.String" value="N&#xfa;mero do empenho:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtNumero">
+    <Component class="javax.swing.JTextField" name="jtParametro">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
@@ -133,6 +136,9 @@
           <Dimension value="[105, 25]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbConsultarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbIncluir">
       <Properties>
@@ -190,6 +196,9 @@
           <Dimension value="[95, 25]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
@@ -200,7 +209,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="jtbEmpenhos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="4">
@@ -281,6 +290,17 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Pesquisa de Empenho"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbAdicionar">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/Add (2).png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Adicionar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAdicionarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
