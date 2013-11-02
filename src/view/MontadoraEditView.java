@@ -20,6 +20,7 @@ Montadora montadora = Montadora.getInstacia();
     public MontadoraEditView(Montadora montadora) {
         initComponents();
         carregaDados(montadora);
+        this.montadora = montadora;
     }
     
     

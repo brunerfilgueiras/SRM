@@ -5,6 +5,7 @@
 package view;
 
 import controller.EntradaController;
+import controller.ItensEntradaController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,13 +21,12 @@ import util.DateTimeUtil;
  * @author secinfor-04
  */
 public class EntradaEditView extends javax.swing.JFrame {
-
-    private List <ItensEntrada>  itensEntradaLista = new ArrayList();
+    private ItensEntrada itensEntrada = ItensEntrada.getInstacia();
     private Entrada entrada = Entrada.getInstacia();
-    private Produto produtoAdd;
+    private Produto produtoAdd = Produto.getInstacia();
     private Empenho empenhoAdd;
     private Float VTotal = new Float(0) ;
-    private int index = 0;
+  
     
     
     
@@ -155,11 +155,11 @@ public class EntradaEditView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Número Peça", "Descrição", "Quantidade", "Valor"
+                "Id peça", "Número Peça", "Descrição", "Quantidade", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -167,17 +167,18 @@ public class EntradaEditView extends javax.swing.JFrame {
             }
         });
         jtItensEntrada.setColumnSelectionAllowed(true);
-        jtItensEntrada.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jtItensEntrada);
         jtItensEntrada.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtItensEntrada.getColumnModel().getColumn(0).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(0).setPreferredWidth(10);
+        jtItensEntrada.getColumnModel().getColumn(0).setPreferredWidth(5);
         jtItensEntrada.getColumnModel().getColumn(1).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jtItensEntrada.getColumnModel().getColumn(1).setPreferredWidth(10);
         jtItensEntrada.getColumnModel().getColumn(2).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(2).setPreferredWidth(5);
+        jtItensEntrada.getColumnModel().getColumn(2).setPreferredWidth(50);
         jtItensEntrada.getColumnModel().getColumn(3).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(3).setPreferredWidth(10);
+        jtItensEntrada.getColumnModel().getColumn(3).setPreferredWidth(5);
+        jtItensEntrada.getColumnModel().getColumn(4).setResizable(false);
+        jtItensEntrada.getColumnModel().getColumn(4).setPreferredWidth(10);
 
         jLabel9.setText("ValorTotal:");
 
@@ -353,6 +354,8 @@ public class EntradaEditView extends javax.swing.JFrame {
         // TODO add your handling code here:
         EntradaController entradaController = EntradaController.getInstacia();
         DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        ItensEntradaController itensEntradaController = ItensEntradaController.getInstacia();
+        
         
         entrada.setIdEmpenho(empenhoAdd);
         entrada.setData(dataUtil.parseDate(jtfData.getText()));
@@ -366,21 +369,40 @@ public class EntradaEditView extends javax.swing.JFrame {
           jtNumero.setText(Long.toString(entrada.getId()));
          }
       
-       for(int i = 0 ; i <= itensEntradaLista.size()-1; i++)  {
-         ItensEntrada itensEntrada = itensEntradaLista.get(i);
-           itensEntrada.setIdEntrada(entrada);
-         itensEntradaLista.set(i, itensEntrada);
-         
+       DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
+     
+       for(int i =0 ; i <=modelo.getRowCount()-1; i++){
+       
+           String id = (String) modelo.getValueAt(i, 0);
+           
+        produtoAdd.setId(Long.parseLong(id));
+           
+           
+         itensEntrada.setIdProduto(produtoAdd);
+         itensEntrada.setIdEntrada(entrada);
+           
+         itensEntradaController.persistir(itensEntrada);
+           
+       }
+        
       
          
-       } 
+       /*
+         if(itensEntradaController.persistir(itensEntradaLista)){
+            
+           JOptionPane.showMessageDialog(null, "Entrada Gravado Com sucesso!", null, 1);
           
+          this.dispose();  
+             
+         }else{
           
+             
+          JOptionPane.showMessageDialog(null, "Falha ao Salvar Entrada!!", null, 2);
+         
+         }
           
-          
-       JOptionPane.showMessageDialog(null, "Entrada Gravado Com sucesso!", null, 1);
-          
-          this.dispose();
+          */
+       
       }else{
           
           JOptionPane.showMessageDialog(null, "Falha ao Salvar Entrada!!", null, 2);
@@ -443,9 +465,8 @@ public class EntradaEditView extends javax.swing.JFrame {
      
    
         
-      ItensEntrada itensEntrada = ItensEntrada.getInstacia();
-      
-      produtoAdd = produto; 
+     
+       
       String dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
       itensEntrada.setQuantidade(Integer.parseInt(dado));
       dado = JOptionPane.showInputDialog(rootPane, "informe o Valor", null);
@@ -454,11 +475,7 @@ public class EntradaEditView extends javax.swing.JFrame {
       itensEntrada.setIdProduto(produto);
       DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
       jtfValorTotal.setText(Float.toString(VTotal));   
-     modelo.addRow(new String[]{produto.getNumeroPeca(), produto.getDescricao(), Integer.toString(itensEntrada.getQuantidade()), Float.toString(itensEntrada.getValor())});
-     
-     itensEntradaLista.add(modelo.getRowCount()-1, itensEntrada);
-     
-     
+      modelo.addRow(new String[]{produto.getId().toString(), produto.getNumeroPeca(), produto.getDescricao(), Integer.toString(itensEntrada.getQuantidade()), Float.toString(itensEntrada.getValor())});
     
     }
    
