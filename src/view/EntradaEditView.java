@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.EmpenhoController;
 import controller.EntradaController;
 import controller.ItensEntradaController;
 import controller.ProdutoController;
@@ -380,6 +381,8 @@ public class EntradaEditView extends javax.swing.JFrame {
           entrada = (Entrada) gravar.get(1);
           jtNumero.setText(Long.toString(entrada.getId()));
          }
+      EmpenhoController empenhoController = EmpenhoController.getInstacia();
+      empenhoController.editaSaldo(empenhoAdd, entrada);
       
        DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
      

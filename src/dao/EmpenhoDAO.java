@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import model.Empenho;
+import model.Entrada;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -54,6 +55,32 @@ public class EmpenhoDAO {
         
     }
    
+    public boolean editaSaldo(Empenho empenho, Entrada entrada){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+       EntityManager em = PersistenceUtil.getEntityManager(); 
+       Float saldo = empenho.getSaldo();
+      try{ 
+       saldo = saldo - entrada.getValorTotal();
+          empenho.setSaldo(saldo);
+          
+          em.getTransaction().begin();
+           
+        em.merge(empenho);
+        
+        em.getTransaction().commit();         
+               
+          return true; 
+          
+        }catch(Exception e){
+                   
+          
+            return  false ;
+        }
+        
+      
+    }
      
      public Empenho consultaId(Empenho empenho){
         

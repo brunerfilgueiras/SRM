@@ -6,6 +6,7 @@ package controller;
 
 import dao.EmpenhoDAO;
 import model.Empenho;
+import model.Entrada;
 
 /**
  *
@@ -30,6 +31,14 @@ public class EmpenhoController {
       EmpenhoDAO empenhoDAO = EmpenhoDAO.getInstacia();
     
       return empenhoDAO.persistir(empenho);
+      
+         
+   }
+   public boolean editaSaldo(Empenho empenho, Entrada entrada){
+       
+      EmpenhoDAO empenhoDAO = EmpenhoDAO.getInstacia();
+    
+      return empenhoDAO.editaSaldo(empenho, entrada);
       
          
    }
