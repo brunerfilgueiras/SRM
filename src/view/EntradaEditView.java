@@ -26,7 +26,7 @@ public class EntradaEditView extends javax.swing.JFrame {
     private Produto produtoAdd = Produto.getInstacia();
     private Empenho empenhoAdd;
     private Float VTotal = new Float(0) ;
-  
+    private DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
     
     
     
@@ -61,11 +61,21 @@ public class EntradaEditView extends javax.swing.JFrame {
     jtCNPJ.setEditable(false);
      jtEmpenho.setEditable(false);
     jtFornecedor.setEditable(false);
-    
     jtfData.setEditable(false);
-     jtfSaldo.setEditable(false);
+     
     jtfValorTotal.setEditable(false);
     jtNumero.setEditable(false);
+    this.entrada = entrada ;
+    empenhoAdd = entrada.getIdEmpenho();
+    carregaTabela();
+    jbIncluirEmpenho.setVisible(false);
+    jbIncluirItem.setVisible(false);
+    jtfSaldo.setVisible(false);
+    jtItensEntrada.setEnabled(false);
+    
+    
+    
+    
     
     } 
     
@@ -81,7 +91,7 @@ public class EntradaEditView extends javax.swing.JFrame {
      jtfSaldo.setEditable(false);
     jtfValorTotal.setEditable(false);
     jtNumero.setEditable(false);
-    DateTimeUtil dataUtil = DateTimeUtil.getInstancia();    
+        
     jtfData.setText(dataUtil.parse("dd/MM/YYYY", dataUtil.getCurrentDateTime()));
     
     
@@ -385,25 +395,15 @@ public class EntradaEditView extends javax.swing.JFrame {
            
        }
         
-      
-         
-       /*
-         if(itensEntradaController.persistir(itensEntradaLista)){
-            
-           JOptionPane.showMessageDialog(null, "Entrada Gravado Com sucesso!", null, 1);
+        JOptionPane.showMessageDialog(null, "Entrada Gravado Com sucesso!", null, 1);
           
-          this.dispose();  
+        this.dispose();  
              
-         }else{
-          
-             
-          JOptionPane.showMessageDialog(null, "Falha ao Salvar Entrada!!", null, 2);
-         
-         }
-          
-          */
+        
        
       }else{
+          
+          
           
           JOptionPane.showMessageDialog(null, "Falha ao Salvar Entrada!!", null, 2);
       }
@@ -463,11 +463,7 @@ public class EntradaEditView extends javax.swing.JFrame {
     
     public void adicionarProduto(Produto produto){
      
-   
-        
-     
-       
-      String dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
+     String dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
       itensEntrada.setQuantidade(Integer.parseInt(dado));
       dado = JOptionPane.showInputDialog(rootPane, "informe o Valor", null);
       itensEntrada.setValor(Float.parseFloat(dado));
@@ -479,27 +475,31 @@ public class EntradaEditView extends javax.swing.JFrame {
     
     }
    
-      /*  
-    private void carregaTabela(){
-     
-                       
-       DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
-       modelo.setNumRows(0);
        
-       for(int i = 0; i<empenhos.size();i++){
-         
-         empenho = empenhos.get(i);
-        
-        modelo.addRow(new String[]{empenho.getId().toString(), empenho.getNumero(), Float.toString(empenho.getValor()),
-         Float.toString(empenho.getSaldo()), dataUtil.parse("dd/MM/YYYY", empenho.getData()), empenho.getIdFornecedor().getNome(), empenho.getIdFornecedor().getCnpj()});
+    private void carregaTabela(){
+     List<ItensEntrada> itensEntradaLista = new ArrayList();
+      DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
+    itensEntradaLista = (List) entrada.getItensEntradaCollection();
+     
+    jtNumero.setText(entrada.getId().toString());
+    jtCNPJ.setText(entrada.getIdEmpenho().getIdFornecedor().getCnpj());
+    jtEmpenho.setText(entrada.getIdEmpenho().getNumero());
+    jtFornecedor.setText(entrada.getIdEmpenho().getIdFornecedor().getNome());
+    jtfData.setText(dataUtil.parse("dd/MM/YYYY", entrada.getData()));
+    jtNumeroNota.setText(entrada.getNumeroNota());
+    jtfValorTotal.setText(Float.toString(entrada.getValorTotal()));
     
-    
+      
+      
+       for(int i = 0; i<itensEntradaLista.size();i++){
+     itensEntrada = itensEntradaLista.get(i);
+  modelo.addRow(new String[]{itensEntradaLista.get(i).getIdProduto().getId().toString(), itensEntradaLista.get(i).getIdProduto().getNumeroPeca(), itensEntradaLista.get(i).getIdProduto().getDescricao(), Integer.toString(itensEntradaLista.get(i).getQuantidade()), Float.toString(itensEntradaLista.get(i).getValor())});
+          
        }
       
     }
     
-    */
-    
+  
     
     
     

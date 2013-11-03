@@ -4,7 +4,13 @@
  */
 package view;
 
+import dao.EntradaDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Entrada;
 import model.Usuario;
+import util.DateTimeUtil;
 
 /**
  *
@@ -12,6 +18,14 @@ import model.Usuario;
  */
 public class EntradaSearchView extends javax.swing.JFrame {
 
+    private List<Entrada> entradas = new ArrayList();
+    private Entrada entrada = Entrada.getInstacia();
+    private DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+    
+    
+    
+    
+    
     /**
      * Creates new form EntradaSearchView
      */
@@ -19,6 +33,8 @@ public class EntradaSearchView extends javax.swing.JFrame {
      initComponents();  
      
      permissao(usuario);
+     carregaTabela();
+     
         
       }
     
@@ -37,20 +53,20 @@ public class EntradaSearchView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtNumero = new javax.swing.JTextField();
+        jtParametro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jbConsultar = new javax.swing.JButton();
         jbIncluir = new javax.swing.JButton();
         jbAlterar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtEntradas = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de entrada");
@@ -60,6 +76,11 @@ public class EntradaSearchView extends javax.swing.JFrame {
 
         jbConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         jbConsultar.setText("Consultar");
+        jbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarActionPerformed(evt);
+            }
+        });
 
         jbIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluir.setText("Incluir");
@@ -80,35 +101,35 @@ public class EntradaSearchView extends javax.swing.JFrame {
         jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete (2).png"))); // NOI18N
         jbExcluir.setText("Excluir");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtEntradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Número Entrada", "Data", "Nota Fiscal", "Valor", "Empenho"
+                "Número Entrada", "Data", "Nota Fiscal", "Valor", "Empenho"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtEntradas);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Pesquisa de Entrada");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
-        jButton1.setText("Sair");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
+        jbSair.setText("Sair");
+        jbSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbSairActionPerformed(evt);
             }
         });
 
@@ -131,7 +152,7 @@ public class EntradaSearchView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbConsultar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -144,20 +165,20 @@ public class EntradaSearchView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jbSair)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
@@ -173,12 +194,12 @@ public class EntradaSearchView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jbSair)
                 .addGap(9, 9, 9))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-746)/2, (screenSize.height-465)/2, 746, 465);
+        setSize(new java.awt.Dimension(746, 465));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirActionPerformed
@@ -191,16 +212,30 @@ this.dispose();
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
 
-        EntradaEditView janelaEntrada = EntradaEditView.getInstacia(null);
+        EntradaEditView janelaEntrada = new EntradaEditView(seleciona());
         janelaEntrada.setVisible(true);
 this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        // TODO add your handling code here:
+        EntradaDAO entradaDAO = EntradaDAO.getInstacia();
+        entrada.setId(Long.parseLong(jtParametro.getText()));
+        
+          carregaConsulta(entrada);
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,8 +279,80 @@ this.dispose();
         jbExcluir.setVisible(false);
     }
     }
+     //carraga consulta
+     private void carregaConsulta(Entrada entrada){
+        EntradaDAO entradaDAO = EntradaDAO.getInstacia();
+        entrada = entradaDAO.consultaId(entrada);
+    
+        
+       DefaultTableModel modelo = (DefaultTableModel) jtEntradas.getModel();
+       modelo.setNumRows(0);
+       
+       
+                        
+         modelo.addRow(new String[]{entrada.getId().toString(), dataUtil.parse("dd/MM/YYYY", entrada.getData()), entrada.getNumeroNota(),
+             Float.toString(entrada.getValorTotal()),entrada.getIdEmpenho().getNumero()});
+         
+      
+      
+    }
+    
+   
+    
+     //caregadados na tabela
+    private void carregaTabela(){
+       
+        EntradaDAO entradaDAO = EntradaDAO.getInstacia();
+        entradas = entradaDAO.listaTodas();
+    
+       DefaultTableModel modelo = (DefaultTableModel) jtEntradas.getModel();
+       modelo.setNumRows(0);
+       
+       
+       for(int i = 0; i<entradas.size();i++){
+         
+         entrada = entradas.get(i);
+        
+         modelo.addRow(new String[]{entradas.get(i).getId().toString(), dataUtil.parse("dd/MM/YYYY", entradas.get(i).getData()), entradas.get(i).getNumeroNota(),
+             Float.toString(entradas.get(i).getValorTotal()),entradas.get(i).getIdEmpenho().getNumero()});
+         
+       }
+      
+    }
+    
+    private Entrada seleciona(){
+    
+       int linha = jtEntradas.getSelectedRow();
+       if(linha != -1){
+       entrada = entradas.get(linha);
+       return entrada;
+       }else{
+        return entrada = null;
+       }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -253,11 +360,12 @@ this.dispose();
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbConsultar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbIncluir;
-    private javax.swing.JTextField jtNumero;
+    private javax.swing.JButton jbSair;
+    private javax.swing.JTable jtEntradas;
+    private javax.swing.JTextField jtParametro;
     // End of variables declaration//GEN-END:variables
 }
