@@ -4,7 +4,13 @@
  */
 package view;
 
+import dao.SaidaDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Saida;
 import model.Usuario;
+import util.DateTimeUtil;
 
 /**
  *
@@ -12,17 +18,25 @@ import model.Usuario;
  */
 public class SaidaSearchView extends javax.swing.JFrame {
 
+    private Saida saida = Saida.getInstacia();
+    private List<Saida> saidas = new ArrayList();
+    private DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+    
+    
+    
     /**
      * Creates new form SaidaSearchView
      */
     public SaidaSearchView(Usuario usuario){
         initComponents();
         permissao(usuario);
+        carregaTabela();
     }
     
     
     public SaidaSearchView() {
         initComponents();
+        carregaTabela();
     }
 
     /**
@@ -40,7 +54,7 @@ public class SaidaSearchView extends javax.swing.JFrame {
         jbAlterar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtSaida = new javax.swing.JTable();
+        jtSaidas = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -52,14 +66,13 @@ public class SaidaSearchView extends javax.swing.JFrame {
         setTitle("Pesquisa de saída");
         setResizable(false);
 
-        jtParametro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtParametroActionPerformed(evt);
-            }
-        });
-
         jbConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         jbConsultar.setText("Consultar");
+        jbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarActionPerformed(evt);
+            }
+        });
 
         jbIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluir.setText("Incluir");
@@ -80,7 +93,7 @@ public class SaidaSearchView extends javax.swing.JFrame {
         jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete (2).png"))); // NOI18N
         jbExcluir.setText("Excluir");
 
-        jtSaida.setModel(new javax.swing.table.DefaultTableModel(
+        jtSaidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -88,7 +101,7 @@ public class SaidaSearchView extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Data", "OM", "OS", "Mecânico"
+                "Número Saída", "Data", "OM", "OS", "Mecânico"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -99,7 +112,7 @@ public class SaidaSearchView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jtSaida);
+        jScrollPane1.setViewportView(jtSaidas);
 
         jLabel1.setText("Número:");
 
@@ -171,32 +184,40 @@ public class SaidaSearchView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-548)/2, (screenSize.height-395)/2, 548, 395);
+        setSize(new java.awt.Dimension(548, 395));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtParametroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtParametroActionPerformed
 
     private void jbIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirActionPerformed
 
-        SaidaEditView janelaSaida = new SaidaEditView();
-        janelaSaida.setVisible(true);// TODO add your handling code here:
-
+        SaidaEditView janelaSaida = SaidaEditView.getInstacia();
+        janelaSaida.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-        SaidaEditView janelaSaida = new SaidaEditView();
+        SaidaEditView janelaSaida = SaidaEditView.getInstacia(seleciona());
         janelaSaida.setVisible(true);
-
-        // TODO add your handling code here:
+        this.dispose();
+        
     }//GEN-LAST:event_jbAlterarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        // TODO add your handling code here:
+        saida.setId(Long.parseLong(jtParametro.getText()));
+        
+          carregaConsulta(saida);
+        
+        
+        
+        
+    }//GEN-LAST:event_jbConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +258,67 @@ public class SaidaSearchView extends javax.swing.JFrame {
         jbExcluir.setVisible(false);
     }
     }
+    
+    //carraga consulta
+     private void carregaConsulta(Saida saida){
+        SaidaDAO saidaDAO = SaidaDAO.getInstacia();
+        saida = saidaDAO.consultaId(saida);
+    
+        
+       DefaultTableModel modelo = (DefaultTableModel) jtSaidas.getModel();
+       modelo.setNumRows(0);
+       
+       
+         modelo.addRow(new String[]{saida.getId().toString(), dataUtil.parse("dd/MM/YYYY", saida.getData()), saida.getIdOrdemDeServico().getOm(),
+             saida.getIdOrdemDeServico().getId().toString(),saida.getIdMecanico().getPosto()+" "+saida.getIdMecanico().getNomeGuerra()});
+         
+      
+      
+    }
+    
+   
+    
+     //caregadados na tabela
+    private void carregaTabela(){
+       
+        SaidaDAO saidaDAO = SaidaDAO.getInstacia();
+        saidas = saidaDAO.listaTodas();
+    
+       DefaultTableModel modelo = (DefaultTableModel) jtSaidas.getModel();
+       modelo.setNumRows(0);
+       
+       
+       for(int i = 0; i<saidas.size();i++){
+         
+         saida = saidas.get(i);
+        
+         modelo.addRow(new String[]{saidas.get(i).getId().toString(), dataUtil.parse("dd/MM/YYYY", saidas.get(i).getData()), saidas.get(i).getIdOrdemDeServico().getOm(),
+             saidas.get(i).getIdOrdemDeServico().getId().toString(),saidas.get(i).getIdMecanico().getPosto()+" "+saidas.get(i).getIdMecanico().getNomeGuerra()});
+         
+       }
+      
+    }
+    
+    private Saida seleciona(){
+    
+       int linha = jtSaidas.getSelectedRow();
+       if(linha != -1){
+       saida = saidas.get(linha);
+       return saida;
+       }else{
+        return saida = null;
+       }
+    } 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -250,6 +332,6 @@ public class SaidaSearchView extends javax.swing.JFrame {
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbIncluir;
     private javax.swing.JTextField jtParametro;
-    private javax.swing.JTable jtSaida;
+    private javax.swing.JTable jtSaidas;
     // End of variables declaration//GEN-END:variables
 }

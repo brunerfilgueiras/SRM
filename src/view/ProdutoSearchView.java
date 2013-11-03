@@ -23,11 +23,25 @@ public class ProdutoSearchView extends javax.swing.JFrame {
     
     public ProdutoSearchView(String arg){
         initComponents();
+      
+       if(arg.equals("saida")){
+       
+           jbAdicionarEntrada.setVisible(false);
+           
+           
+           
+       }else{
+           jbAdicionarSaida.setVisible(false);
+           
+       }
+        
        jbIncluir.setVisible(false);
        jbAlterar.setVisible(false);
        jbExcluir.setVisible(false);
        carregaTabela();
+       
     }
+    
     
     
     /**
@@ -67,7 +81,8 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jbAdicionar = new javax.swing.JButton();
+        jbAdicionarEntrada = new javax.swing.JButton();
+        jbAdicionarSaida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de Produtos");
@@ -145,11 +160,19 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Pesquisa de Produtos");
 
-        jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
-        jbAdicionar.setText("Adicionar");
-        jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
+        jbAdicionarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
+        jbAdicionarEntrada.setText("Adicionar");
+        jbAdicionarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAdicionarActionPerformed(evt);
+                jbAdicionarEntradaActionPerformed(evt);
+            }
+        });
+
+        jbAdicionarSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
+        jbAdicionarSaida.setText("Adicionar");
+        jbAdicionarSaida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAdicionarSaidaActionPerformed(evt);
             }
         });
 
@@ -186,7 +209,9 @@ public class ProdutoSearchView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbExcluir)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbAdicionar)))
+                                        .addComponent(jbAdicionarSaida)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbAdicionarEntrada)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -209,7 +234,8 @@ public class ProdutoSearchView extends javax.swing.JFrame {
                     .addComponent(jbIncluir)
                     .addComponent(jbAlterar)
                     .addComponent(jbExcluir)
-                    .addComponent(jbAdicionar))
+                    .addComponent(jbAdicionarEntrada)
+                    .addComponent(jbAdicionarSaida))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -295,19 +321,27 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbConsultarActionPerformed
 
-    private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
+    private void jbAdicionarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarEntradaActionPerformed
         // TODO add your handling code here:
         EntradaEditView janelaEntrada = EntradaEditView.getInstacia();
          janelaEntrada.adicionarProduto(seleciona());
          janelaEntrada.setVisible(true);
            this.dispose();
         
+          
+    }//GEN-LAST:event_jbAdicionarEntradaActionPerformed
+
+    private void jbAdicionarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarSaidaActionPerformed
+        // TODO add your handling code here:
+        SaidaEditView janelaSaida = SaidaEditView.getInstacia();
+         janelaSaida.adicionarProduto(seleciona());
+         janelaSaida.setVisible(true);
+           this.dispose();
         
         
         
         
-        
-    }//GEN-LAST:event_jbAdicionarActionPerformed
+    }//GEN-LAST:event_jbAdicionarSaidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,7 +451,8 @@ public class ProdutoSearchView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JButton jbAdicionar;
+    private javax.swing.JButton jbAdicionarEntrada;
+    private javax.swing.JButton jbAdicionarSaida;
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbConsultar;
     private javax.swing.JButton jbExcluir;

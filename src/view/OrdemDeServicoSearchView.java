@@ -28,6 +28,15 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
     /**
      * Creates new form OrdemDeServicoSearchView
      */
+    public OrdemDeServicoSearchView(String arg){
+        initComponents();
+       jbIncluir.setVisible(false);
+       jbAlterar.setVisible(false);
+       jbExcluir.setVisible(false);
+       carregaTabela();
+    } 
+    
+    
     public OrdemDeServicoSearchView(Usuario usuario){
       initComponents();
       permissao(usuario);
@@ -61,6 +70,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         jbSair = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
+        jbAdicionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de ordem de Serviço");
@@ -108,10 +118,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
 
         jtOrdensDeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "OS", "OM", "Viatura", "Data Saida", "Data Entrada"
@@ -140,6 +147,14 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Pesquisa de ordem de Serviço");
 
+        jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
+        jbAdicionar.setText("Adicionar");
+        jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAdicionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,6 +176,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(7, 7, 7)
                                 .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbConsultar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,8 +184,9 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbAlterar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbExcluir))
-                            .addComponent(jLabel2))
+                                .addComponent(jbExcluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbAdicionar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -191,7 +208,8 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
                     .addComponent(jbConsultar)
                     .addComponent(jbIncluir)
                     .addComponent(jbAlterar)
-                    .addComponent(jbExcluir))
+                    .addComponent(jbExcluir)
+                    .addComponent(jbAdicionar))
                 .addGap(7, 7, 7)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -200,11 +218,11 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSair)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-548)/2, (screenSize.height-393)/2, 548, 393);
+        setSize(new java.awt.Dimension(548, 393));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtParametroActionPerformed
@@ -272,6 +290,15 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
+        // TODO add your handling code here:
+        SaidaEditView janelaSaida = SaidaEditView.getInstacia();
+        janelaSaida.adicionarOrdemDeServico(seleciona());
+        janelaSaida.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jbAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -376,6 +403,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JButton jbAdicionar;
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbConsultar;
     private javax.swing.JButton jbExcluir;

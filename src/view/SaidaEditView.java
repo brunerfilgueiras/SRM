@@ -4,17 +4,89 @@
  */
 package view;
 
+import controller.ItensSaidaController;
+import controller.SaidaController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.ItensSaida;
+import model.Mecanico;
+import model.OrdemDeServico;
+import model.Produto;
+import model.Saida;
+import util.DateTimeUtil;
+
 /**
  *
  * @author secinfor-04
  */
 public class SaidaEditView extends javax.swing.JFrame {
 
+    
+    private ItensSaida itensSaida = ItensSaida.getInstacia();
+    private Saida saida = Saida.getInstacia();
+    private Produto produtoAdd = Produto.getInstacia();
+    private Mecanico mecanicoAdd;
+    private OrdemDeServico ordemDeServicoAdd;
+    private DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+    
+    
+    
+    static SaidaEditView instancia = null;  
+      
+     public static SaidaEditView getInstacia(){
+       if(  instancia == null){
+         return instancia = new SaidaEditView();
+         } else{ 
+         return instancia;
+       }
+     }
+     
+     
+     
+     public static SaidaEditView getInstacia(Saida saida){
+       if(  instancia == null){
+         return instancia = new SaidaEditView(saida);
+         } else{ 
+         return instancia;
+       }
+     }
     /**
-     * Creates new form SaidaEditView
+     * Creates new form EntradaEditView
      */
+     
+     
+    public SaidaEditView(Saida saida) {
+        
+        initComponents();
+   
+    jtMecanico.setEditable(false);
+     jtOrdemDeServico.setEditable(false);
+    jtOM.setEditable(false);
+    jtfData.setEditable(false);
+    jtNumero.setEditable(false);
+    this.saida = saida ;
+    ordemDeServicoAdd = saida.getIdOrdemDeServico();
+    mecanicoAdd = saida.getIdMecanico();
+    carregaTabela();
+    jbIncluirItem.setVisible(false);   
+    } 
+    
+    
+    
     public SaidaEditView() {
         initComponents();
+       jtMecanico.setEditable(false);
+     jtOrdemDeServico.setEditable(false);
+    jtOM.setEditable(false);
+    jtfData.setEditable(false);
+    jtNumero.setEditable(false);
+        
+    jtfData.setText(dataUtil.parse("dd/MM/YYYY", dataUtil.getCurrentDateTime()));
+    
+    
+    
     }
 
     /**
@@ -41,11 +113,9 @@ public class SaidaEditView extends javax.swing.JFrame {
         jtfData = new javax.swing.JFormattedTextField();
         jbIncluirMecanico = new javax.swing.JButton();
         jbIncluirOS = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jtItem = new javax.swing.JTextField();
         jbIncluirItem = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jtItens = new javax.swing.JTable();
+        jtItensSaida = new javax.swing.JTable();
         jbGravar = new javax.swing.JButton();
         jbSair = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -72,46 +142,63 @@ public class SaidaEditView extends javax.swing.JFrame {
 
         jLabel5.setText("Data:");
 
-        jbIncluirMecanico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_add.png"))); // NOI18N
+        jbIncluirMecanico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluirMecanico.setText("Incluir Mecânico");
+        jbIncluirMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIncluirMecanicoActionPerformed(evt);
+            }
+        });
 
-        jbIncluirOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table_add.png"))); // NOI18N
+        jbIncluirOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluirOS.setText("Incluir OS");
+        jbIncluirOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIncluirOSActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("Produto:");
-
-        jbIncluirItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/package_add.png"))); // NOI18N
+        jbIncluirItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbIncluirItem.setText("Incluir Item");
+        jbIncluirItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIncluirItemActionPerformed(evt);
+            }
+        });
 
-        jtItens.setModel(new javax.swing.table.DefaultTableModel(
+        jtItensSaida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Número Peça", "Descrição", "Quantidade"
+                "Id Peça", "Número Peça", "Descrição", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jtItens);
-        jtItens.getColumnModel().getColumn(0).setResizable(false);
-        jtItens.getColumnModel().getColumn(0).setPreferredWidth(10);
-        jtItens.getColumnModel().getColumn(1).setResizable(false);
-        jtItens.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jtItens.getColumnModel().getColumn(2).setResizable(false);
-        jtItens.getColumnModel().getColumn(2).setPreferredWidth(5);
+        jScrollPane2.setViewportView(jtItensSaida);
+        jtItensSaida.getColumnModel().getColumn(0).setResizable(false);
+        jtItensSaida.getColumnModel().getColumn(0).setPreferredWidth(5);
+        jtItensSaida.getColumnModel().getColumn(1).setResizable(false);
+        jtItensSaida.getColumnModel().getColumn(1).setPreferredWidth(10);
+        jtItensSaida.getColumnModel().getColumn(2).setResizable(false);
+        jtItensSaida.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jtItensSaida.getColumnModel().getColumn(3).setResizable(false);
+        jtItensSaida.getColumnModel().getColumn(3).setPreferredWidth(5);
 
         jbGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Success.png"))); // NOI18N
         jbGravar.setText("Gravar");
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
 
         jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         jbSair.setText("Sair");
@@ -143,7 +230,6 @@ public class SaidaEditView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
@@ -167,8 +253,7 @@ public class SaidaEditView extends javax.swing.JFrame {
                                             .addComponent(jbIncluirOS)))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jtItem, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(217, 217, 217)
                                         .addComponent(jbIncluirItem))))
                             .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -206,12 +291,9 @@ public class SaidaEditView extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jtItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbIncluirItem))
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbIncluirItem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -221,13 +303,103 @@ public class SaidaEditView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-488)/2, (screenSize.height-534)/2, 488, 534);
+        setSize(new java.awt.Dimension(488, 534));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbIncluirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirItemActionPerformed
+        // TODO add your handling code here:
+     
+     
+     ProdutoSearchView janelaProduto = new ProdutoSearchView("saida");   
+     janelaProduto.setVisible(true);    
+       
+        
+        
+    }//GEN-LAST:event_jbIncluirItemActionPerformed
+
+    private void jbIncluirOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirOSActionPerformed
+        // TODO add your handling code here:
+        
+        
+     OrdemDeServicoSearchView janelaOrdemDeServico = new OrdemDeServicoSearchView("");   
+     janelaOrdemDeServico.setVisible(true); 
+        
+        
+        
+    }//GEN-LAST:event_jbIncluirOSActionPerformed
+
+    private void jbIncluirMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirMecanicoActionPerformed
+        // TODO add your handling code here:
+     
+     MecanicoSearchView janelaMecanico = new MecanicoSearchView("");   
+     janelaMecanico.setVisible(true);    
+        
+        
+        
+        
+    }//GEN-LAST:event_jbIncluirMecanicoActionPerformed
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        // TODO add your handling code here:
+        SaidaController saidaController = SaidaController.getInstacia();
+        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        ItensSaidaController itensSaidaController = ItensSaidaController.getInstacia();
+        
+        
+        saida.setIdOrdemDeServico(ordemDeServicoAdd);
+        saida.setData(dataUtil.parseDate(jtfData.getText()));
+        saida.setIdMecanico(mecanicoAdd);
+        saida.setObservacoes(jtaObservacoes.getText());
+        saida.setData(dataUtil.parseDate(jtfData.getText()));
+            
+        
+       List gravar = saidaController.persistir(saida);
+      if(gravar.get(0)== true){
+         if(jtNumero.getText().equals("")){
+          saida = (Saida) gravar.get(1);
+          jtNumero.setText(Long.toString(saida.getId()));
+         }
+      
+       DefaultTableModel modelo = (DefaultTableModel) jtItensSaida.getModel();
+     
+       for(int i =0 ; i <=modelo.getRowCount()-1; i++){
+       
+           String id = (String) modelo.getValueAt(i, 0);
+           
+        produtoAdd.setId(Long.parseLong(id));
+           
+           
+         itensSaida.setIdProduto(produtoAdd);
+         itensSaida.setIdSaida(saida);
+           
+         itensSaidaController.persistir(itensSaida);
+           
+       }
+        
+        JOptionPane.showMessageDialog(null, "Saída Gravado Com sucesso!", null, 1);
+          
+        this.dispose();  
+             
+        
+       
+      }else{
+          
+          
+          
+          JOptionPane.showMessageDialog(null, "Falha ao Salvar Saída!!", null, 2);
+      }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jbGravarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,6 +435,65 @@ public class SaidaEditView extends javax.swing.JFrame {
             }
         });
     }
+    
+     //adiciona empenho a entrada
+    public void adicionarOrdemDeServico(OrdemDeServico ordemDeServico){
+        
+       ordemDeServicoAdd = ordemDeServico; 
+        jtOrdemDeServico.setText(ordemDeServicoAdd.getId().toString());
+        jtOM.setText(ordemDeServicoAdd.getOm());
+          
+          }
+    
+    public void adicionarMecanico(Mecanico mecanico){
+        
+       mecanicoAdd = mecanico; 
+        jtMecanico.setText(mecanicoAdd.getPosto() + " " + mecanicoAdd.getNomeGuerra());
+        
+          }
+    
+    public void adicionarProduto(Produto produto){
+     
+     String dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
+      itensSaida.setQuantidade(Integer.parseInt(dado));
+      itensSaida.setIdProduto(produto);
+      DefaultTableModel modelo = (DefaultTableModel) jtItensSaida.getModel();
+      modelo.addRow(new String[]{produto.getId().toString(), produto.getNumeroPeca(), produto.getDescricao(), Integer.toString(itensSaida.getQuantidade())});
+    
+    }
+   
+       
+    private void carregaTabela(){
+     List<ItensSaida> itensSaidaLista = new ArrayList();
+      DefaultTableModel modelo = (DefaultTableModel) jtItensSaida.getModel();
+    itensSaidaLista = (List) saida.getItensSaidaCollection();
+     
+    jtNumero.setText(saida.getId().toString());
+    jtMecanico.setText(saida.getIdMecanico().getPosto() + " " + saida.getIdMecanico().getNomeGuerra());
+    jtOM.setText(saida.getIdOrdemDeServico().getOm());
+    jtaObservacoes.setText(saida.getObservacoes());
+    jtfData.setText(dataUtil.parse("dd/MM/YYYY", saida.getData()));
+    jtOrdemDeServico.setText(saida.getIdOrdemDeServico().getId().toString());
+    
+    
+      
+      
+       for(int i = 0; i<itensSaidaLista.size();i++){
+     itensSaida = itensSaidaLista.get(i);
+  modelo.addRow(new String[]{itensSaida.getIdProduto().getId().toString(), itensSaida.getIdProduto().getNumeroPeca(), itensSaida.getIdProduto().getDescricao(), Integer.toString(itensSaida.getIdProduto().getQuantidade())});
+            
+       }
+      
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -270,7 +501,6 @@ public class SaidaEditView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -281,8 +511,7 @@ public class SaidaEditView extends javax.swing.JFrame {
     private javax.swing.JButton jbIncluirMecanico;
     private javax.swing.JButton jbIncluirOS;
     private javax.swing.JButton jbSair;
-    private javax.swing.JTextField jtItem;
-    private javax.swing.JTable jtItens;
+    private javax.swing.JTable jtItensSaida;
     private javax.swing.JTextField jtMecanico;
     private javax.swing.JTextField jtNumero;
     private javax.swing.JTextField jtOM;

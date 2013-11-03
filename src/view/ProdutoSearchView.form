@@ -58,7 +58,9 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jbExcluir" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jbAdicionar" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jbAdicionarSaida" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jbAdicionarEntrada" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -90,7 +92,8 @@
                   <Component id="jbIncluir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbAdicionar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbAdicionarEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbAdicionarSaida" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -240,7 +243,7 @@
         <Property name="text" type="java.lang.String" value="Pesquisa de Produtos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jbAdicionar">
+    <Component class="javax.swing.JButton" name="jbAdicionarEntrada">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icons/Add (2).png"/>
@@ -248,8 +251,22 @@
         <Property name="text" type="java.lang.String" value="Adicionar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAdicionarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAdicionarEntradaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbAdicionarSaida">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/Add (2).png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Adicionar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAdicionarSaidaActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ProdutoSearchView_jbAdicionarSaida"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

@@ -225,7 +225,7 @@ this.dispose();
 
     private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
         // TODO add your handling code here:
-        EntradaDAO entradaDAO = EntradaDAO.getInstacia();
+        
         entrada.setId(Long.parseLong(jtParametro.getText()));
         
           carregaConsulta(entrada);

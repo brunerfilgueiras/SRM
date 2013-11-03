@@ -28,6 +28,16 @@ public class MecanicoSearchView extends javax.swing.JFrame {
         permissao(usuario);
         carregaTabela();
     }
+    
+    public MecanicoSearchView(String arg){
+       initComponents();
+       jbIncluir.setVisible(false);
+       jbAlterar.setVisible(false);
+       jbExcluir.setVisible(false);
+       
+       carregaTabela();
+    }
+    
     public MecanicoSearchView() {
         initComponents();
     }
@@ -55,6 +65,7 @@ public class MecanicoSearchView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
+        jbAdicionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de Mecânicos");
@@ -137,6 +148,14 @@ public class MecanicoSearchView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Pesquisa de Mecânicos");
 
+        jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
+        jbAdicionar.setText("Adicionar");
+        jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAdicionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,11 +178,10 @@ public class MecanicoSearchView extends javax.swing.JFrame {
                         .addComponent(jbAlterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbExcluir)
-                        .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbAdicionar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jSeparator2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -173,7 +191,10 @@ public class MecanicoSearchView extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
-            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 4, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,20 +214,25 @@ public class MecanicoSearchView extends javax.swing.JFrame {
                     .addComponent(jbConsultar)
                     .addComponent(jbIncluir)
                     .addComponent(jbAlterar)
-                    .addComponent(jbExcluir))
+                    .addComponent(jbExcluir)
+                    .addComponent(jbAdicionar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(141, 141, 141))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jbSair)
-                .addGap(23, 23, 23))
+                .addGap(135, 135, 135))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-538)/2, (screenSize.height-395)/2, 538, 395);
+        setSize(new java.awt.Dimension(538, 395));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtParametroActionPerformed
@@ -280,6 +306,14 @@ public class MecanicoSearchView extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbSairActionPerformed
+
+    private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
+        // TODO add your handling code here:
+        SaidaEditView janelaSaida = SaidaEditView.getInstacia();
+        janelaSaida.adicionarMecanico(seleciona());
+        janelaSaida.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jbAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +412,7 @@ public class MecanicoSearchView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JButton jbAdicionar;
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbConsultar;
     private javax.swing.JButton jbExcluir;
