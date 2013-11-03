@@ -4,9 +4,11 @@
  */
 package view;
 
+import controller.SaidaController;
 import dao.SaidaDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Saida;
 import model.Usuario;
@@ -92,6 +94,11 @@ public class SaidaSearchView extends javax.swing.JFrame {
 
         jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete (2).png"))); // NOI18N
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jtSaidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -218,6 +225,26 @@ public class SaidaSearchView extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jbConsultarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        // TODO add your handling code here:
+        
+        
+        SaidaController saidaController = SaidaController.getInstacia();
+        if(saidaController.deletar(seleciona())){
+            
+           JOptionPane.showMessageDialog(rootPane, "");
+            
+        }else{
+          
+            
+            
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jbExcluirActionPerformed
 
     /**
      * @param args the command line arguments

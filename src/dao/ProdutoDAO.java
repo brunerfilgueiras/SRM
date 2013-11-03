@@ -7,6 +7,8 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import model.ItensEntrada;
+import model.ItensSaida;
 import model.Produto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -53,6 +55,83 @@ public class ProdutoDAO {
         
     }
    
+        public boolean editaQuantidade(ItensEntrada itensEntrada){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+       Produto resultado = new Produto();
+      EntityManager em = PersistenceUtil.getEntityManager();
+       try{ 
+        
+            
+                    Criteria crit = session.createCriteria(Produto.class);
+                    crit.add(Restrictions.eq("id", itensEntrada.getIdProduto().getId()));
+                    resultado = (Produto) crit.uniqueResult();
+               
+        int qtd = itensEntrada.getQuantidade();
+        
+         qtd= qtd + itensEntrada.getQuantidade();
+                    
+          resultado.setQuantidade(qtd);
+          
+           em.getTransaction().begin();
+           
+        em.merge(resultado);
+        
+        em.getTransaction().commit();         
+                    
+                    
+                    
+          return true; 
+        }catch(Exception e){
+                   
+          
+            return  false ;
+        }
+        
+      }
+    
+    
+    
+    public boolean editaQuantidade(ItensSaida itensSaida){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+       Produto resultado = new Produto();
+      EntityManager em = PersistenceUtil.getEntityManager();
+       try{ 
+        
+            
+                    Criteria crit = session.createCriteria(Produto.class);
+                    crit.add(Restrictions.eq("id", itensSaida.getIdProduto().getId()));
+                    resultado = (Produto) crit.uniqueResult();
+               
+        int qtd = itensSaida.getQuantidade();
+        
+         qtd= qtd - itensSaida.getQuantidade();
+                    
+          resultado.setQuantidade(qtd);
+          
+           em.getTransaction().begin();
+           
+        em.merge(resultado);
+        
+        em.getTransaction().commit();         
+                    
+                    
+                    
+          return true; 
+        }catch(Exception e){
+                   
+          
+            return  false ;
+        }
+        
+      }   
+    
+    
      public List consulta(Produto produto){
         
         EntityManager entityManager = PersistenceUtil.getEntityManager();

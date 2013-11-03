@@ -6,6 +6,7 @@ package view;
 
 import controller.EntradaController;
 import controller.ItensEntradaController;
+import controller.ProdutoController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -363,6 +364,7 @@ public class EntradaEditView extends javax.swing.JFrame {
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
         // TODO add your handling code here:
         EntradaController entradaController = EntradaController.getInstacia();
+        ProdutoController produtoController = ProdutoController.getInstacia();
         DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
         ItensEntradaController itensEntradaController = ItensEntradaController.getInstacia();
         
@@ -392,7 +394,8 @@ public class EntradaEditView extends javax.swing.JFrame {
          itensEntrada.setIdEntrada(entrada);
            
          itensEntradaController.persistir(itensEntrada);
-           
+        produtoController.editaQuantidade(itensEntrada);
+         
        }
         
         JOptionPane.showMessageDialog(null, "Entrada Gravado Com sucesso!", null, 1);

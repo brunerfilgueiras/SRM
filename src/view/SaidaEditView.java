@@ -5,6 +5,7 @@
 package view;
 
 import controller.ItensSaidaController;
+import controller.ProdutoController;
 import controller.SaidaController;
 import java.util.ArrayList;
 import java.util.List;
@@ -347,6 +348,8 @@ public class SaidaEditView extends javax.swing.JFrame {
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
         // TODO add your handling code here:
         SaidaController saidaController = SaidaController.getInstacia();
+        ProdutoController produtoController = ProdutoController.getInstacia();
+
         DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
         ItensSaidaController itensSaidaController = ItensSaidaController.getInstacia();
         
@@ -378,6 +381,7 @@ public class SaidaEditView extends javax.swing.JFrame {
          itensSaida.setIdSaida(saida);
            
          itensSaidaController.persistir(itensSaida);
+         produtoController.editaQuantidade(itensSaida);
            
        }
         

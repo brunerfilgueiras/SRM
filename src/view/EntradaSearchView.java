@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.EntradaController;
 import dao.EntradaDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +101,11 @@ public class EntradaSearchView extends javax.swing.JFrame {
 
         jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete (2).png"))); // NOI18N
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jtEntradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -236,6 +242,15 @@ this.dispose();
         
         
     }//GEN-LAST:event_jbConsultarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        // TODO add your handling code here:
+        
+        EntradaController entradaController = EntradaController.getInstacia();
+        entradaController.deletar(seleciona());
+        
+        
+    }//GEN-LAST:event_jbExcluirActionPerformed
 
     /**
      * @param args the command line arguments

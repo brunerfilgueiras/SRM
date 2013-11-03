@@ -5,6 +5,8 @@
 package controller;
 
 import dao.ProdutoDAO;
+import model.ItensEntrada;
+import model.ItensSaida;
 import model.Produto;
 
 /**
@@ -30,6 +32,22 @@ public class ProdutoController {
       ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
     
       return produtoDAO.persistir(produto);
+      
+         
+   }
+   public boolean editaQuantidade(ItensSaida itensSaida){
+       
+      ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
+    
+      return produtoDAO.editaQuantidade(itensSaida);
+      
+         
+   }
+   public boolean editaQuantidade(ItensEntrada itensEntrada){
+       
+      ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
+    
+      return produtoDAO.editaQuantidade(itensEntrada);
       
          
    }
