@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="44e700e0-92de-4955-9651-561b855160ed">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     ordem_de_servico.`dataSaida` AS ordem_de_servico_dataSaida,
+     ordem_de_servico.`ebPlaca` AS ordem_de_servico_ebPlaca,
+     ordem_de_servico.`dataEntrada` AS ordem_de_servico_dataEntrada,
+     ordem_de_servico.`observacoes` AS ordem_de_servico_observacoes,
+     ordem_de_servico.`viatura` AS ordem_de_servico_viatura,
+     ordem_de_servico.`om` AS ordem_de_servico_om,
+     ordem_de_servico.`id` AS ordem_de_servico_id
+FROM
+     `ordem_de_servico` ordem_de_servico]]>
+	</queryString>
+	<field name="ordem_de_servico_dataSaida" class="java.sql.Date"/>
+	<field name="ordem_de_servico_ebPlaca" class="java.lang.String"/>
+	<field name="ordem_de_servico_dataEntrada" class="java.sql.Date"/>
+	<field name="ordem_de_servico_observacoes" class="java.lang.String"/>
+	<field name="ordem_de_servico_viatura" class="java.lang.String"/>
+	<field name="ordem_de_servico_om" class="java.lang.String"/>
+	<field name="ordem_de_servico_id" class="java.lang.Long"/>
+	<group name="ordem_de_servico_id">
+		<groupExpression><![CDATA[$F{ordem_de_servico_id}]]></groupExpression>
+		<groupHeader>
+			<band height="35">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="153" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="d8577634-66d8-4168-a25d-a76b82f4b2ee"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Número Ordem de Serviço:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="372d0ae7-5f5f-448d-a2ac-2927085c4d1a"/>
+				</line>
+				<textField>
+					<reportElement mode="Opaque" x="153" y="0" width="402" height="31" forecolor="#006699" backcolor="#E6E6E6" uuid="52b3ac22-94c1-467b-b93d-7c19f45badc2"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ordem_de_servico_id}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="575" height="92" backcolor="#006699" uuid="3f16386f-f622-40f8-b5f1-8272f1f555f7"/>
+				<staticText>
+					<reportElement x="20" y="20" width="340" height="43" forecolor="#FFFFFF" uuid="a12ca604-0c40-48a6-b353-c38ad5b102b1"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ordens de Serviço]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="295" y="72" width="270" height="20" forecolor="#FFFFFF" uuid="2dbe40ac-56a9-4e65-b46e-60b9e895da11"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Listagem de Ordens de Serviço - 17º BLog]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="0c1f8b5d-8577-4624-8bbd-6e72dfe722db"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="132">
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="340" y="20" width="82" height="20" uuid="42800aa7-6cca-4571-95d5-d231b6f96b15"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ordem_de_servico_dataSaida}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="92" y="0" width="92" height="20" uuid="cb58aea1-2712-4cc0-8778-df200dacce96"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ordem_de_servico_ebPlaca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="100" y="20" width="148" height="20" uuid="b6333742-e9f5-4f08-b518-f2c1813807f8"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ordem_de_servico_dataEntrada}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="100" y="40" width="455" height="89" uuid="3572be6f-b54b-472c-ad73-4df4cb4dbe19"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ordem_de_servico_observacoes}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="248" y="0" width="139" height="20" uuid="cfd46a24-f314-4557-9bd5-7d3d965f9e25"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ordem_de_servico_viatura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="422" y="0" width="133" height="20" uuid="dc2e6644-a986-4bf9-ac79-39bd49871f76"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ordem_de_servico_om}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="10521a79-66c7-45a6-9284-7ecf1f2fa76d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa / EB:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="184" y="0" width="64" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f0bc819a-cdd2-466d-82f7-d7eabed3cb5a"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Viatura:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="387" y="0" width="35" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="738d87fb-d491-4606-b70f-cbed145181f1"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OM:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="20" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="75f243aa-15bf-4008-b894-3f1432c8dad2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Entrada:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="248" y="20" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="720d0433-c235-4257-92f5-3c923063dc32"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Saída:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="40" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="67c23f6b-2a5a-4e72-b9c8-37d1c06d78ef"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observações:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="129" width="555" height="1" uuid="b4b95bf4-8e20-441c-8d86-589d6f58c826"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="41ea3c01-ffc0-440a-ace6-2ef3b34254fb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="3692388b-426b-4f4a-850a-418f6a8b01da"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="10fd6827-4649-4443-a205-40110c15c466"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="5a68acdf-7e72-41f7-9354-3497c4e024e5"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
