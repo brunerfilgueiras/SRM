@@ -19,24 +19,24 @@ FROM
 	<group name="mecanico_nomeGuerra">
 		<groupExpression><![CDATA[$F{mecanico_nomeGuerra}]]></groupExpression>
 		<groupHeader>
-			<band height="19">
+			<band height="33">
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="100" height="18" forecolor="#666666" backcolor="#E6E6E6" uuid="54518e8b-0ed3-47d3-8138-e2c40daa9d84"/>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="54518e8b-0ed3-47d3-8138-e2c40daa9d84"/>
 					<textElement>
 						<font size="12"/>
 					</textElement>
 					<text><![CDATA[Nome de Guerra:]]></text>
 				</staticText>
-				<line>
-					<reportElement x="-20" y="18" width="595" height="1" forecolor="#666666" uuid="a4406edf-8118-4872-aed9-1891607813d5"/>
-				</line>
 				<textField>
-					<reportElement mode="Opaque" x="100" y="1" width="455" height="17" forecolor="#006699" backcolor="#E6E6E6" uuid="250cb036-4c6f-495e-a702-baa8a6dbc148"/>
+					<reportElement mode="Opaque" x="100" y="0" width="455" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="250cb036-4c6f-495e-a702-baa8a6dbc148"/>
 					<textElement>
 						<font size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{mecanico_nomeGuerra}]]></textFieldExpression>
 				</textField>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="a4406edf-8118-4872-aed9-1891607813d5"/>
+				</line>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -46,9 +46,9 @@ FROM
 	<group name="mecanico_nomeCompleto">
 		<groupExpression><![CDATA[$F{mecanico_nomeCompleto}]]></groupExpression>
 		<groupHeader>
-			<band height="21">
+			<band height="32">
 				<textField>
-					<reportElement x="100" y="0" width="455" height="20" forecolor="#006699" uuid="9ed42431-21f2-4f7c-a4fe-41efbf52c716"/>
+					<reportElement x="100" y="0" width="455" height="32" forecolor="#006699" uuid="9ed42431-21f2-4f7c-a4fe-41efbf52c716"/>
 					<textElement>
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -70,9 +70,9 @@ FROM
 	<group name="mecanico_posto">
 		<groupExpression><![CDATA[$F{mecanico_posto}]]></groupExpression>
 		<groupHeader>
-			<band height="22">
+			<band height="32">
 				<textField>
-					<reportElement x="100" y="0" width="455" height="20" forecolor="#006699" uuid="60194341-69dd-4526-aac9-575e1e69d1ee"/>
+					<reportElement x="100" y="0" width="455" height="32" forecolor="#006699" uuid="60194341-69dd-4526-aac9-575e1e69d1ee"/>
 					<textElement>
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -140,7 +140,7 @@ FROM
 			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="555" height="20" uuid="9aa43632-da6c-4241-ac98-47aab00b850b"/>
 				<textElement>
-					<font size="10"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mecanico_id}]]></textFieldExpression>
 			</textField>
