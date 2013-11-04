@@ -366,7 +366,7 @@ public class EntradaEditView extends javax.swing.JFrame {
         // TODO add your handling code here:
         EntradaController entradaController = EntradaController.getInstacia();
         ProdutoController produtoController = ProdutoController.getInstacia();
-        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+      
         ItensEntradaController itensEntradaController = ItensEntradaController.getInstacia();
         
         
@@ -376,7 +376,8 @@ public class EntradaEditView extends javax.swing.JFrame {
         entrada.setNumeroNota(jtNumeroNota.getText());
         
        List gravar = entradaController.persistir(entrada);
-      if(gravar.get(0)== true){
+      boolean boo= (boolean) gravar.get(0);
+       if(boo== true){
          if(jtNumero.getText().equals("")){
           entrada = (Entrada) gravar.get(1);
           jtNumero.setText(Long.toString(entrada.getId()));

@@ -69,7 +69,7 @@ public class ConnectionFactory {
         return getConnection(
                 "jdbc:mysql://localhost/srm",
                 "root",
-                "root" );
+                "l0g1st1c@" );
  
     }
     

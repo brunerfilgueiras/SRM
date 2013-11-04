@@ -362,7 +362,8 @@ public class SaidaEditView extends javax.swing.JFrame {
             
         
        List gravar = saidaController.persistir(saida);
-      if(gravar.get(0)== true){
+      boolean boo = (boolean) gravar.get(0);
+       if(boo == true){
          if(jtNumero.getText().equals("")){
           saida = (Saida) gravar.get(1);
           jtNumero.setText(Long.toString(saida.getId()));
