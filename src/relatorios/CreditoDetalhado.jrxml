@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d1197c6a-221c-499f-8bcd-5f66585e0760">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     empenho.`numero` AS empenho_numero,
+     empenho.`data` AS empenho_data,
+     empenho.`saldo` AS empenho_saldo,
+     empenho.`valor` AS empenho_valor,
+     empenho.`id` AS empenho_id,
+     empenho.`id_fornecedor` AS empenho_id_fornecedor,
+     entrada.`numeroNota` AS entrada_numeroNota,
+     entrada.`data` AS entrada_data,
+     entrada.`valorTotal` AS entrada_valorTotal,
+     entrada.`id` AS entrada_id,
+     entrada.`id_empenho` AS entrada_id_empenho,
+     fornecedor.`complemento` AS fornecedor_complemento,
+     fornecedor.`bairro` AS fornecedor_bairro,
+     fornecedor.`numero` AS fornecedor_numero,
+     fornecedor.`nome` AS fornecedor_nome,
+     fornecedor.`cep` AS fornecedor_cep,
+     fornecedor.`cidade` AS fornecedor_cidade,
+     fornecedor.`telefone` AS fornecedor_telefone,
+     fornecedor.`rua` AS fornecedor_rua,
+     fornecedor.`cnpj` AS fornecedor_cnpj,
+     fornecedor.`estado` AS fornecedor_estado,
+     fornecedor.`contato` AS fornecedor_contato,
+     fornecedor.`id` AS fornecedor_id,
+     itens_entrada.`id` AS itens_entrada_id,
+     itens_entrada.`valor` AS itens_entrada_valor,
+     itens_entrada.`quantidade` AS itens_entrada_quantidade,
+     itens_entrada.`id_entrada` AS itens_entrada_id_entrada,
+     itens_entrada.`id_produto` AS itens_entrada_id_produto,
+     produto.`numeroPeca` AS produto_numeroPeca,
+     produto.`descricao` AS produto_descricao,
+     produto.`localizacao` AS produto_localizacao,
+     produto.`quantidade` AS produto_quantidade,
+     produto.`valor` AS produto_valor,
+     produto.`id` AS produto_id,
+     produto.`id_montadora` AS produto_id_montadora,
+     montadora.`nome` AS montadora_nome,
+     montadora.`id` AS montadora_id
+FROM
+     `empenho` empenho INNER JOIN `entrada` entrada ON empenho.`id` = entrada.`id_empenho`
+     INNER JOIN `fornecedor` fornecedor ON empenho.`id_fornecedor` = fornecedor.`id`
+     INNER JOIN `itens_entrada` itens_entrada ON entrada.`id` = itens_entrada.`id_entrada`
+     INNER JOIN `produto` produto ON itens_entrada.`id_produto` = produto.`id`
+     INNER JOIN `montadora` montadora ON produto.`id_montadora` = montadora.`id`
+WHERE
+     empenho.`numero` = "numero"]]>
+	</queryString>
+	<field name="empenho_numero" class="java.lang.String"/>
+	<field name="empenho_data" class="java.sql.Date"/>
+	<field name="empenho_saldo" class="java.lang.Float"/>
+	<field name="empenho_valor" class="java.lang.Float"/>
+	<field name="empenho_id" class="java.lang.Long"/>
+	<field name="empenho_id_fornecedor" class="java.lang.Long"/>
+	<field name="entrada_numeroNota" class="java.lang.String"/>
+	<field name="entrada_data" class="java.sql.Date"/>
+	<field name="entrada_valorTotal" class="java.lang.Float"/>
+	<field name="entrada_id" class="java.lang.Long"/>
+	<field name="entrada_id_empenho" class="java.lang.Long"/>
+	<field name="fornecedor_complemento" class="java.lang.String"/>
+	<field name="fornecedor_bairro" class="java.lang.String"/>
+	<field name="fornecedor_numero" class="java.lang.String"/>
+	<field name="fornecedor_nome" class="java.lang.String"/>
+	<field name="fornecedor_cep" class="java.lang.String"/>
+	<field name="fornecedor_cidade" class="java.lang.String"/>
+	<field name="fornecedor_telefone" class="java.lang.String"/>
+	<field name="fornecedor_rua" class="java.lang.String"/>
+	<field name="fornecedor_cnpj" class="java.lang.String"/>
+	<field name="fornecedor_estado" class="java.lang.String"/>
+	<field name="fornecedor_contato" class="java.lang.String"/>
+	<field name="fornecedor_id" class="java.lang.Long"/>
+	<field name="itens_entrada_id" class="java.lang.Long"/>
+	<field name="itens_entrada_valor" class="java.lang.Float"/>
+	<field name="itens_entrada_quantidade" class="java.lang.Integer"/>
+	<field name="itens_entrada_id_entrada" class="java.lang.Long"/>
+	<field name="itens_entrada_id_produto" class="java.lang.Long"/>
+	<field name="produto_numeroPeca" class="java.lang.String"/>
+	<field name="produto_descricao" class="java.lang.String"/>
+	<field name="produto_localizacao" class="java.lang.String"/>
+	<field name="produto_quantidade" class="java.lang.Integer"/>
+	<field name="produto_valor" class="java.lang.Float"/>
+	<field name="produto_id" class="java.lang.Long"/>
+	<field name="produto_id_montadora" class="java.lang.Long"/>
+	<field name="montadora_nome" class="java.lang.String"/>
+	<field name="montadora_id" class="java.lang.Long"/>
+	<group name="empenho_numero">
+		<groupExpression><![CDATA[$F{empenho_numero}]]></groupExpression>
+		<groupHeader>
+			<band height="189">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="0d177025-82a6-44d7-943f-9b91a15aa426"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[empenho_numero]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="100" y="0" width="455" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="3aefa7d3-04f6-42d4-9562-d63532f0b550"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empenho_numero}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="4e7193bb-8b24-4f61-9bff-43db3b1316bc"/>
+				</line>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="33" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c125ae55-8350-4ee6-97cb-0df897930bde"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[empenho_data]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="entrada_id">
+		<groupExpression><![CDATA[$F{entrada_id}]]></groupExpression>
+		<groupHeader>
+			<band height="254">
+				<textField>
+					<reportElement x="100" y="0" width="455" height="32" forecolor="#006699" uuid="8e2c323f-3775-4580-8c74-d0b278718257"/>
+					<textElement>
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{entrada_id}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="f94ed93b-fcdc-47af-8776-1e0ead1c1094"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[entrada_id]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="itens_entrada_id">
+		<groupExpression><![CDATA[$F{itens_entrada_id}]]></groupExpression>
+		<groupHeader>
+			<band height="284">
+				<textField>
+					<reportElement x="100" y="0" width="455" height="32" forecolor="#006699" uuid="673cd9f7-54fb-4f3c-80ec-499f9d3c6716"/>
+					<textElement>
+						<font size="20" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{itens_entrada_id}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="f2ca5533-5f8c-491d-9ffa-653acb0c5e08"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[itens_entrada_id]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="45127359-067a-4150-a44c-3ff2eb02a794"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="1f168cd5-0291-4f95-b19e-01f0796a55bb"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TITLE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="b2e08c6f-1133-4741-a09e-f3600e0e669d"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Add a description here]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="49b3078b-f879-4c1f-9cf3-b506c7e8feaf"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="16" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0f357feb-8518-47c5-9c7f-7e5f98ca6d7d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[empenho_saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="32" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="fb50f232-36f4-480c-9a21-bbb55feee92b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[empenho_valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="48" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="71fefe1c-f407-42e4-b1c6-e005cdcd33bd"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[empenho_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="64" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="33882cea-bd75-4f2c-aea1-98037756d74c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[empenho_id_fornecedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="80" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="fa6304d0-53df-4550-ae47-688d0302c354"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[entrada_numeroNota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="96" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="dd95968c-d520-4763-9b65-0ec1bdfd6ac6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[entrada_data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="112" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5d178295-b347-48be-8f5c-2432ca89424b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[entrada_valorTotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="128" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1df3334c-1a6b-41c1-ab7f-7d9fa23d1419"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[entrada_id_empenho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="144" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b9b96b04-2790-4c0f-ae1a-0a6b2b6a3f0d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_complemento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="160" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a2a6dfdb-2356-4425-955f-a9680409a52c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_bairro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="176" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="36f4d6ae-4dc0-4d4c-8efa-ebbb4d6593ab"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="192" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ba3c8c67-401d-4da5-bdeb-aaa603b3b89e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="208" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b85d2b4e-9fc1-41b4-ad8d-76250b87ad64"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_cep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="224" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e92acea5-b741-4394-ac5a-05f6ce259dda"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_cidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="240" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="3a5c097a-0695-459f-a1c9-f62d5b76957e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="256" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="27cf98ac-dda6-48de-ae33-0cb2823721e3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_rua]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="272" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6ab4d1bf-e481-439a-b27a-8288db202f72"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_cnpj]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="564858aa-fb1f-4f52-8bac-a1d6388c55ac"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="304" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="01805e99-7fac-4caa-b97a-034f1863e511"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_contato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="320" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="79460f87-59f9-4609-9538-b116db091954"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fornecedor_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="336" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="929539b8-5bda-4fe7-b205-9e8bf8b76c42"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[itens_entrada_valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="352" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b173d2bb-7c7f-4565-a1cd-2ff018a64b47"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[itens_entrada_quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="368" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e91c0473-4c6e-48c7-9f23-02a351a41868"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[itens_entrada_id_entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="384" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="77b7c565-acbc-4298-9384-b389c4e72b65"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[itens_entrada_id_produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="400" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="af141163-7ecb-4a4e-b3c9-85a3b281af58"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produto_numeroPeca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="416" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1d8493bf-197e-402b-9de7-343fba91a8d4"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produto_descricao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="432" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ce499272-ef6a-44b0-8fd9-524a0bd2223b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produto_localizacao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="448" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="8d510f98-3049-4281-aa30-4e55ac049e60"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produto_quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="464" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f2ab65f1-5c45-419e-8d28-d8085a4c4437"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produto_valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7a6b62a7-d68e-448c-b825-9b1277afcbcb"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produto_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="496" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1a747907-f46b-4e73-a594-c368dc7715db"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produto_id_montadora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="512" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="04de1707-69ab-4403-b31b-85048edc35cf"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[montadora_nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="528" y="0" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="4fb24b69-2dd3-43c2-a90f-263076726afe"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[montadora_id]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="322">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="3e70312a-3d54-4990-9940-c52a4af49b53"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="16" height="20" uuid="aa5ea908-de8e-4ab8-9e79-0077d96edd92"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenho_data}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="16" y="0" width="16" height="20" uuid="6d52b51e-501d-4b8e-969f-e12d7121b38e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenho_saldo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="32" y="0" width="16" height="20" uuid="1e5be3d6-5376-4e79-b9c7-e8bf557814ca"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenho_valor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="48" y="0" width="16" height="20" uuid="f603a42a-a201-4b0d-9a64-d1fe2c7658ac"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenho_id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="64" y="0" width="16" height="20" uuid="708c5843-4770-416f-b5a1-7f5b485f211f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenho_id_fornecedor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="80" y="0" width="16" height="20" uuid="a7334afb-06ab-4664-bf4d-968a3fd6c2aa"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entrada_numeroNota}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="96" y="0" width="16" height="20" uuid="cabf4323-fc79-4dff-b77f-c5466f2c5388"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entrada_data}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="112" y="0" width="16" height="20" uuid="b3bb7610-8e1e-456c-b3ed-18d5c336c06b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entrada_valorTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="128" y="0" width="16" height="20" uuid="f1ad3fb5-1391-40f7-84c9-ffc11a664d8d"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entrada_id_empenho}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="144" y="0" width="16" height="20" uuid="adeddf17-d134-49a6-acc8-95138562dcf6"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_complemento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="160" y="0" width="16" height="20" uuid="e2b37457-9b0d-45e9-9389-459d2acdd7a3"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_bairro}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="176" y="0" width="16" height="20" uuid="63ef5d6e-6c83-4906-b967-d18b2eee69ed"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_numero}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="192" y="0" width="16" height="20" uuid="cfd68df3-83ce-4f68-b40d-05a791ea195c"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="208" y="0" width="16" height="20" uuid="35fbd271-f665-4d99-bf38-b576e4a1b5da"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_cep}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="224" y="0" width="16" height="20" uuid="08537f22-6203-4446-b681-1457b8207864"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_cidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="240" y="0" width="16" height="20" uuid="c8a6a104-1834-450e-9b74-9db00f73015f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_telefone}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="256" y="0" width="16" height="20" uuid="495c7642-6fe5-445e-ab78-318bba30da7f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_rua}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="272" y="0" width="16" height="20" uuid="da2ab2c5-4196-49ab-82a3-28e3ae32d24d"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_cnpj}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="288" y="0" width="16" height="20" uuid="ead89e40-c37b-4772-b0e7-d8abbd8368c8"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_estado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="304" y="0" width="16" height="20" uuid="b2559613-d1f5-4c11-8a8b-3d27d417f732"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_contato}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="320" y="0" width="16" height="20" uuid="f1b3f430-ca45-48d9-ba4a-e9db142bfb87"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fornecedor_id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="336" y="0" width="16" height="20" uuid="e2010420-58ab-4d98-bd39-73f9c23471c4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itens_entrada_valor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="352" y="0" width="16" height="20" uuid="3b89ed05-87c9-4e7e-a420-2858c57c4992"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itens_entrada_quantidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="368" y="0" width="16" height="20" uuid="f893e34f-b56e-495a-ae2f-d928ec917bee"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itens_entrada_id_entrada}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="384" y="0" width="16" height="20" uuid="fc8fe10f-782b-4c7e-90ad-e08059293b93"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itens_entrada_id_produto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="400" y="0" width="16" height="20" uuid="d84d1f63-3a5b-414a-9c66-98b1194d8108"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produto_numeroPeca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="416" y="0" width="16" height="20" uuid="8e2bcefd-3539-47b9-ae49-9229a287c075"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produto_descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="432" y="0" width="16" height="20" uuid="77c12e6b-e560-456d-862c-f7040b4b3d7a"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produto_localizacao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="448" y="0" width="16" height="20" uuid="bdf83fcb-2878-4250-9b8d-745a37a18b0c"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produto_quantidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="464" y="0" width="16" height="20" uuid="c21925b8-e50b-4662-a121-8c18ef4444da"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produto_valor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="480" y="0" width="16" height="20" uuid="33181b26-34d3-473a-8640-e610d37d7e63"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produto_id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="496" y="0" width="16" height="20" uuid="d553e34c-b776-4e9f-983b-8a1c4f45372b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produto_id_montadora}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="512" y="0" width="16" height="20" uuid="0d18e635-959a-4b23-b0cd-f2d626cd20f1"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montadora_nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="528" y="0" width="16" height="20" uuid="245bd935-4cd8-4ad0-81a3-de02421abeb5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montadora_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="ffa6c138-8484-49df-bc42-bc880e024712"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="71f8458c-81ac-4cfb-a4b7-d0e1a7c11149"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="258c26b7-035c-455c-9588-75ac04cedce6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
