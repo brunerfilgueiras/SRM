@@ -36,6 +36,7 @@ static FornecedorSearchView instancia = null;
     public FornecedorSearchView(Usuario usuario){
         initComponents();
         permissao(usuario);
+        jbAdicionar.setVisible(false);
         carregaTabela();
         
         
@@ -54,6 +55,8 @@ static FornecedorSearchView instancia = null;
     
     public FornecedorSearchView() {
         initComponents();
+        jbAdicionar.setVisible(false);
+
     }
     
     

@@ -51,8 +51,8 @@ public class ConnectionFactory {
     public static Connection getConnection(
             String url,
             String usuario,
-            String senha ) throws SQLException {
- 
+            String senha ) throws SQLException, ClassNotFoundException {
+       Class.forName( "com.mysql.jdbc.Driver" );
         // retorna a conexão a partir do método getConnection de DriverManager
         return DriverManager.getConnection( url, usuario, senha );
  
@@ -64,7 +64,7 @@ public class ConnectionFactory {
      * @return Uma conexão para a base de dados sakila.
      * @throws SQLException Caso ocorra algum problema durante a conexão.
      */
-    public static Connection getSrmConnection() throws SQLException {
+    public static Connection getSrmConnection() throws SQLException, ClassNotFoundException {
  
         return getConnection(
                 "jdbc:mysql://localhost/srm",

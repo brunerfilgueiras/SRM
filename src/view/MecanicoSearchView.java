@@ -25,6 +25,8 @@ public class MecanicoSearchView extends javax.swing.JFrame {
     
     public MecanicoSearchView(Usuario usuario){
         initComponents();
+        jbAdicionar.setVisible(false);
+
         permissao(usuario);
         carregaTabela();
     }
@@ -40,6 +42,8 @@ public class MecanicoSearchView extends javax.swing.JFrame {
     
     public MecanicoSearchView() {
         initComponents();
+        jbAdicionar.setVisible(false);
+
     }
 
     /**

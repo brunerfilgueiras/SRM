@@ -49,6 +49,8 @@ public class ProdutoSearchView extends javax.swing.JFrame {
      */
     public ProdutoSearchView(Usuario usuario){
         initComponents();
+         jbAdicionarEntrada.setVisible(false);
+         jbAdicionarSaida.setVisible(false);
        permissao(usuario);
        carregaTabela();
     }
@@ -56,6 +58,8 @@ public class ProdutoSearchView extends javax.swing.JFrame {
     
     public ProdutoSearchView() {
         initComponents();
+        jbAdicionarEntrada.setVisible(false);
+         jbAdicionarSaida.setVisible(false);
     }
 
     /**
@@ -258,7 +262,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
         ProdutoEditView janelaProduto = new ProdutoEditView(seleciona());
         janelaProduto.setVisible(true);
-
+this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
 
@@ -266,6 +270,8 @@ public class ProdutoSearchView extends javax.swing.JFrame {
 
          ProdutoEditView janelaProduto = new ProdutoEditView();
         janelaProduto.setVisible(true);
+        this.dispose();
+
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jbIncluirActionPerformed

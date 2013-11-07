@@ -4,7 +4,12 @@
  */
 package view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Usuario; 
+import net.sf.jasperreports.engine.JRException;
+import util.ReportUtils;
 
 
 /**
@@ -182,6 +187,11 @@ public class SRMView extends javax.swing.JFrame {
 
         jbLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/door_out.png"))); // NOI18N
         jbLogout.setText("Logout");
+        jbLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLogoutActionPerformed(evt);
+            }
+        });
 
         jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         jbSair.setText("Sair");
@@ -588,11 +598,33 @@ public class SRMView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbUsuarioActionPerformed
 
     private void jbAbrirRelatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirRelatActionPerformed
-        // TODO add your handling code here:       
+        try {
+            // TODO add your handling code here:       
+        
+           ReportUtils.gerars("./src/relatorios/Empenhos.jasper","Empenho");
        
+        }catch(JRException e){
+        } catch (SQLException ex) {
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+        
+        
         
         // fazer um if selecteditem da combo, para abrir cada tela
     }//GEN-LAST:event_jbAbrirRelatActionPerformed
+
+    private void jbLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogoutActionPerformed
+        // TODO add your handling code here:
+        LoginView janelaLogin = new LoginView();
+        janelaLogin.setVisible(true);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_jbLogoutActionPerformed
 
     /**
      * @param args the command line arguments

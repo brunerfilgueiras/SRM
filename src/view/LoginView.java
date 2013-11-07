@@ -4,6 +4,10 @@
  */
 package view;
 
+import dao.UsuarioDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import model.Usuario;
 
 /**
@@ -11,12 +15,16 @@ import model.Usuario;
  * @author secinfor-04
  */
 public class LoginView extends javax.swing.JFrame {
+UsuarioDAO usuarioDAO = UsuarioDAO.getInstacia();
+    
+List resultado = new ArrayList();
 
-    /**
+/**
      * Creates new form LoginView
      */
     public LoginView() {
         initComponents();
+        resultado = usuarioDAO.listaTodos();
     }
 
     /**
@@ -56,6 +64,11 @@ public class LoginView extends javax.swing.JFrame {
 
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Sistema de Reserva de Materiais");
@@ -111,28 +124,41 @@ public class LoginView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-233)/2, (screenSize.height-197)/2, 233, 197);
+        setSize(new java.awt.Dimension(233, 197));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         Usuario logado = Usuario.getInstacia();
+        
+       
+        if(resultado== null){
+        
+        if(jtLogin.getText().equals("Instalador")&& jtSenha.getText().equals("l0g1st1c@")){
         logado.setPerfil("Administrador");
-        
+        } 
+        }else{
         if(true){
-        
+        logado.setPerfil("Administrador");
             SRMView janelaPrincipal = new SRMView(logado);
             janelaPrincipal.setVisible(true);
             this.dispose();
             
-            
+         }else{
+        JOptionPane.showMessageDialog(rootPane, "Login ou Senha Inválido");
+        
         }
         
-        
+        }
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jbCancelarActionPerformed
 
     /**
      * @param args the command line arguments

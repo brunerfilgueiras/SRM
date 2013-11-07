@@ -7,13 +7,17 @@ package util;
 import java.awt.BorderLayout;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.util.Map;
+import java.sql.SQLException;
+import java.util.HashMap;
 import javax.swing.JFrame;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -33,15 +37,15 @@ public class ReportUtils {
     public static void openReport(
             String titulo,
             InputStream inputStream,
-            Map parametros,
-            Connection conexao ) throws JRException {
+            HashMap parametros
+            ) throws JRException, SQLException, ClassNotFoundException {
  
         /*
          * Cria um JasperPrint, que é a versão preenchida do relatório,
          * usando uma conexão.
          */
         JasperPrint print = JasperFillManager.fillReport(
-                inputStream, parametros, conexao );
+                inputStream, parametros, ConnectionFactory.getSrmConnection() );
  
         // abre o JasperPrint em um JFrame
         viewReportFrame( titulo, print );
@@ -60,7 +64,7 @@ public class ReportUtils {
     public static void openReport(
             String titulo,
             InputStream inputStream,
-            Map parametros,
+            HashMap parametros,
             JRDataSource dataSource ) throws JRException {
  
         /*
@@ -108,5 +112,26 @@ public class ReportUtils {
         frameRelatorio.setVisible( true );
  
     }
+    
+    public static void gerars(String arquivo, String titulo) throws JRException, SQLException, ClassNotFoundException{
+        
+        //JasperPrint report = JasperFillManager.fillReport(arquivo,null);
+        Connection con =  ConnectionFactory.getSrmConnection();
+       JasperPrint relatorio = JasperFillManager.fillReport(arquivo, null, con);
+        JasperViewer viewer = new JasperViewer(relatorio,false);
+        viewer.setTitle(titulo);
+        viewer.setVisible(true);
+        
+    }
+
+    public static void gerar(String srcrelatoriosEmpenhosjasper, String empenho) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+    
+    
+    
     
 }
