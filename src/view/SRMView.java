@@ -4,12 +4,13 @@
  */
 package view;
 
-import java.sql.SQLException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Usuario; 
 import net.sf.jasperreports.engine.JRException;
-import util.ReportUtils;
+import util.Imprimir;
+
 
 
 /**
@@ -598,23 +599,15 @@ public class SRMView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbUsuarioActionPerformed
 
     private void jbAbrirRelatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirRelatActionPerformed
-        try {
-            // TODO add your handling code here:       
         
-           ReportUtils.gerars("./src/relatorios/Empenhos.jasper","Empenho");
-       
-        }catch(JRException e){
-        } catch (SQLException ex) {
+         try {
+          Imprimir relat = new Imprimir();
+          relat.imprimeRelatorioMontadoras();
+        } catch (JRException ex) {
             Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
-        
-        
-        
-        // fazer um if selecteditem da combo, para abrir cada tela
     }//GEN-LAST:event_jbAbrirRelatActionPerformed
 
     private void jbLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogoutActionPerformed
@@ -733,4 +726,5 @@ public class SRMView extends javax.swing.JFrame {
     private javax.swing.JPanel jpRodape;
     private javax.swing.JTabbedPane jtpPrincipal;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioMecanicos" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd98ef49-ecad-4c50-9078-4c2fd08599dd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="1"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     mecanico.`id` AS mecanico_id,
+     mecanico.`posto` AS mecanico_posto,
+     mecanico.`nomeGuerra` AS mecanico_nomeGuerra,
+     mecanico.`nomeCompleto` AS mecanico_nomeCompleto
+FROM
+     `mecanico` mecanico]]>
+	</queryString>
+	<field name="mecanico_id" class="java.lang.Long"/>
+	<field name="mecanico_posto" class="java.lang.String"/>
+	<field name="mecanico_nomeGuerra" class="java.lang.String"/>
+	<field name="mecanico_nomeCompleto" class="java.lang.String"/>
+	<group name="mecanico_nomeGuerra">
+		<groupExpression><![CDATA[$F{mecanico_nomeGuerra}]]></groupExpression>
+		<groupHeader>
+			<band height="83">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="33" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="54518e8b-0ed3-47d3-8138-e2c40daa9d84"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome de Guerra:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="100" y="33" width="455" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="250cb036-4c6f-495e-a702-baa8a6dbc148"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mecanico_nomeGuerra}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="a4406edf-8118-4872-aed9-1891607813d5"/>
+				</line>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="65" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="25c45f8e-d8cb-4e20-8b3f-1c7f6ec53efa"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Código:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="65" y="0" width="490" height="20" uuid="9aa43632-da6c-4241-ac98-47aab00b850b"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mecanico_id}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="mecanico_nomeCompleto">
+		<groupExpression><![CDATA[$F{mecanico_nomeCompleto}]]></groupExpression>
+		<groupHeader>
+			<band height="32">
+				<textField>
+					<reportElement x="100" y="0" width="455" height="32" forecolor="#006699" uuid="9ed42431-21f2-4f7c-a4fe-41efbf52c716"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mecanico_nomeCompleto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="7464569d-e582-4df8-b3fa-6c7fa3e673de"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome Completo:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="mecanico_posto">
+		<groupExpression><![CDATA[$F{mecanico_posto}]]></groupExpression>
+		<groupHeader>
+			<band height="32">
+				<textField>
+					<reportElement x="100" y="0" width="455" height="32" forecolor="#006699" uuid="60194341-69dd-4526-aac9-575e1e69d1ee"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mecanico_posto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="c6aa0865-baa6-4803-a470-98ecd44c343e"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Posto:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="7ded1fe4-8381-45a2-a455-a877cd32ba83"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="1dd95d71-0433-4687-bd5b-9e7075fa7d40"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mecânicos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="340" y="43" width="235" height="20" forecolor="#FFFFFF" uuid="a6ac5a83-8b24-4ec4-baac-410dca4157a2"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Listagem de mecânicos - 17º BLog]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="32030b07-7ebf-4016-937a-58893886bc09"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="566a59b3-c7b1-4e86-b957-8d27bfe9709f"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="c259caed-9013-4a96-ad66-571b28c438c7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="516edc0a-2bf7-435c-b600-4461ecb0c814"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="ab5a0789-4f6c-4c2b-b1c4-e27dceadf7e8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

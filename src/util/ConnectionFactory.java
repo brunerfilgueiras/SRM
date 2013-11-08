@@ -52,7 +52,7 @@ public class ConnectionFactory {
             String url,
             String usuario,
             String senha ) throws SQLException, ClassNotFoundException {
-       Class.forName( "com.mysql.jdbc.Driver" );
+      
         // retorna a conexão a partir do método getConnection de DriverManager
         return DriverManager.getConnection( url, usuario, senha );
  
@@ -67,9 +67,9 @@ public class ConnectionFactory {
     public static Connection getSrmConnection() throws SQLException, ClassNotFoundException {
  
         return getConnection(
-                "jdbc:mysql://localhost/srm",
+               "jdbc:mysql://localhost:3306/srm",
                 "root",
-                "l0g1st1c@" );
+                "root" );
  
     }
     

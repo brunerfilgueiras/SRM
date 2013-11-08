@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEmpenho" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a5eadbe6-f801-41db-b897-32853a93614a">
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     empenho.`numero` AS empenho_numero,
+     empenho.`data` AS empenho_data,
+     empenho.`saldo` AS empenho_saldo,
+     empenho.`valor` AS empenho_valor,
+     empenho.`id` AS empenho_id,
+     empenho.`id_fornecedor` AS empenho_id_fornecedor
+FROM
+     `empenho` empenho]]>
+	</queryString>
+	<field name="empenho_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empenho_id_fornecedor" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empenho_numero" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empenho_data" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empenho_valor" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empenho_saldo" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="empenho_numero">
+		<groupExpression><![CDATA[$F{empenho_numero}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="139" height="27" forecolor="#FFFFFF" backcolor="#000000" uuid="62c47b2f-5915-473a-b0c1-2d334e552d07"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Número:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="138" y="0" width="416" height="27" forecolor="#FFFFFF" backcolor="#000000" uuid="62edbd81-839d-4476-8dae-249c36fc5b96"/>
+					<textElement>
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empenho_numero}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="8">
+				<line direction="BottomUp">
+					<reportElement key="line" x="1" y="4" width="554" height="1" uuid="5f23fbca-03d0-4501-a173-1952cf1d871c"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="empenho_data">
+		<groupExpression><![CDATA[$F{empenho_data}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="139" height="27" backcolor="#CCCCFF" uuid="9b1a68cb-4be7-4e51-a023-58c50af0189f"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Data:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="139" y="0" width="416" height="27" backcolor="#CCCCFF" uuid="85076959-7252-4596-9b0c-d292c9124eba"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empenho_data}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="555" height="1" uuid="5766f5be-9151-4e76-962c-07c20e279b48"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="8">
+				<line direction="BottomUp">
+					<reportElement key="line" x="1" y="4" width="554" height="1" uuid="c7cf0258-78f5-49e1-9fa6-51cc170637c3"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="empenho_valor">
+		<groupExpression><![CDATA[$F{empenho_valor}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<staticText>
+					<reportElement x="0" y="0" width="139" height="27" uuid="92fb381c-d8c3-4be2-b148-16912e0e5644"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Valor:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="139" y="0" width="416" height="27" uuid="63e042e4-753c-4795-8f7f-3530134f3a31"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empenho_valor}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="555" height="1" uuid="e59372b7-1248-4913-8050-d6224f4cf9d3"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="8">
+				<line direction="BottomUp">
+					<reportElement key="line" x="1" y="4" width="554" height="1" uuid="f3b6e73e-339f-4779-aab9-1dc7b20be612"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="empenho_saldo">
+		<groupExpression><![CDATA[$F{empenho_saldo}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<staticText>
+					<reportElement x="0" y="0" width="139" height="27" uuid="dc2e184e-cf8a-4980-be10-0167ff2de2b1"/>
+					<textElement>
+						<font size="16" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Saldo:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="139" y="0" width="416" height="27" uuid="87e6f277-9bc3-4d2c-ba5a-ffbdf58f056c"/>
+					<textElement>
+						<font size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empenho_saldo}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="555" height="1" uuid="4cd0d5cd-c5bb-4686-823f-5e0017c4330b"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="9">
+				<line direction="BottomUp">
+					<reportElement key="line" x="1" y="4" width="554" height="1" uuid="4e35ea5a-db0b-48ad-9809-7616d072425f"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="58">
+			<line>
+				<reportElement x="0" y="8" width="555" height="1" uuid="73459260-38a7-426d-a818-7475e03ad723"/>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="51" width="555" height="1" uuid="e1f2f982-94ec-4f9c-9036-53f2289352bb"/>
+			</line>
+			<staticText>
+				<reportElement x="65" y="13" width="424" height="35" uuid="f73c5e85-1e69-404b-babe-69f66c6d0ca7"/>
+				<textElement textAlignment="Center">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Empenho]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="277" height="18" forecolor="#FFFFFF" backcolor="#999999" uuid="c76ad320-6a9e-4aee-b4bf-1265a340e68e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Código:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="0" width="277" height="18" forecolor="#FFFFFF" backcolor="#999999" uuid="0a3209c1-d575-4069-b289-bb853aa79c16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Código do Fornecedor:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="0" width="277" height="20" uuid="68896b5f-d661-4d3f-ac65-3e1e7a56929f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenho_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="0" width="277" height="20" uuid="fe29a7bd-3b77-4b22-859e-849d34d4fe30"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenho_id_fornecedor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26">
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="516" y="6" width="36" height="19" forecolor="#000000" backcolor="#FFFFFF" uuid="124dbdcb-8c0b-460c-9917-02caddceb3e9"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="342" y="6" width="170" height="19" forecolor="#000000" backcolor="#FFFFFF" uuid="c492900d-0b7e-4974-8fb1-24037188f817"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="1" y="6" width="209" height="19" forecolor="#000000" backcolor="#FFFFFF" uuid="e1acdacf-d3ab-40c3-a4af-c68ef95a709b"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

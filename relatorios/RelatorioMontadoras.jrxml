@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioMontadoras" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6d4bcd67-5f07-43a4-be8e-86299542c61b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     montadora.`nome` AS montadora_nome,
+     montadora.`id` AS montadora_id
+FROM
+     `montadora` montadora]]>
+	</queryString>
+	<field name="montadora_nome" class="java.lang.String"/>
+	<field name="montadora_id" class="java.lang.Long"/>
+	<group name="montadora_id">
+		<groupExpression><![CDATA[$F{montadora_id}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<line>
+					<reportElement x="-20" y="18" width="595" height="1" forecolor="#666666" uuid="f8172b7b-98eb-4df9-934e-482a24b22f59"/>
+				</line>
+				<textField>
+					<reportElement mode="Opaque" x="100" y="1" width="455" height="17" forecolor="#006699" backcolor="#E6E6E6" uuid="a756b873-cedc-4d42-aa90-8aaacc289001"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{montadora_id}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="1" width="100" height="17" forecolor="#666666" backcolor="#E6E6E6" uuid="bff44086-1378-4729-8129-f97dd89adf15"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Código:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="montadora_nome">
+		<groupExpression><![CDATA[$F{montadora_nome}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="100" y="0" width="455" height="20" forecolor="#006699" uuid="0944f91a-be47-41c8-93bf-b0720b21abb3"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{montadora_nome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="6095851c-a7ac-4a6a-a1e7-8e80b862f1aa"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="2de3bcdf-40fa-4ff0-a8fb-f9b62dc888b6"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="118103c8-9a20-4aa6-9bfc-2a4864d1c6aa"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Montadoras]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="329" y="43" width="246" height="20" forecolor="#FFFFFF" uuid="5825f5d8-f513-47a0-a4c1-2d5b6caec5c0"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Listagem de montadoras - 17º BLog]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="b782a20b-ece4-482b-b26d-cfa768c29345"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="3">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1" uuid="1e2a6382-68c7-4b35-9214-ee2f8ad4f937"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="bd09b9b2-91bd-4f1c-922b-4d0bfbccbf9a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="c59e8a3f-2525-4133-a8ca-7cfd3f48358a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="843d8b89-da37-4b7d-a70d-514c64ba0b30"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

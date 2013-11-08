@@ -10,14 +10,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.JFrame;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.swing.JRViewer;
-import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.view.*;
 
 /**
  *
@@ -36,7 +31,7 @@ public class ReportUtils {
      */
     public static void openReport(
             String titulo,
-            InputStream inputStream,
+            String inputStream,
             HashMap parametros
             ) throws JRException, SQLException, ClassNotFoundException {
  
