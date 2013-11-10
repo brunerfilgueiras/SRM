@@ -5,10 +5,15 @@
 package view;
 
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Usuario; 
 import net.sf.jasperreports.engine.JRException;
+import util.DateTimeUtil;
 import util.Imprimir;
 
 
@@ -599,15 +604,256 @@ public class SRMView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbUsuarioActionPerformed
 
     private void jbAbrirRelatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirRelatActionPerformed
+        Imprimir relat = new Imprimir();
+        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        HashMap<String,Object> map = new HashMap<String,Object>();
         
-         try {
-          Imprimir relat = new Imprimir();
-          relat.imprimeRelatorioMontadoras();
+        switch(jcbRelatorios.getSelectedIndex()){
+            case 0:{
+              
+                String numero = "2344";
+                
+                map.put("numero", numero);
+                
+                
+                try {
+          
+          relat.imprimeRelatorioCreditoDetalhado(map);
         } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
             Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
             Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+                
+                break;
+            }    
+           case 1:{
+                
+               try {
+          
+          relat.imprimeRelatorioEntradaProdutosB();
+       } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+               
+                break;
+            } 
+           case 2:{
+                
+               
+               
+              Date dataFim = new Date();
+              Date dataInicio = new Date();
+               // falta colocar um joption pane 
+              dataInicio = dataUtil.parseDateException("29/10/2013");
+              dataFim = dataUtil.parseDateException("9/11/2013");
+               
+               map.put("dataInicio", dataInicio);
+               map.put("dataFim", dataFim);
+               
+               
+               try {
+          
+          relat.imprimeRelatorioEntradaPorPeriodo(map);
+        } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+               
+                break;
+            } 
+            case 3:{
+                
+                try {
+          
+          relat.imprimeRelatorioProdutos();
+        } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+                
+                break;
+            } 
+             case 4:{
+        try {
+          
+          relat.imprimeRelatorioEmpenhos();
+        } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+                 
+                break;
+            } 
+            case 5:{
+                
+                try {
+          
+          relat.imprimeRelatorioFornecedores();
+       } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+                
+                break;
+            } 
+           case 6:{
+                
+           try {
+          
+          relat.imprimeRelatorioMontadoras();
+        } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+               
+               
+                break;
+            } 
+            case 7:{
+                
+                try {
+          
+          relat.imprimeRelatorioMecanicos();
+       } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+                
+                break;
+            } 
+            case 8:{
+                
+                try {
+          
+          relat.imprimeRelatorioOrdensDeServico();
+       } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+                
+                break;
+            } 
+             case 9:{
+                
+             Date dataFim = new Date();
+              Date dataInicio = new Date();
+               // falta colocar um joption pane 
+              dataInicio = dataUtil.parseDateException("29/10/2013");
+              dataFim = dataUtil.parseDateException("9/11/2013");
+               
+               map.put("dataInicio", dataInicio);
+               map.put("dataFim", dataFim);     
+                 
+                 
+                 
+                 try {
+          
+          relat.imprimeRelatorioProdutoPorPeriodo(map);
+       } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+                 
+                break;
+            } 
+              case 10:{
+                
+                  try {
+          
+          relat.imprimeRelatorioProdutoPorSaida();
+        } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+                  
+                break;
+            } 
+            case 11:{
+                String montadora = "Volvo";
+                map.put("montadora", montadora);
+                try {
+          
+          relat.imprimeRelatorioProdutoPorMontadora(map);
+        } catch (JRException ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+                
+                break;
+            } 
+            case 12:{
+                
+                Date dataFim = new Date();
+              Date dataInicio = new Date();
+               // falta colocar um joption pane 
+              dataInicio = dataUtil.parseDateException("29/10/2013");
+              dataFim = dataUtil.parseDateException("9/11/2013");
+               
+               map.put("dataInicio", dataInicio);
+               map.put("dataFim", dataFim); 
+                
+                try {
+          
+          relat.imprimeRelatorioSaidaPorPeriodo(map);
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+                
+                break;
+            } 
+            default:{
+                
+               JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+                
+                
+                break;
+            }
+                
         }
+        
+        
+         
     }//GEN-LAST:event_jbAbrirRelatActionPerformed
 
     private void jbLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogoutActionPerformed
