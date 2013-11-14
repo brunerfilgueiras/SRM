@@ -54,6 +54,7 @@ public class UsuarioSearchView extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
+        jPBbarra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -145,29 +146,29 @@ public class UsuarioSearchView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jPBbarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jcbParametro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                                .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -187,18 +188,19 @@ public class UsuarioSearchView extends javax.swing.JFrame {
                     .addComponent(jbAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPBbarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-548)/2, (screenSize.height-394)/2, 548, 394);
+        setSize(new java.awt.Dimension(618, 394));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtParametroActionPerformed
@@ -209,16 +211,18 @@ public class UsuarioSearchView extends javax.swing.JFrame {
 
         UsuarioEditView janelaUsuario = new UsuarioEditView();
         janelaUsuario.setVisible(true);// TODO add your handling code here:
-        this.dispose();
+        
         
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
       
- 
+  if(seleciona() != null){
         UsuarioEditView janelaUsuario = new UsuarioEditView(seleciona());
         janelaUsuario.setVisible(true);
-        this.dispose();
+     }else{
+            JOptionPane.showMessageDialog(rootPane, "Usuario Não selecionado!",null , 2);
+        }  
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
 
@@ -228,7 +232,7 @@ public class UsuarioSearchView extends javax.swing.JFrame {
        UsuarioController usuarioController =  UsuarioController.getInstacia();
        
        if(seleciona() != null){
-        
+        if(JOptionPane.showConfirmDialog(null, "Deseja excluir este registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
         if(usuarioController.deletar(seleciona())){
             JOptionPane.showMessageDialog(rootPane, "Usuario Excluido com sucesso!");
                         
@@ -236,11 +240,12 @@ public class UsuarioSearchView extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir  Usuario!", null, 2);
         }
+        }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Usuario Não selecionado!",null , 2);
         }
        
-       
+    
         
         
         // TODO add your handling code here:
@@ -341,33 +346,40 @@ public class UsuarioSearchView extends javax.swing.JFrame {
         
        DefaultTableModel modelo = (DefaultTableModel) jtUsuarios.getModel();
        modelo.setNumRows(0);
-       
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(usuarios.size());
+       jPBbarra.setValue(0);
        for(int i = 0; i<usuarios.size();i++){
                         
          modelo.addRow(new String[]{usuarios.get(i).getId().toString(), usuarios.get(i).getNomeCompleto(),
              usuarios.get(i).getNomeGuerra(),usuarios.get(i).getPosto()});
-    
+    jPBbarra.setValue(i+1);
        }
       
     }
     
     
+   
+           
+    
+    
     
     //caregadados na tabela
-    private void carregaTabela(){
+    private  void carregaTabela(){
         UsuarioDAO usuarioDAO = UsuarioDAO.getInstacia();
         usuarios = usuarioDAO.listaTodos();
     
        DefaultTableModel modelo = (DefaultTableModel) jtUsuarios.getModel();
        modelo.setNumRows(0);
-       
-      
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(usuarios.size());
+       jPBbarra.setValue(0);
        for(int i = 0; i<usuarios.size();i++){
          
          usuario = usuarios.get(i);
         
          modelo.addRow(new String[]{usuario.getId().toString(), usuario.getNomeCompleto(), usuario.getNomeGuerra(),usuario.getPosto()});
-    
+    jPBbarra.setValue(i+1);
        }
        
        
@@ -395,6 +407,7 @@ public class UsuarioSearchView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JProgressBar jPBbarra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

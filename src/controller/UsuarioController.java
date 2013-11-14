@@ -46,7 +46,21 @@ public class UsuarioController {
    }
     
    
-    
+    public boolean existir(Usuario usuario){
+        
+        
+        UsuarioDAO usuarioDAO = UsuarioDAO.getInstacia();
+        
+        if(usuarioDAO.existe(usuario).isEmpty()){
+           return true;  
+        }else{
+          return false;   
+        }
+        
+        
+       
+        
+    }
     
     
     

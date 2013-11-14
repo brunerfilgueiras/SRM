@@ -14,7 +14,8 @@ import model.Usuario;
  */
 public class UsuarioEditView extends javax.swing.JFrame {
 Usuario  usuario = Usuario.getInstacia();
-    /**
+   
+/**
      * Creates new form UsuarioEditView
      */
 public UsuarioEditView(Usuario usuario){
@@ -26,6 +27,7 @@ public UsuarioEditView(Usuario usuario){
 
     public UsuarioEditView() {
         initComponents();
+        usuario.setId(null); 
     }
 
     /**
@@ -187,16 +189,20 @@ public UsuarioEditView(Usuario usuario){
        
      
      if(campoObrigatorio()==null){
+      
+    if(validaCaracteres()==null){   
       usuario.setPerfil((String) jcbPerfil.getSelectedItem());
       usuario.setPosto((String) jcbPosto.getSelectedItem());
       usuario.setLogin(jtLogin.getText());
       usuario.setNomeCompleto(jtNomeCompleto.getText());
       usuario.setNomeGuerra(jtNomeGuerra.getText());
       usuario.setSenha(jtSenha.getText()); 
-        
+      }else{
+          JOptionPane.showMessageDialog(null, validaCaracteres(), null, 1);
+      }  
         
       
-      
+     if(usuarioController.existir(usuario)){ 
       if(usuarioController.persistir(usuario)){
           
           JOptionPane.showMessageDialog(jtNomeCompleto, "Usuario Gravado Com sucesso!", null, 1);
@@ -206,7 +212,9 @@ public UsuarioEditView(Usuario usuario){
           
           JOptionPane.showMessageDialog(jtNomeCompleto, "Falha ao Salvar Usuario!!", null, 2);
       }
-        
+     }else{
+         JOptionPane.showMessageDialog(jtNomeCompleto, "Usuario já cadastrado !!", null, 2);
+     }
      }else{  
          
         JOptionPane.showMessageDialog(jtNomeCompleto, campoObrigatorio(), null, 2); 
@@ -215,7 +223,7 @@ public UsuarioEditView(Usuario usuario){
         
         
         
-        
+     
         
         
         
@@ -326,6 +334,44 @@ public UsuarioEditView(Usuario usuario){
         }
         
         
+        if(msg){
+        
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
+    private String validaCaracteres(){
+       
+        String vazio = "Campos com poucos caracteres: ";
+       boolean msg = false;
+       
+        if(jtNomeCompleto.getText().length()<4){
+          
+            vazio = vazio + "\n Nome Completo ";
+            
+        msg = true; 
+        }
+        if(jtNomeGuerra.getText().length()<4){
+          
+            vazio = vazio + "\n Nome de Guerra ";
+            
+          msg = true;
+        }
+        if(jtSenha.getText().length()<2){
+          
+            vazio = vazio + "\n Senha ";
+            
+         msg = true;
+        }
+        if(jtLogin.getText().length()<4){
+          
+            vazio = vazio + "\n Login ";
+            
+         msg = true;
+        }
+               
         if(msg){
         
             return vazio;

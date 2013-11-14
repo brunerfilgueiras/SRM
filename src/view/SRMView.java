@@ -610,22 +610,9 @@ public class SRMView extends javax.swing.JFrame {
         
         switch(jcbRelatorios.getSelectedIndex()){
             case 0:{
+              RelatorioParametroView janelaParametro = new RelatorioParametroView(false);
+              janelaParametro.setVisible(true);
               
-                String numero = "2344";
-                
-                map.put("numero", numero);
-                
-                
-                try {
-          
-          relat.imprimeRelatorioCreditoDetalhado(map);
-        } catch (JRException ex) {
-           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        }     
                 
                 break;
             }    
@@ -645,30 +632,10 @@ public class SRMView extends javax.swing.JFrame {
                 break;
             } 
            case 2:{
-                
-               
-               
-              Date dataFim = new Date();
-              Date dataInicio = new Date();
-               // falta colocar um joption pane 
-              dataInicio = dataUtil.parseDateException("29/10/2013");
-              dataFim = dataUtil.parseDateException("9/11/2013");
-               
-               map.put("dataInicio", dataInicio);
-               map.put("dataFim", dataFim);
-               
-               
-               try {
-          
-          relat.imprimeRelatorioEntradaPorPeriodo(map);
-        } catch (JRException ex) {
-           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-               
+           
+             RelatorioPeriodoView janelaRelatorio = new RelatorioPeriodoView(2);
+             janelaRelatorio.setVisible(true);
+             
                 break;
             } 
             case 3:{
@@ -763,27 +730,8 @@ public class SRMView extends javax.swing.JFrame {
             } 
              case 9:{
                 
-             Date dataFim = new Date();
-              Date dataInicio = new Date();
-               // falta colocar um joption pane 
-              dataInicio = dataUtil.parseDateException("29/10/2013");
-              dataFim = dataUtil.parseDateException("9/11/2013");
-               
-               map.put("dataInicio", dataInicio);
-               map.put("dataFim", dataFim);     
-                 
-                 
-                 
-                 try {
-          
-          relat.imprimeRelatorioProdutoPorPeriodo(map);
-       } catch (JRException ex) {
-           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+            RelatorioPeriodoView janelaRelatorio = new RelatorioPeriodoView(9);
+             janelaRelatorio.setVisible(true);
                  
                 break;
             } 
@@ -803,43 +751,18 @@ public class SRMView extends javax.swing.JFrame {
                 break;
             } 
             case 11:{
-                String montadora = "Volvo";
-                map.put("montadora", montadora);
-                try {
-          
-          relat.imprimeRelatorioProdutoPorMontadora(map);
-        } catch (JRException ex) {
-           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+                
+                RelatorioParametroView janelaParametro = new RelatorioParametroView(true);
+              janelaParametro.setVisible(true);
+                
                 
                 break;
             } 
             case 12:{
                 
-                Date dataFim = new Date();
-              Date dataInicio = new Date();
-               // falta colocar um joption pane 
-              dataInicio = dataUtil.parseDateException("29/10/2013");
-              dataFim = dataUtil.parseDateException("9/11/2013");
-               
-               map.put("dataInicio", dataInicio);
-               map.put("dataFim", dataFim); 
-                
-                try {
-          
-          relat.imprimeRelatorioSaidaPorPeriodo(map);
-        } catch (JRException ex) {
-            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-                
+               RelatorioPeriodoView janelaRelatorio = new RelatorioPeriodoView(12);
+             janelaRelatorio.setVisible(true);
+             
                 break;
             } 
             default:{
@@ -912,9 +835,27 @@ public class SRMView extends javax.swing.JFrame {
        jbCadMont.setVisible(false);
        jbCadProd.setVisible(false);
        jbCadForn.setVisible(false);
+       jbCadEntrada.setVisible(false);
        jcbRelatorios.setVisible(false);
-       
-               
+       jSeparator2.setVisible(false);
+       jSeparator3.setVisible(false);
+       jSeparator5.setVisible(false);
+       jSeparator6.setVisible(false);
+       jSeparator7.setVisible(false);
+       jSeparator8.setVisible(false);
+       jSeparator9.setVisible(false);
+       jbcadUsuaro.setVisible(false);
+        jbForn.setVisible(false);
+        jbEmp.setVisible(false);
+        jbMont.setVisible(false);
+        jbProd.setVisible(false);
+        jbUsuario.setVisible(false);
+        
+        
+        
+        
+        
+        
        break;} 
        case "Estoquista" : {      
          
@@ -922,8 +863,11 @@ public class SRMView extends javax.swing.JFrame {
        jbCadMec.setVisible(false);
        jcbRelatorios.setVisible(false);       
        jbCadForn.setVisible(false);
-       jbCadEmp.setVisible(false);     
-        
+       jbCadEmp.setVisible(false);  
+       jbForn.setVisible(false);
+        jbEmp.setVisible(false);
+        jbUsuario.setVisible(false);
+        jbMec.setVisible(false);
        break;}
        default :{
        

@@ -39,12 +39,12 @@ List resultado = new ArrayList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jtLogin = new javax.swing.JTextField();
-        jtSenha = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
+        jtSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login do sistema");
@@ -115,7 +115,7 @@ List resultado = new ArrayList();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -139,9 +139,13 @@ List resultado = new ArrayList();
         logado.setPerfil("Administrador");
         } 
         }else{
-        if(true){
-        logado.setPerfil("Administrador");
-            SRMView janelaPrincipal = new SRMView(logado);
+        logado.setPerfil(null);
+        logado.setLogin(jtLogin.getText());
+         logado.setSenha(jtSenha.getText());    
+         logado = usuarioDAO.login(logado);   
+        if(logado.getPerfil()!= null){
+         
+           SRMView janelaPrincipal = new SRMView(logado);
             janelaPrincipal.setVisible(true);
             this.dispose();
             
@@ -203,6 +207,6 @@ List resultado = new ArrayList();
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JTextField jtLogin;
-    private javax.swing.JTextField jtSenha;
+    private javax.swing.JPasswordField jtSenha;
     // End of variables declaration//GEN-END:variables
 }

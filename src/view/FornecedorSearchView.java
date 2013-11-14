@@ -84,7 +84,6 @@ static FornecedorSearchView instancia = null;
         jbSair = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jbAdicionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -157,8 +156,6 @@ static FornecedorSearchView instancia = null;
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Pesquisa de Fornecedor");
 
-        jButton1.setText("jButton1");
-
         jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
         jbAdicionar.setText("Adicionar");
         jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,11 +198,6 @@ static FornecedorSearchView instancia = null;
                                 .addComponent(jbAdicionar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 337, Short.MAX_VALUE)
-                    .addComponent(jButton1)
-                    .addGap(0, 338, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,11 +228,6 @@ static FornecedorSearchView instancia = null;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSair)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 224, Short.MAX_VALUE)
-                    .addComponent(jButton1)
-                    .addGap(0, 224, Short.MAX_VALUE)))
         );
 
         setSize(new java.awt.Dimension(764, 479));
@@ -412,7 +399,6 @@ static FornecedorSearchView instancia = null;
     }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

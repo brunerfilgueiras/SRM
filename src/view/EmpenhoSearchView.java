@@ -30,6 +30,7 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
        initComponents();
     permissao(usuario);
     carregaTabela();
+    jbAdicionar.setVisible(false);
    
     }
      public EmpenhoSearchView(String arg) {

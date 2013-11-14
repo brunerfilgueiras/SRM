@@ -108,7 +108,33 @@ public class UsuarioDAO {
         }
         
       }   
-    
+     public List existe(Usuario usuario){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+       List<Usuario> resultado = new ArrayList<Usuario>();
+        try{ 
+ 
+           if(usuario.getId()==null){
+            Criteria crit = session.createCriteria(Usuario.class);
+            crit.add(Restrictions.ilike("nomeCompleto", usuario.getNomeCompleto()));
+            crit.add(Restrictions.ilike("nomeGuerra", usuario.getNomeGuerra()));
+            
+          return crit.list(); 
+                       }else{
+          resultado.clear();
+               return resultado;     
+           }
+           
+
+        }catch(Exception e){
+                   
+          resultado.clear();
+          return  resultado ;
+        }
+        
+      }   
     
     
     public Usuario login(Usuario usuario){
