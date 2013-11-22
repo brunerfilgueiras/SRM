@@ -49,19 +49,21 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jtDescricao" alignment="0" pref="288" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jcbMontadora" max="32767" attributes="0"/>
-                                  <Component id="jtNumeroPeca" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                                  <Component id="jtLocalizacao" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jcbMontadora" max="32767" attributes="0"/>
+                                      <Component id="jtNumeroPeca" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
+                                      <Component id="jtLocalizacao" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jtQuantidade" min="-2" pref="115" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jtfValor" min="-2" pref="89" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jtQuantidade" min="-2" pref="115" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jtfValor" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -210,7 +212,16 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfValor">
+    <Component class="javax.swing.JFormattedTextField" name="jtfValor">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="#,##0.00" subtype="-1" type="4"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xa;  MaskFormatter moeda = new MaskFormatter(&quot;#######,##&quot;); &#xa;moeda.setPlaceholderCharacter(&apos;_&apos;);&#xa;  jtfValor = new JFormattedTextField(moeda); &#xa;}catch(Exception e){&#xa;&#xa;}"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

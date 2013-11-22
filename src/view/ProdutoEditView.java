@@ -7,7 +7,9 @@ package view;
 import controller.ProdutoController;
 import dao.MontadoraDAO;
 import java.util.List;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 import model.Montadora;
 import model.Produto;
 
@@ -63,7 +65,14 @@ public class ProdutoEditView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jtfValor = new javax.swing.JTextField();
+        jtfValor = new javax.swing.JFormattedTextField();
+        try{
+            MaskFormatter moeda = new MaskFormatter("#######,##");
+            moeda.setPlaceholderCharacter('_');
+            jtfValor = new JFormattedTextField(moeda);
+        }catch(Exception e){
+
+        }
 
         jLabel5.setText("jLabel5");
 
@@ -104,6 +113,9 @@ public class ProdutoEditView extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Cadastro de Produtos");
 
+        jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jtfValor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,17 +134,18 @@ public class ProdutoEditView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jcbMontadora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtNumeroPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfValor))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jcbMontadora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jtNumeroPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jbGravar)
@@ -204,7 +217,7 @@ public class ProdutoEditView extends javax.swing.JFrame {
      produto.setLocalizacao(jtLocalizacao.getText());
      produto.setNumeroPeca(jtNumeroPeca.getText());
      produto.setQuantidade(Integer.parseInt(jtQuantidade.getText()));
-     produto.setValor(Float.parseFloat(jtfValor.getText()));
+     produto.setValor(Float.parseFloat(jtfValor.getText().replace(",", ".")));
     
      
            
@@ -314,7 +327,7 @@ public class ProdutoEditView extends javax.swing.JFrame {
         jtDescricao.setText(produto.getDescricao());
         jtLocalizacao.setText(produto.getLocalizacao());
         jtQuantidade.setText(Integer.toString(produto.getQuantidade()));
-        jtfValor.setText(Float.toString(produto.getValor()));
+        jtfValor.setText(Float.toString(produto.getValor()).replace(".", ","));
         jcbMontadora.setSelectedItem(produto.getIdMontadora().getNome());
         
     }
@@ -367,6 +380,6 @@ public class ProdutoEditView extends javax.swing.JFrame {
     private javax.swing.JTextField jtLocalizacao;
     private javax.swing.JTextField jtNumeroPeca;
     private javax.swing.JTextField jtQuantidade;
-    private javax.swing.JTextField jtfValor;
+    private javax.swing.JFormattedTextField jtfValor;
     // End of variables declaration//GEN-END:variables
 }

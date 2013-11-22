@@ -120,8 +120,8 @@ public class UsuarioDAO {
             Criteria crit = session.createCriteria(Usuario.class);
             crit.add(Restrictions.ilike("nomeCompleto", usuario.getNomeCompleto()));
             crit.add(Restrictions.ilike("nomeGuerra", usuario.getNomeGuerra()));
-            
-          return crit.list(); 
+          resultado  = crit.list();
+          return resultado; 
                        }else{
           resultado.clear();
                return resultado;     
