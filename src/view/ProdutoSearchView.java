@@ -23,7 +23,9 @@ public class ProdutoSearchView extends javax.swing.JFrame {
     
     public ProdutoSearchView(String arg){
         initComponents();
-      
+      jbIncluir.setVisible(false);
+       jbAlterar.setVisible(false);
+       jbExcluir.setVisible(false);
        if(arg.equals("saida")){
        
            jbAdicionarEntrada.setVisible(false);
@@ -35,9 +37,8 @@ public class ProdutoSearchView extends javax.swing.JFrame {
            
        }
         
-       jbIncluir.setVisible(false);
-       jbAlterar.setVisible(false);
-       jbExcluir.setVisible(false);
+       
+       
        carregaTabela();
        
     }
@@ -52,7 +53,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
          jbAdicionarEntrada.setVisible(false);
          jbAdicionarSaida.setVisible(false);
        permissao(usuario);
-       carregaTabela();
+       
     }
     
     
@@ -60,6 +61,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         initComponents();
         jbAdicionarEntrada.setVisible(false);
          jbAdicionarSaida.setVisible(false);
+         this.produto.setId(null);
     }
 
     /**
@@ -87,12 +89,13 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jbAdicionarEntrada = new javax.swing.JButton();
         jbAdicionarSaida = new javax.swing.JButton();
+        jPBbarra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de Produtos");
         setResizable(false);
 
-        jcbParametro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número Ficha", "Descrição" }));
+        jcbParametro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número da Peça", "Descrição" }));
 
         jtParametro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,17 +137,14 @@ public class ProdutoSearchView extends javax.swing.JFrame {
 
         jtMecanicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "ID", "Número da Peça", "Descrição", "Montadora"
+                "Número da Peça", "Descrição", "Montadora"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -165,7 +165,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         jLabel1.setText("Pesquisa de Produtos");
 
         jbAdicionarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
-        jbAdicionarEntrada.setText("Adicionar");
+        jbAdicionarEntrada.setText("OK");
         jbAdicionarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAdicionarEntradaActionPerformed(evt);
@@ -173,7 +173,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
         });
 
         jbAdicionarSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
-        jbAdicionarSaida.setText("Adicionar");
+        jbAdicionarSaida.setText("OK");
         jbAdicionarSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAdicionarSaidaActionPerformed(evt);
@@ -193,10 +193,7 @@ public class ProdutoSearchView extends javax.swing.JFrame {
                     .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jbSair))
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -215,9 +212,12 @@ public class ProdutoSearchView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbAdicionarSaida)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbAdicionarEntrada)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(jbAdicionarEntrada)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbSair)))
+                                .addGap(0, 88, Short.MAX_VALUE)))
                         .addContainerGap())))
+            .addComponent(jPBbarra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,19 +239,20 @@ public class ProdutoSearchView extends javax.swing.JFrame {
                     .addComponent(jbAlterar)
                     .addComponent(jbExcluir)
                     .addComponent(jbAdicionarEntrada)
-                    .addComponent(jbAdicionarSaida))
+                    .addComponent(jbAdicionarSaida)
+                    .addComponent(jbSair))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbSair)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPBbarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
-        setSize(new java.awt.Dimension(678, 491));
+        setSize(new java.awt.Dimension(713, 474));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -260,9 +261,14 @@ public class ProdutoSearchView extends javax.swing.JFrame {
     }//GEN-LAST:event_jtParametroActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+        
+       if(seleciona()!=null){ 
+
         ProdutoEditView janelaProduto = new ProdutoEditView(seleciona());
         janelaProduto.setVisible(true);
-this.dispose();
+}else{
+            JOptionPane.showMessageDialog(rootPane, "Produto Não selecionado!",null , 2);
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
 
@@ -270,7 +276,7 @@ this.dispose();
 
          ProdutoEditView janelaProduto = new ProdutoEditView();
         janelaProduto.setVisible(true);
-        this.dispose();
+       
 
         // TODO add your handling code here:
 
@@ -285,35 +291,41 @@ this.dispose();
         // TODO add your handling code here:
         
         ProdutoController produtoController =  ProdutoController.getInstacia();
-       
-       if(seleciona() != null){
-        
+      if(seleciona()!=null){ 
+      if(JOptionPane.showConfirmDialog(null, "Deseja excluir este registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
         if(produtoController.deletar(seleciona())){
+            
+          
             JOptionPane.showMessageDialog(rootPane, "Produto Excluido com sucesso!");
                         
             carregaTabela();
         }else{
             JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir  Produto!", null, 2);
         }
+        }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Produto Não selecionado!",null , 2);
         }
         
-        
-        
+
         
     }//GEN-LAST:event_jbExcluirActionPerformed
 
     private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
         // TODO add your handling code here:
-        
-        if(jcbParametro.getSelectedItem().equals("Numero Ficha")){
+        if(jtParametro.getText().isEmpty()){  
+                    carregaTabela();
+        }else{            
+        if(jcbParametro.getSelectedItem().equals("Numero da Peça")){
+                
+                
                    produto = Produto.getInstacia();
                    produto.setDescricao(null);
                     produto.setNumeroPeca(jtParametro.getText());
                     carregaConsulta(produto);  
                    
                 }else{
+            
                      produto = Produto.getInstacia();
                      produto.setNumeroPeca(null);
                     produto.setDescricao(jtParametro.getText());
@@ -321,7 +333,7 @@ this.dispose();
                      
                   }
         
-        
+        }
         
         
         
@@ -329,22 +341,28 @@ this.dispose();
 
     private void jbAdicionarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarEntradaActionPerformed
         // TODO add your handling code here:
+       if(seleciona()!=null){ 
         EntradaEditView janelaEntrada = EntradaEditView.getInstacia();
          janelaEntrada.adicionarProduto(seleciona());
          janelaEntrada.setVisible(true);
            this.dispose();
-        
+      }else{
+            JOptionPane.showMessageDialog(rootPane, "Produto Não selecionado!",null , 2);
+        }  
           
     }//GEN-LAST:event_jbAdicionarEntradaActionPerformed
 
     private void jbAdicionarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarSaidaActionPerformed
         // TODO add your handling code here:
-        SaidaEditView janelaSaida = SaidaEditView.getInstacia();
+if(seleciona()!=null){         
+SaidaEditView janelaSaida = SaidaEditView.getInstacia();
          janelaSaida.adicionarProduto(seleciona());
          janelaSaida.setVisible(true);
            this.dispose();
         
-        
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Produto Não selecionado!",null , 2);
+        }
         
         
     }//GEN-LAST:event_jbAdicionarSaidaActionPerformed
@@ -398,11 +416,19 @@ this.dispose();
        DefaultTableModel modelo = (DefaultTableModel) jtMecanicos.getModel();
        modelo.setNumRows(0);
        
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(produtos.size());
+       jPBbarra.setValue(0);
+       if(produtos.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum produto encontrado!!", null, 2);
+       
        for(int i = 0; i<produtos.size();i++){
                         
-         modelo.addRow(new String[]{produtos.get(i).getId().toString(), produtos.get(i).getNumeroPeca(), produtos.get(i).getDescricao(),
+         modelo.addRow(new String[]{produtos.get(i).getNumeroPeca(), produtos.get(i).getDescricao(),
              produtos.get(i).getIdMontadora().getNome()});
     
+        jPBbarra.setValue(i+1); 
+         
        }
       
     }
@@ -417,14 +443,20 @@ this.dispose();
     
        DefaultTableModel modelo = (DefaultTableModel) jtMecanicos.getModel();
        modelo.setNumRows(0);
+        jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(produtos.size());
+       jPBbarra.setValue(0);
+       
+        if(produtos.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum produto encontrado!!", null, 2);
        
        for(int i = 0; i<produtos.size();i++){
          
          produto = produtos.get(i);
         
-         modelo.addRow(new String[]{produtos.get(i).getId().toString(), produtos.get(i).getNumeroPeca(), produtos.get(i).getDescricao(),
+         modelo.addRow(new String[]{produtos.get(i).getNumeroPeca(), produtos.get(i).getDescricao(),
              produtos.get(i).getIdMontadora().getNome()});
-         
+          jPBbarra.setValue(i+1); 
        }
       
     }
@@ -452,6 +484,7 @@ this.dispose();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JProgressBar jPBbarra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

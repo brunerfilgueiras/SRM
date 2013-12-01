@@ -13,6 +13,7 @@ import model.Produto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import util.PersistenceUtil;
 
@@ -188,7 +189,8 @@ public class ProdutoDAO {
        List<Produto> resultado = new ArrayList<Produto>();
         try{ 
         
-            Criteria crit = session.createCriteria(Produto.class);
+            Criteria crit = session.createCriteria(Produto.class).addOrder(Order.asc("descricao"));
+            
             resultado = crit.list();
        
           return resultado; 
@@ -214,4 +216,31 @@ public class ProdutoDAO {
         
                     
     } 
+       
+   public boolean existe(Produto produto){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+       List<Produto> resultado = new ArrayList<Produto>();
+       
+       try{ 
+ 
+          
+            Criteria crit = session.createCriteria(Produto.class);
+            crit.add(Restrictions.ilike("descricao", produto.getDescricao()));
+            crit.add(Restrictions.ilike("numeroPeca", produto.getNumeroPeca()));
+            return crit.list().isEmpty();
+        
+         
+         }catch(Exception e){
+        
+          return  true ;
+        }
+     
+   
+   }
+       
+       
+       
 }

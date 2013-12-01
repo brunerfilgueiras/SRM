@@ -73,13 +73,6 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
 
         }
         jtDataEntrada = new javax.swing.JFormattedTextField();
-        try{ 
-            MaskFormatter data = new MaskFormatter("##/##/####"); 
-            data.setPlaceholderCharacter('_');
-            jtDataEntrada = new JFormattedTextField(data); 
-        }catch(Exception e){
-
-        }
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -127,11 +120,9 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Cadastro de Ordem de Serviço");
 
-        jtDataEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtDataEntradaActionPerformed(evt);
-            }
-        });
+        jtDataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
+        jtDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,11 +136,6 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel8))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
                         .addComponent(jbGravar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -158,35 +144,42 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jtViatura, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(57, 57, 57)
-                                    .addComponent(jLabel2)
-                                    .addGap(4, 4, 4)
-                                    .addComponent(jtOM, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(31, 31, 31))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(59, 59, 59)
-                                    .addComponent(jLabel1)
-                                    .addGap(4, 4, 4)
-                                    .addComponent(jtOS, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel3))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtEB, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 26, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel2)
+                                .addGap(4, 4, 4)
+                                .addComponent(jtOM, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(jLabel1)
+                                .addGap(4, 4, 4)
+                                .addComponent(jtOS, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtEB, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(jtDataEntrada)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtViatura, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,10 +230,10 @@ public class OrdemDeServicoEditView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSair)
                     .addComponent(jbGravar))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(486, 374));
+        setSize(new java.awt.Dimension(486, 370));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -257,7 +250,7 @@ this.dispose();        // TODO add your handling code here:
        
      
      if(campoObrigatorio()==null){
-      
+      if(validaCaracteres()== null||ordemDeServico.getId()!=null){
       ordemDeServico.setDataEntrada(dataUtil.parse("dd/MM/yyyy",jtDataEntrada.getText()));
       
       if(ordemDeServico.getId() != null)
@@ -285,7 +278,9 @@ this.dispose();        // TODO add your handling code here:
           
           JOptionPane.showMessageDialog(null, "Falha ao Salvar Mecanico!!", null, 2);
       }
-        
+      }else{
+         JOptionPane.showMessageDialog(null, validaCaracteres(), null, 2); 
+      }   
      }else{  
          
         JOptionPane.showMessageDialog(null, campoObrigatorio(), null, 2); 
@@ -298,10 +293,6 @@ this.dispose();        // TODO add your handling code here:
         
         
     }//GEN-LAST:event_jbGravarActionPerformed
-
-    private void jtDataEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDataEntradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtDataEntradaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -376,20 +367,20 @@ this.dispose();        // TODO add your handling code here:
          
             if(jtEB.getText().equals("")){
                 
-                vazio = vazio + "/b EB / Placa";
+                vazio = vazio + "\n EB / Placa";
                 msg = true;
             }
               
                 if(jtViatura.getText().equals("")){
                 
-                vazio = vazio + "/b Viatura";
+                vazio = vazio + "\n Viatura";
                 msg = true;
                 }
                   
                     
                 if(jtDataEntrada.getText().equals("")){
                 
-                vazio = vazio + "/b Data de Entrada";  
+                vazio = vazio + "\n Data de Entrada";  
                   msg = true;  
                 }
          
@@ -404,7 +395,40 @@ this.dispose();        // TODO add your handling code here:
          }
        }
     
-    
+    private String validaCaracteres(){
+       
+        boolean msg = false;
+        
+        String vazio = "Dados invalidos nos campos: ";
+        if(jtOM.getText().length()<4){
+          
+            vazio = vazio + "Nome";
+            msg = true;
+        }
+         
+            if(jtEB.getText().length()<4){
+                
+                vazio = vazio + "\n EB / Placa";
+                msg = true;
+            }
+              
+                if(jtViatura.getText().length()<4){
+                
+                vazio = vazio + "\n Viatura";
+                msg = true;
+                }
+                
+                
+         if(msg){   
+        
+        return vazio ;
+        
+         }else{
+             
+           return vazio = null;  
+             
+         }
+       }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

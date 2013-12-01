@@ -7,6 +7,8 @@ package view;
 import controller.ItensSaidaController;
 import controller.ProdutoController;
 import controller.SaidaController;
+import java.awt.event.KeyEvent;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,7 +26,7 @@ import util.DateTimeUtil;
  */
 public class SaidaEditView extends javax.swing.JFrame {
 
-    
+    private List<ItensSaida> lista = new ArrayList();
     private ItensSaida itensSaida = ItensSaida.getInstacia();
     private Saida saida = Saida.getInstacia();
     private Produto produtoAdd = Produto.getInstacia();
@@ -172,26 +174,29 @@ public class SaidaEditView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Peça", "Número Peça", "Descrição", "Quantidade"
+                "Número Peça", "Descrição", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jtItensSaida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtItensSaidaKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtItensSaida);
         jtItensSaida.getColumnModel().getColumn(0).setResizable(false);
-        jtItensSaida.getColumnModel().getColumn(0).setPreferredWidth(5);
+        jtItensSaida.getColumnModel().getColumn(0).setPreferredWidth(10);
         jtItensSaida.getColumnModel().getColumn(1).setResizable(false);
-        jtItensSaida.getColumnModel().getColumn(1).setPreferredWidth(10);
+        jtItensSaida.getColumnModel().getColumn(1).setPreferredWidth(50);
         jtItensSaida.getColumnModel().getColumn(2).setResizable(false);
-        jtItensSaida.getColumnModel().getColumn(2).setPreferredWidth(50);
-        jtItensSaida.getColumnModel().getColumn(3).setResizable(false);
-        jtItensSaida.getColumnModel().getColumn(3).setPreferredWidth(5);
+        jtItensSaida.getColumnModel().getColumn(2).setPreferredWidth(5);
 
         jbGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Success.png"))); // NOI18N
         jbGravar.setText("Gravar");
@@ -265,7 +270,7 @@ public class SaidaEditView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -304,7 +309,7 @@ public class SaidaEditView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(488, 534));
+        setSize(new java.awt.Dimension(488, 554));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -350,10 +355,10 @@ public class SaidaEditView extends javax.swing.JFrame {
         SaidaController saidaController = SaidaController.getInstacia();
         ProdutoController produtoController = ProdutoController.getInstacia();
 
-        DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
+        
         ItensSaidaController itensSaidaController = ItensSaidaController.getInstacia();
         
-        
+      if(validaDados()==null||saida.getId()!=null){  
         saida.setIdOrdemDeServico(ordemDeServicoAdd);
         saida.setData(dataUtil.parseDate(jtfData.getText()));
         saida.setIdMecanico(mecanicoAdd);
@@ -373,12 +378,10 @@ public class SaidaEditView extends javax.swing.JFrame {
      
        for(int i =0 ; i <=modelo.getRowCount()-1; i++){
        
-           String id = (String) modelo.getValueAt(i, 0);
-           
-        produtoAdd.setId(Long.parseLong(id));
-           
-           
-         itensSaida.setIdProduto(produtoAdd);
+        
+                 
+          itensSaida = lista.get(i);
+         
          itensSaida.setIdSaida(saida);
            
          itensSaidaController.persistir(itensSaida);
@@ -399,12 +402,38 @@ public class SaidaEditView extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "Falha ao Salvar Saída!!", null, 2);
       }
         
-        
+      }else{
+          
+        JOptionPane.showMessageDialog(null, validaDados(), null, 2);  
+      }  
         
         
         
         
     }//GEN-LAST:event_jbGravarActionPerformed
+
+    private void jtItensSaidaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtItensSaidaKeyPressed
+        // TODO add your handling code here:
+        
+       if(evt.getKeyCode()==0){
+         
+           
+           seleciona();
+             
+             
+               
+           
+           
+       }
+        
+        
+       
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jtItensSaidaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -441,7 +470,26 @@ public class SaidaEditView extends javax.swing.JFrame {
         });
     }
     
+    //seleciona na tabela
+    private void seleciona(){
+    
+       int linha = jtItensSaida.getSelectedRow();
+   if(JOptionPane.showConfirmDialog(null, "Deseja excluir este item ?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){  
+     
+     lista.remove(linha);
+    DefaultTableModel modelo = (DefaultTableModel) jtItensSaida.getModel(); 
+   modelo.removeRow(linha);
+   
+   }
+   
+   
+    }
+    
      //adiciona empenho a entrada
+    /**
+     *
+     * @param ordemDeServico
+     */
     public void adicionarOrdemDeServico(OrdemDeServico ordemDeServico){
         
        ordemDeServicoAdd = ordemDeServico; 
@@ -458,13 +506,23 @@ public class SaidaEditView extends javax.swing.JFrame {
           }
     
     public void adicionarProduto(Produto produto){
+      boolean valido;
+      String dado ;
+      do{
+     dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
+     if(dado.matches("\\d")){
+         valido = false;
+     }else{
+         valido = true;
+       JOptionPane.showMessageDialog(null, "Quatidade inválida!!", null, 2);  
+     }
      
-     String dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
-      itensSaida.setQuantidade(Integer.parseInt(dado));
+     }while(valido);
+     itensSaida.setQuantidade(Integer.parseInt(dado));
       itensSaida.setIdProduto(produto);
       DefaultTableModel modelo = (DefaultTableModel) jtItensSaida.getModel();
-      modelo.addRow(new String[]{produto.getId().toString(), produto.getNumeroPeca(), produto.getDescricao(), Integer.toString(itensSaida.getQuantidade())});
-    
+      modelo.addRow(new String[]{produto.getNumeroPeca(), produto.getDescricao(), Integer.toString(itensSaida.getQuantidade())});
+    lista.add(itensSaida);
     }
    
        
@@ -485,13 +543,47 @@ public class SaidaEditView extends javax.swing.JFrame {
       
        for(int i = 0; i<itensSaidaLista.size();i++){
      itensSaida = itensSaidaLista.get(i);
-  modelo.addRow(new String[]{itensSaida.getIdProduto().getId().toString(), itensSaida.getIdProduto().getNumeroPeca(), itensSaida.getIdProduto().getDescricao(), Integer.toString(itensSaida.getIdProduto().getQuantidade())});
+  modelo.addRow(new String[]{itensSaida.getIdProduto().getNumeroPeca(), itensSaida.getIdProduto().getDescricao(), Integer.toString(itensSaida.getIdProduto().getQuantidade())});
             
        }
       
     }
     
+    private String validaDados(){
+        
+      
+        String vazio = "Dados Inválidos : ";
+       boolean msg = false;
+       
+        if(jtItensSaida.getRowCount()==0){
+          
+            vazio = vazio + "\n  Item ";
+            
+           return vazio;
+         
+        
+      } 
+       
+       if(jtOrdemDeServico.getText().isEmpty()){
+           vazio = vazio + "\n Ordem de Servico";
+            
+           return vazio;
+           
+       }
+       
+       if(jtMecanico.getText().isEmpty()){
+          
+           vazio = vazio + "\n Mecanico";
+            
+           return vazio;
+           
+       }
+      if(vazio.equals("Dados Inválidos : ")){ 
+        vazio = null;
+      }
     
+    return vazio;
+    }
     
     
     

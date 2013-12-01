@@ -11,6 +11,7 @@ import model.Empenho;
 import model.Entrada;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import util.PersistenceUtil;
 
@@ -133,7 +134,7 @@ public class EmpenhoDAO {
        List<Empenho> resultado = new ArrayList<Empenho>();
         try{ 
         
-            Criteria crit = session.createCriteria(Empenho.class);
+            Criteria crit = session.createCriteria(Empenho.class).addOrder(Order.asc("numero"));
             resultado = crit.list();
        
           return resultado; 
@@ -160,7 +161,28 @@ public class EmpenhoDAO {
                     
     } 
 
-    
+    public boolean existe(Empenho empenho){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+       List<Empenho> resultado = new ArrayList<Empenho>();
+       
+       try{ 
+ 
+            Criteria crit = session.createCriteria(Empenho.class);
+            crit.add(Restrictions.ilike("numero", empenho.getNumero()));
+            crit.add(Restrictions.ilike("valor", empenho.getValor()));
+         return crit.list().isEmpty();
+        
+         
+         }catch(Exception e){
+        
+          return  true ;
+        }
+     
+   
+   }
     
     
     

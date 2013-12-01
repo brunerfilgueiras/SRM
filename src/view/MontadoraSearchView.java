@@ -29,7 +29,7 @@ public class MontadoraSearchView extends javax.swing.JFrame {
     public MontadoraSearchView(Usuario logado){
         initComponents();
         permissao(logado);
-        carregaTabela();
+        
         
      //MontadoraDAO montadoraDAO = MontadoraDAO.getInstacia();
    //  List lista = montadoraDAO.listaTodas();
@@ -62,6 +62,7 @@ public class MontadoraSearchView extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jPBbarra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de Montadoras");
@@ -110,17 +111,9 @@ public class MontadoraSearchView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome"
+                "Nome"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(jtMecanicos);
 
         jLabel1.setText("Nome:");
@@ -150,15 +143,13 @@ public class MontadoraSearchView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btConsultar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,10 +157,12 @@ public class MontadoraSearchView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbAlterar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbExcluir))
-                                    .addComponent(jLabel2))
+                                        .addComponent(jbExcluir)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
+            .addComponent(jPBbarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,20 +182,21 @@ public class MontadoraSearchView extends javax.swing.JFrame {
                     .addComponent(btConsultar)
                     .addComponent(jbIncluir)
                     .addComponent(jbAlterar)
-                    .addComponent(jbExcluir))
+                    .addComponent(jbExcluir)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPBbarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-538)/2, (screenSize.height-406)/2, 538, 406);
+        setSize(new java.awt.Dimension(538, 406));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtParametroActionPerformed
@@ -213,7 +207,7 @@ public class MontadoraSearchView extends javax.swing.JFrame {
 
         MontadoraEditView janelaMontadora = new MontadoraEditView();
         janelaMontadora.setVisible(true);// TODO add your handling code here:
-        this.dispose();
+        
         
     }//GEN-LAST:event_jbIncluirActionPerformed
 
@@ -221,7 +215,7 @@ public class MontadoraSearchView extends javax.swing.JFrame {
         if(seleciona() != null){       
         MontadoraEditView janelaMontadora = new MontadoraEditView(seleciona());
         janelaMontadora.setVisible(true);
-        this.dispose();
+       
         
         
         }else{
@@ -236,13 +230,15 @@ public class MontadoraSearchView extends javax.swing.JFrame {
         
         
         if(seleciona() != null){
-        
+        if(JOptionPane.showConfirmDialog(null, "Deseja excluir este registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
+ 
         if(montadoraController.deletar(seleciona())){
             JOptionPane.showMessageDialog(rootPane, "Montadora Excluida com sucesso!");
                         
             carregaTabela();
         }else{
             JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir a Montadora!");
+        }
         }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Montadora Não selecionada!");
@@ -317,17 +313,21 @@ carregaConsulta(montadora);
     private void carregaConsulta(Montadora montadora){
         MontadoraDAO montadoraDAO = MontadoraDAO.getInstacia();
         montadoras = montadoraDAO.consulta(montadora);
-    Montadora resultado;
+    
         
        DefaultTableModel modelo = (DefaultTableModel) jtMecanicos.getModel();
        modelo.setNumRows(0);
-       
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(montadoras.size());
+       jPBbarra.setValue(0);
+     if(montadoras.isEmpty())
+       JOptionPane.showMessageDialog(rootPane, "Nenhuma Montadora encontrada!", null, 2);
        for(int i = 0; i<montadoras.size();i++){
          
-         resultado = montadoras.get(i);
+         montadora = montadoras.get(i);
         
-         modelo.addRow(new String[]{resultado.getId().toString(), resultado.getNome()});
-    
+         modelo.addRow(new String[]{ montadora.getNome()});
+    jPBbarra.setValue(i+1);
        }
       
     }
@@ -338,13 +338,19 @@ carregaConsulta(montadora);
     
        DefaultTableModel modelo = (DefaultTableModel) jtMecanicos.getModel();
        modelo.setNumRows(0);
-       
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(montadoras.size());
+       jPBbarra.setValue(0);
+    
+       if(montadoras.isEmpty())
+       JOptionPane.showMessageDialog(rootPane, "Nenhuma Montadora encontrada!", null, 2);
+      
        for(int i = 0; i<montadoras.size();i++){
          
          montadora = montadoras.get(i);
         
-         modelo.addRow(new String[]{montadora.getId().toString(), montadora.getNome()});
-    
+         modelo.addRow(new String[]{montadora.getNome()});
+    jPBbarra.setValue(i+1);
        }
       
     }
@@ -362,29 +368,13 @@ carregaConsulta(montadora);
     }     
     
     
-    /*
-    private List alimentarTabela(){
-   
-       MontadoraDAO montadoraDAO = MontadoraDAO.getInstacia();
-        List montadoras = montadoraDAO.listaTodas();
        
-        for(){
-        
-            jtMecanicos
-        }
-        
-    }*/
-    
-    
-    
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConsultar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JProgressBar jPBbarra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

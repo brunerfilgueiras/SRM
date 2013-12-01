@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProdutoPorSaida" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27105f2a-b942-4230-a1da-9a92dd47fba8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataInicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataFim" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     itens_saida.`quantidade` AS itens_saida_quantidade,
+     itens_saida.`id` AS itens_saida_id,
+     itens_saida.`id_saida` AS itens_saida_id_saida,
+     produto.`numeroPeca` AS produto_numeroPeca,
+     produto.`descricao` AS produto_descricao,
+     produto.`id` AS produto_id,
+     saida.`data` AS saida_data,
+     saida.`id` AS saida_id,
+     itens_saida.`id_produto` AS itens_saida_id_produto
+FROM
+     `produto` produto INNER JOIN `itens_saida` itens_saida ON produto.`id` = itens_saida.`id_produto`
+     INNER JOIN `saida` saida ON itens_saida.`id_saida` = saida.`id`
+WHERE
+     saida.data >= $P{dataInicio}
+     and saida.data <= $P{dataFim}]]>
+	</queryString>
+	<field name="itens_saida_quantidade" class="java.lang.Integer"/>
+	<field name="itens_saida_id" class="java.lang.Long"/>
+	<field name="itens_saida_id_saida" class="java.lang.Long"/>
+	<field name="produto_numeroPeca" class="java.lang.String"/>
+	<field name="produto_descricao" class="java.lang.String"/>
+	<field name="produto_id" class="java.lang.Long"/>
+	<field name="saida_data" class="java.sql.Date"/>
+	<field name="saida_id" class="java.lang.Long"/>
+	<field name="itens_saida_id_produto" class="java.lang.Long"/>
+	<variable name="itens_saida_quantidade_1" class="java.lang.Integer" resetType="Group" resetGroup="produto_id" calculation="Sum">
+		<variableExpression><![CDATA[$F{itens_saida_quantidade}]]></variableExpression>
+	</variable>
+	<group name="produto_id">
+		<groupExpression><![CDATA[$F{produto_id}]]></groupExpression>
+		<groupHeader>
+			<band height="72">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="1" width="84" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="4a996053-48e4-4740-b9f3-6bcd0030469d"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Numero Peça:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="9430eefd-6888-4c72-903e-3b4611c9101a"/>
+				</line>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="84" y="12" width="171" height="20" uuid="2c5f104d-cbd5-429d-996a-cfc44ae7e87c"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{produto_numeroPeca}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="84" y="33" width="282" height="20" uuid="1df03e31-5d78-42d0-a5d9-5343d9f71055"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{produto_descricao}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="32" width="84" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="99451ede-5842-434c-a85d-558e00396a00"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Descrição:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="52" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="dd00410e-54b5-4e63-bf8d-4bff5c7b6448"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Quantidade:]]></text>
+				</staticText>
+				<textField evaluationTime="Group" evaluationGroup="produto_id">
+					<reportElement x="100" y="52" width="100" height="20" uuid="84db8451-c4a5-4e39-9968-3f8bb076aa17"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{itens_saida_quantidade_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="449567b2-546e-4b45-a258-869fa13bf0fa"/>
+				<staticText>
+					<reportElement x="20" y="20" width="313" height="43" forecolor="#FFFFFF" uuid="e3499a1f-3d8a-4258-a57d-87d9f35d4752"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Produto Por Saída]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="275" y="72" width="306" height="20" forecolor="#FFFFFF" uuid="7b3f7fc4-6439-4621-a2de-ec85f8a2db6c"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Listagem de Produto Por Saída - 17º BLog]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="192218ed-951d-4f2a-9554-4bdaa0453892"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="3">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1" uuid="96da52cc-980b-47fa-b895-baf1906a78b9"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="f15fd078-04cb-427b-a991-be6d4f082442"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="016777e2-b932-4bce-bfb6-4bf2739c6a65"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="cf216f94-a013-45eb-87cd-bd092a9caf41"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

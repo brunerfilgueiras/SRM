@@ -162,6 +162,26 @@ public RelatorioPeriodoView(int relatorio) {
                  
                 break;
             } 
+         case 10:{
+                
+                           
+               map.put("dataInicio", dataInicio);
+               map.put("dataFim", dataFim); 
+                
+                try {
+          
+          relat.imprimeRelatorioProdutoPorSaida(map);
+          this.dispose();
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
+            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+                
+                break;
+            }         
          case 12:{
                 
                            

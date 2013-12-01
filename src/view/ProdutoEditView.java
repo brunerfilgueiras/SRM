@@ -7,9 +7,7 @@ package view;
 import controller.ProdutoController;
 import dao.MontadoraDAO;
 import java.util.List;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
 import model.Montadora;
 import model.Produto;
 
@@ -19,7 +17,7 @@ import model.Produto;
  */
 public class ProdutoEditView extends javax.swing.JFrame {
 
-   private Produto produto = Produto.getInstacia();
+   private Produto produto = new Produto();
    private List  montadoras;
     
     /**
@@ -57,7 +55,6 @@ public class ProdutoEditView extends javax.swing.JFrame {
         jtNumeroPeca = new javax.swing.JTextField();
         jtDescricao = new javax.swing.JTextField();
         jtLocalizacao = new javax.swing.JTextField();
-        jtQuantidade = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jcbMontadora = new javax.swing.JComboBox();
         jbGravar = new javax.swing.JButton();
@@ -66,13 +63,7 @@ public class ProdutoEditView extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jtfValor = new javax.swing.JFormattedTextField();
-        try{
-            MaskFormatter moeda = new MaskFormatter("#######,##");
-            moeda.setPlaceholderCharacter('_');
-            jtfValor = new JFormattedTextField(moeda);
-        }catch(Exception e){
-
-        }
+        jtQuantidade = new javax.swing.JFormattedTextField();
 
         jLabel5.setText("jLabel5");
 
@@ -113,8 +104,10 @@ public class ProdutoEditView extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Cadastro de Produtos");
 
-        jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jtfValor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        jtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,9 +173,9 @@ public class ProdutoEditView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -210,8 +203,8 @@ public class ProdutoEditView extends javax.swing.JFrame {
     
            
     if(campoObrigatorio()==null){
-      
-     
+    if(validaCaracteres()==null){  
+    
      produto.setIdMontadora(selecionada());
      produto.setDescricao(jtDescricao.getText());
      produto.setLocalizacao(jtLocalizacao.getText());
@@ -219,10 +212,9 @@ public class ProdutoEditView extends javax.swing.JFrame {
      produto.setQuantidade(Integer.parseInt(jtQuantidade.getText()));
      produto.setValor(Float.parseFloat(jtfValor.getText().replace(",", ".")));
     
-     
-           
+        
       ProdutoController produtoController = ProdutoController.getInstacia();
-      
+      if(!produtoController.existir(produto)||(produto.getId()!=null)){
       if(produtoController.persistir(produto)){
           
           JOptionPane.showMessageDialog(null, "Produto Gravado Com sucesso!", null, 1);
@@ -232,8 +224,13 @@ public class ProdutoEditView extends javax.swing.JFrame {
           
           JOptionPane.showMessageDialog(null, "Falha ao Salvar Produto!!", null, 2);
       }
-        
-     }else{  
+      }else{
+          JOptionPane.showMessageDialog(null, "Produto já Cadastrado!!", null, 2);
+      }
+    }else{
+        JOptionPane.showMessageDialog(null, validaCaracteres(), null, 2); 
+      } 
+    }else{  
          
         JOptionPane.showMessageDialog(null, campoObrigatorio(), null, 2); 
      }    
@@ -290,7 +287,7 @@ public class ProdutoEditView extends javax.swing.JFrame {
             
           msg = true;
         }
-        if(jtQuantidade.getText().equals("")){
+        if(jtQuantidade.getText().equals("")||jtQuantidade.getText().matches("\\d")){
           
             vazio = vazio + "\n Quantidade ";
             
@@ -318,6 +315,44 @@ public class ProdutoEditView extends javax.swing.JFrame {
         return vazio = null;
     }
        }
+    
+   //valida minimo caracteres
+   private String validaCaracteres(){
+       
+        String vazio = "Campos com caracteres inválidos: ";
+       boolean msg = false;
+       
+        if(jtNumeroPeca.getText().length()<4){
+          
+            vazio = vazio + "\n Numero da Peça ";
+            
+        msg = true; 
+        }
+        if(jtDescricao.getText().length()<4){
+          
+            vazio = vazio + "\n Descrição ";
+            
+          msg = true;
+        }
+        if(jtLocalizacao.getText().length()<2){
+          
+            vazio = vazio + "\n Localização ";
+            
+          msg = true;
+        }
+                     
+        if(msg){
+        
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       } 
+    
+    
+    
+    
     //carrega dados para alterar 
     private void carregaDados(Produto produto){
        
@@ -379,7 +414,7 @@ public class ProdutoEditView extends javax.swing.JFrame {
     private javax.swing.JTextField jtDescricao;
     private javax.swing.JTextField jtLocalizacao;
     private javax.swing.JTextField jtNumeroPeca;
-    private javax.swing.JTextField jtQuantidade;
+    private javax.swing.JFormattedTextField jtQuantidade;
     private javax.swing.JFormattedTextField jtfValor;
     // End of variables declaration//GEN-END:variables
 }

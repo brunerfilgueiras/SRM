@@ -14,8 +14,12 @@ import model.Montadora;
 public class MontadoraController {
     
     static MontadoraController instancia = null;      
-     
-     public static MontadoraController getInstacia(){
+    private MontadoraDAO montadoraDAO = MontadoraDAO.getInstacia(); 
+    
+    
+    
+    
+    public static MontadoraController getInstacia(){
        if(  instancia == null){
          return instancia = new MontadoraController();
          } else{ 
@@ -27,7 +31,7 @@ public class MontadoraController {
     
    public boolean persistir(Montadora montadora){
        
-      MontadoraDAO montadoraDAO = MontadoraDAO.getInstacia();
+     
     
       return montadoraDAO.persistir(montadora);
       
@@ -35,7 +39,7 @@ public class MontadoraController {
    }
    public boolean deletar(Montadora montadora){
        
-      MontadoraDAO montadoraDAO = MontadoraDAO.getInstacia();
+     
     
       return montadoraDAO.deletar(montadora);
       
@@ -43,7 +47,11 @@ public class MontadoraController {
    } 
   
   
-   
+  public boolean existe(Montadora montadora){
+      
+        return montadoraDAO.existe(montadora);
+     
+    }  
    
    
    

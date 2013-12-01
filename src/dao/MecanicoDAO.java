@@ -120,5 +120,43 @@ public class MecanicoDAO {
             return  resultado ;
         }
         
-      }   
+      }  
+    
+    public boolean existe(Mecanico mecanico){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+       List<Mecanico> resultado = new ArrayList<Mecanico>();
+       
+       try{ 
+ 
+          
+            Criteria crit = session.createCriteria(Mecanico.class);
+            crit.add(Restrictions.ilike("nomeCompleto", mecanico.getNomeCompleto()));
+            crit.add(Restrictions.ilike("nomeGuerra", mecanico.getNomeGuerra()));
+            
+         return crit.list().isEmpty();
+        
+         
+         }catch(Exception e){
+        
+          return  true ;
+        }
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

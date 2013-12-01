@@ -23,6 +23,7 @@ import util.DateTimeUtil;
  * @author secinfor-04
  */
 public class EntradaEditView extends javax.swing.JFrame {
+    private List<ItensEntrada> lista = new ArrayList();
     private ItensEntrada itensEntrada = ItensEntrada.getInstacia();
     private Entrada entrada = Entrada.getInstacia();
     private Produto produtoAdd = Produto.getInstacia();
@@ -167,11 +168,11 @@ public class EntradaEditView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id peça", "Número Peça", "Descrição", "Quantidade", "Valor"
+                "Número Peça", "Descrição", "Quantidade", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -179,18 +180,21 @@ public class EntradaEditView extends javax.swing.JFrame {
             }
         });
         jtItensEntrada.setColumnSelectionAllowed(true);
+        jtItensEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtItensEntradaKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtItensEntrada);
         jtItensEntrada.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtItensEntrada.getColumnModel().getColumn(0).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(0).setPreferredWidth(5);
+        jtItensEntrada.getColumnModel().getColumn(0).setPreferredWidth(10);
         jtItensEntrada.getColumnModel().getColumn(1).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(1).setPreferredWidth(10);
+        jtItensEntrada.getColumnModel().getColumn(1).setPreferredWidth(50);
         jtItensEntrada.getColumnModel().getColumn(2).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jtItensEntrada.getColumnModel().getColumn(2).setPreferredWidth(5);
         jtItensEntrada.getColumnModel().getColumn(3).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(3).setPreferredWidth(5);
-        jtItensEntrada.getColumnModel().getColumn(4).setResizable(false);
-        jtItensEntrada.getColumnModel().getColumn(4).setPreferredWidth(10);
+        jtItensEntrada.getColumnModel().getColumn(3).setPreferredWidth(10);
 
         jLabel9.setText("ValorTotal:");
 
@@ -369,7 +373,7 @@ public class EntradaEditView extends javax.swing.JFrame {
       
         ItensEntradaController itensEntradaController = ItensEntradaController.getInstacia();
         
-        
+      if(validaDados()==null){  
         entrada.setIdEmpenho(empenhoAdd);
         entrada.setData(dataUtil.parseDate(jtfData.getText()));
         entrada.setValorTotal(Float.parseFloat(jtfValorTotal.getText()));
@@ -389,12 +393,11 @@ public class EntradaEditView extends javax.swing.JFrame {
      
        for(int i =0 ; i <=modelo.getRowCount()-1; i++){
        
-           String id = (String) modelo.getValueAt(i, 0);
+       
            
-        produtoAdd.setId(Long.parseLong(id));
-           
-           
-         itensEntrada.setIdProduto(produtoAdd);
+       itensEntrada = lista.get(i);
+         
+       
          itensEntrada.setIdEntrada(entrada);
            
          itensEntradaController.persistir(itensEntrada);
@@ -415,13 +418,34 @@ public class EntradaEditView extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "Falha ao Salvar Entrada!!", null, 2);
       }
         
-        
+      }else{
+          JOptionPane.showMessageDialog(null,validaDados(), null, 2);
+          
+      }  
         
         
         
         
         
     }//GEN-LAST:event_jbGravarActionPerformed
+
+    private void jtItensEntradaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtItensEntradaKeyPressed
+        // TODO add your handling code her
+        
+        if(evt.getKeyCode()==0){
+         
+           
+           seleciona();
+             
+             
+               
+           
+           
+       }
+        
+        
+        
+    }//GEN-LAST:event_jtItensEntradaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -457,6 +481,31 @@ public class EntradaEditView extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    //seleciona na tabela
+    private void seleciona(){
+    
+       int linha = jtItensEntrada.getSelectedRow();
+   if(JOptionPane.showConfirmDialog(null, "Deseja excluir este item ?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){  
+     
+     lista.remove(linha);
+    DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel(); 
+   modelo.removeRow(linha);
+   String valor = (String) modelo.getValueAt(linha, 3);
+   String quantidade = (String) modelo.getValueAt(linha, 2);
+   
+  VTotal = VTotal - (Float.parseFloat(valor) * Float.parseFloat(quantidade));
+   
+  jtfValorTotal.setText(VTotal.toString()) ;
+   
+     
+   }
+   
+   
+    }
+    
+    
     //adiciona empenho a entrada
     public void adicionarEmpenho(Empenho empenho){
         
@@ -469,17 +518,42 @@ public class EntradaEditView extends javax.swing.JFrame {
           }
     
     public void adicionarProduto(Produto produto){
+      String dado;
+      boolean valido = true;
+      
+    do{  
+     dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
+     if(dado.matches("\\d")){
+     itensEntrada.setQuantidade(Integer.parseInt(dado));
+      valido = false;
+     }else{
+         
+       JOptionPane.showMessageDialog(null, "Quatidade inválida!!", null, 2);  
+     }
      
-     String dado = JOptionPane.showInputDialog(rootPane, "informe a Quantidade", null);
-      itensEntrada.setQuantidade(Integer.parseInt(dado));
+    }while(valido); 
+    valido = true; 
+    
+    do{
       dado = JOptionPane.showInputDialog(rootPane, "informe o Valor", null);
-      itensEntrada.setValor(Float.parseFloat(dado));
+    try{
+      
+      itensEntrada.setValor(Float.parseFloat(dado.replace(",", ".")));
+      valido = false;
+     
+    }catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Valor inválido!!", null, 2);
+    }
+      
+    }while(valido);   
       VTotal = VTotal + (itensEntrada.getValor() * itensEntrada.getQuantidade());
       itensEntrada.setIdProduto(produto);
+     
+      
       DefaultTableModel modelo = (DefaultTableModel) jtItensEntrada.getModel();
       jtfValorTotal.setText(Float.toString(VTotal));   
-      modelo.addRow(new String[]{produto.getId().toString(), produto.getNumeroPeca(), produto.getDescricao(), Integer.toString(itensEntrada.getQuantidade()), Float.toString(itensEntrada.getValor())});
-    
+      modelo.addRow(new String[]{ produto.getNumeroPeca(), produto.getDescricao(), Integer.toString(itensEntrada.getQuantidade()), Float.toString(itensEntrada.getValor())});
+    lista.add(itensEntrada);
     }
    
        
@@ -500,13 +574,47 @@ public class EntradaEditView extends javax.swing.JFrame {
       
        for(int i = 0; i<itensEntradaLista.size();i++){
      itensEntrada = itensEntradaLista.get(i);
-  modelo.addRow(new String[]{itensEntradaLista.get(i).getIdProduto().getId().toString(), itensEntradaLista.get(i).getIdProduto().getNumeroPeca(), itensEntradaLista.get(i).getIdProduto().getDescricao(), Integer.toString(itensEntradaLista.get(i).getQuantidade()), Float.toString(itensEntradaLista.get(i).getValor())});
+  modelo.addRow(new String[]{itensEntradaLista.get(i).getIdProduto().getNumeroPeca(), itensEntradaLista.get(i).getIdProduto().getDescricao(), Integer.toString(itensEntradaLista.get(i).getQuantidade()), Float.toString(itensEntradaLista.get(i).getValor())});
           
        }
       
     }
     
-  
+  private String validaDados(){
+        
+      
+        String vazio = "Dados Inválidos: ";
+       boolean msg = false;
+       
+        if(jtItensEntrada.getRowCount()==0){
+          
+            vazio = vazio + "\n sem item adicionado";
+            
+           return vazio;
+         
+        
+      } 
+       
+       if(jtFornecedor.getText().isEmpty()){
+           vazio = vazio + "\n Fornecedor";
+            
+           return vazio;
+           
+       }
+       
+       if(jtEmpenho.getText().isEmpty()){
+          
+           vazio = vazio + "\n Empenho";
+            
+           return vazio;
+           
+       }
+      if(vazio.equals("Dados Inválidos: ")){ 
+        vazio = null;
+      }
+    
+    return vazio;
+    }
     
     
     

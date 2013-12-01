@@ -14,7 +14,8 @@ import model.Mecanico;
 public class MecanicoController {
   
     static MecanicoController instancia = null;      
-     
+    MecanicoDAO mecanicoDAO = MecanicoDAO.getInstacia();
+    
      public static MecanicoController getInstacia(){
        if(  instancia == null){
          return instancia = new MecanicoController();
@@ -25,7 +26,7 @@ public class MecanicoController {
     
     public boolean persistir(Mecanico mecanico){
        
-      MecanicoDAO mecanicoDAO = MecanicoDAO.getInstacia();
+      
     
       return mecanicoDAO.persistir(mecanico);
       
@@ -35,13 +36,17 @@ public class MecanicoController {
  
    public boolean deletar(Mecanico mecanico){
        
-      MecanicoDAO mecanicoDAO = MecanicoDAO.getInstacia();
+      
     
       return mecanicoDAO.deletar(mecanico);
     
    }
     
-    
+    public boolean existe(Mecanico mecanico){
+      
+        return mecanicoDAO.existe(mecanico);
+     
+    } 
     
     
     

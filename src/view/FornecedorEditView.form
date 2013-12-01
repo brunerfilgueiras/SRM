@@ -56,12 +56,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jtNome" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jtCNPJ" min="-2" pref="171" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jtCNPJ" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtTelefone" max="32767" attributes="0"/>
+                                  <Component id="jtTelefone" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -76,34 +76,41 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jtRua" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jtEstado" pref="153" max="32767" attributes="0"/>
-                                      <Component id="jtBairro" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jtCidade" max="32767" attributes="0"/>
-                                      <Component id="jtCEP" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Group type="102" attributes="0">
+                                  <Component id="jtContato" min="-2" pref="171" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="163" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jtContato" min="-2" pref="171" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jtNumero" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jtEstado" pref="153" max="32767" attributes="0"/>
+                                          <Component id="jtBairro" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="jtNumero" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jtComplemento" min="-2" pref="80" max="-2" attributes="0"/>
+                                          <Component id="jtCidade" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jtComplemento" min="-2" pref="80" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jtCEP" min="-2" pref="81" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="0" pref="57" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -129,8 +136,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtCNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtCNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -216,8 +223,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtNome">
     </Component>
-    <Component class="javax.swing.JTextField" name="jtCNPJ">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contato:"/>
@@ -272,10 +277,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtComplemento">
     </Component>
-    <Component class="javax.swing.JTextField" name="jtTelefone">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtCEP">
-    </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
@@ -287,6 +288,24 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cadastro de Fornecedores"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jtCNPJ">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xa;  MaskFormatter cnpj = new MaskFormatter(&quot;##.###.###.####-##&quot;); &#xa;cnpj.setPlaceholderCharacter(&apos;_&apos;);&#xa;jtCNPJ = new JFormattedTextField(cnpj);&#xa;}catch(Exception e){&#xa;&#xa;}"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jtTelefone">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtTelefoneActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{ &#xa;  MaskFormatter telefone = new MaskFormatter(&quot;(##) ####-####&quot;); &#xa;telefone.setPlaceholderCharacter(&apos;_&apos;);&#xa;jtTelefone = new JFormattedTextField(telefone);&#xa;}catch(Exception e){&#xa;&#xa;}"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jtCEP">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xa;  MaskFormatter CEP = new MaskFormatter(&quot;#####-###&quot;); &#xa;&#xa;jtCEP = new JFormattedTextField(CEP);&#xa;}catch(Exception e){&#xa;&#xa;}"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

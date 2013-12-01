@@ -32,13 +32,13 @@ public class SaidaSearchView extends javax.swing.JFrame {
     public SaidaSearchView(Usuario usuario){
         initComponents();
         permissao(usuario);
-        carregaTabela();
+        
     }
     
     
     public SaidaSearchView() {
         initComponents();
-        carregaTabela();
+        
     }
 
     /**
@@ -63,6 +63,7 @@ public class SaidaSearchView extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        jPBbarra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de saída");
@@ -102,10 +103,7 @@ public class SaidaSearchView extends javax.swing.JFrame {
 
         jtSaidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Número Saída", "Data", "OM", "OS", "Mecânico"
@@ -147,9 +145,6 @@ public class SaidaSearchView extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbConsultar)
@@ -158,9 +153,12 @@ public class SaidaSearchView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbAlterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbExcluir))
+                        .addComponent(jbExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
                     .addComponent(jLabel2))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPBbarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
@@ -181,14 +179,15 @@ public class SaidaSearchView extends javax.swing.JFrame {
                     .addComponent(jbConsultar)
                     .addComponent(jbIncluir)
                     .addComponent(jbAlterar)
-                    .addComponent(jbExcluir))
-                .addGap(18, 18, 18)
+                    .addComponent(jbExcluir)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPBbarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         setSize(new java.awt.Dimension(548, 395));
@@ -199,15 +198,20 @@ public class SaidaSearchView extends javax.swing.JFrame {
 
         SaidaEditView janelaSaida = SaidaEditView.getInstacia();
         janelaSaida.setVisible(true);
-        this.dispose();
+        
         
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+       
+       if(seleciona()!=null){ 
         SaidaEditView janelaSaida = SaidaEditView.getInstacia(seleciona());
         janelaSaida.setVisible(true);
-        this.dispose();
         
+       }else{
+         JOptionPane.showMessageDialog(rootPane, "Saida Não selecionada!",null , 2); 
+       }
+       
     }//GEN-LAST:event_jbAlterarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -217,10 +221,16 @@ public class SaidaSearchView extends javax.swing.JFrame {
 
     private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
         // TODO add your handling code here:
-        saida.setId(Long.parseLong(jtParametro.getText()));
+       SaidaController saidaController = SaidaController.getInstacia();
         
+        if(jtParametro.getText().isEmpty()){
+            
+       
+                 carregaTabela();
+        }else{
+          saida.setId(Long.parseLong(jtParametro.getText()));
           carregaConsulta(saida);
-        
+        }
         
         
         
@@ -231,14 +241,21 @@ public class SaidaSearchView extends javax.swing.JFrame {
         
         
         SaidaController saidaController = SaidaController.getInstacia();
+        if(seleciona() != null){
+        if(JOptionPane.showConfirmDialog(null, "Deseja excluir este registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
         if(saidaController.deletar(seleciona())){
             
-           JOptionPane.showMessageDialog(rootPane, "");
+                      
             
+            JOptionPane.showMessageDialog(rootPane, "Saida Excluido com sucesso!");
+                        
+            carregaTabela();
         }else{
-          
-            
-            
+            JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir  Saida!", null, 2);
+        }
+        }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Saida Não selecionada!",null , 2);
         }
         
         
@@ -295,11 +312,15 @@ public class SaidaSearchView extends javax.swing.JFrame {
        DefaultTableModel modelo = (DefaultTableModel) jtSaidas.getModel();
        modelo.setNumRows(0);
        
-       
+        if(saidas.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhuma Saída encontrada!!", null, 2);
+        
          modelo.addRow(new String[]{saida.getId().toString(), dataUtil.parse("dd/MM/YYYY", saida.getData()), saida.getIdOrdemDeServico().getOm(),
              saida.getIdOrdemDeServico().getId().toString(),saida.getIdMecanico().getPosto()+" "+saida.getIdMecanico().getNomeGuerra()});
          
-      
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(1);
+       jPBbarra.setValue(1);  
       
     }
     
@@ -313,7 +334,11 @@ public class SaidaSearchView extends javax.swing.JFrame {
     
        DefaultTableModel modelo = (DefaultTableModel) jtSaidas.getModel();
        modelo.setNumRows(0);
-       
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(saidas.size());
+       jPBbarra.setValue(0);
+       if(saidas.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhuma Saída encontrada!!", null, 2);
        
        for(int i = 0; i<saidas.size();i++){
          
@@ -321,7 +346,7 @@ public class SaidaSearchView extends javax.swing.JFrame {
         
          modelo.addRow(new String[]{saidas.get(i).getId().toString(), dataUtil.parse("dd/MM/YYYY", saidas.get(i).getData()), saidas.get(i).getIdOrdemDeServico().getOm(),
              saidas.get(i).getIdOrdemDeServico().getId().toString(),saidas.get(i).getIdMecanico().getPosto()+" "+saidas.get(i).getIdMecanico().getNomeGuerra()});
-         
+        jPBbarra.setValue(i+1); 
        }
       
     }
@@ -350,6 +375,7 @@ public class SaidaSearchView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JProgressBar jPBbarra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

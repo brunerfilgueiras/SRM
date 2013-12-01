@@ -37,7 +37,7 @@ static FornecedorSearchView instancia = null;
         initComponents();
         permissao(usuario);
         jbAdicionar.setVisible(false);
-        carregaTabela();
+        
         
         
     }
@@ -45,9 +45,7 @@ static FornecedorSearchView instancia = null;
     public FornecedorSearchView(String args){
         initComponents();
         jbExcluir.setVisible(false);
-        jbIncluir.setVisible(false);
-        jbAlterar.setVisible(false);
-        carregaTabela();
+        
         
         
     }
@@ -85,6 +83,7 @@ static FornecedorSearchView instancia = null;
         jSeparator4 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jbAdicionar = new javax.swing.JButton();
+        jPBbarra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de Fornecedor");
@@ -124,17 +123,14 @@ static FornecedorSearchView instancia = null;
 
         jtFornecedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nome", "CNPJ", "Contato", "Telefone"
+                "Nome", "CNPJ", "Contato", "Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -157,7 +153,7 @@ static FornecedorSearchView instancia = null;
         jLabel1.setText("Pesquisa de Fornecedor");
 
         jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
-        jbAdicionar.setText("Adicionar");
+        jbAdicionar.setText("OK");
         jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAdicionarActionPerformed(evt);
@@ -170,15 +166,11 @@ static FornecedorSearchView instancia = null;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator2)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator3)
             .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbSair))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -195,9 +187,13 @@ static FornecedorSearchView instancia = null;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbExcluir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbAdicionar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jbAdicionar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbSair)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addComponent(jPBbarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,19 +214,20 @@ static FornecedorSearchView instancia = null;
                     .addComponent(jbIncluir)
                     .addComponent(jbAlterar)
                     .addComponent(jbExcluir)
-                    .addComponent(jbAdicionar))
+                    .addComponent(jbAdicionar)
+                    .addComponent(jbSair))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSair)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jPBbarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
-        setSize(new java.awt.Dimension(764, 479));
+        setSize(new java.awt.Dimension(764, 501));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -238,16 +235,18 @@ static FornecedorSearchView instancia = null;
 
         FornecedorEditView janelaFornecedor = new FornecedorEditView();
         janelaFornecedor.setVisible(true);
-        this.dispose();
+       
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-
+    if(seleciona() != null){
         FornecedorEditView janelaFornecedor = new FornecedorEditView(seleciona());
         janelaFornecedor.setVisible(true);
-        this.dispose();
+       }else{
+            JOptionPane.showMessageDialog(rootPane, "Fornecedor Não selecionado!");
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
@@ -257,7 +256,7 @@ static FornecedorSearchView instancia = null;
        FornecedorController fornecedorController = FornecedorController.getInstacia();
         
         if(seleciona() != null){
-        
+        if(JOptionPane.showConfirmDialog(null,"Deseja excluir este registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
         if(fornecedorController.deletar(seleciona())){
             JOptionPane.showMessageDialog(rootPane, "Fornecedor Excluido com sucesso!");
                         
@@ -265,8 +264,9 @@ static FornecedorSearchView instancia = null;
         }else{
             JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir o Fornecedor!");
         }
+        }
         }else{
-            JOptionPane.showMessageDialog(rootPane, "Fornecedor Não selecionada!");
+            JOptionPane.showMessageDialog(rootPane, "Fornecedor Não selecionado!");
         }
     }//GEN-LAST:event_jbExcluirActionPerformed
 
@@ -299,12 +299,14 @@ static FornecedorSearchView instancia = null;
 
     private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
         // TODO add your handling code here:
-        
+        if(seleciona()!=null){
         EmpenhoEditView janela = EmpenhoEditView.getInstacia();
                
         janela.adicionarFornecedor(seleciona());
-        janela.setVisible(true);
         this.dispose();
+       }else{
+            JOptionPane.showMessageDialog(rootPane, "Fornecedor Não selecionado!");
+        }
     }//GEN-LAST:event_jbAdicionarActionPerformed
 
     /**
@@ -356,13 +358,19 @@ static FornecedorSearchView instancia = null;
        DefaultTableModel modelo = (DefaultTableModel) jtFornecedores.getModel();
        modelo.setNumRows(0);
        
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(fornecedores.size());
+       jPBbarra.setValue(0);
+       if(fornecedores.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum fornecedor encontrado!!", null, 2);
+       
        for(int i = 0; i<fornecedores.size();i++){
          
          fornecedor = fornecedores.get(i);
         
-         modelo.addRow(new String[]{fornecedor.getId().toString(), fornecedor.getNome(), fornecedor.getCnpj(),
+         modelo.addRow(new String[]{ fornecedor.getNome(), fornecedor.getCnpj(),
          fornecedor.getContato(), fornecedor.getTelefone()});
-    
+    jPBbarra.setValue(i+1);
        }
       
     }
@@ -388,18 +396,25 @@ static FornecedorSearchView instancia = null;
        DefaultTableModel modelo = (DefaultTableModel) jtFornecedores.getModel();
        modelo.setNumRows(0);
        
+        jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(fornecedores.size());
+       jPBbarra.setValue(0);
+       if(fornecedores.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum fornecedor encontrado!!", null, 2);
+       
        for(int i = 0; i<fornecedores.size();i++){
          
            fornecedor = fornecedores.get(i);
-         modelo.addRow(new String[]{fornecedor.getId().toString(), fornecedor.getNome(), fornecedor.getCnpj(),
+         modelo.addRow(new String[]{fornecedor.getNome(), fornecedor.getCnpj(),
                                     fornecedor.getContato(), fornecedor.getTelefone()});
-    
+    jPBbarra.setValue(i+1);
        }
       
     }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JProgressBar jPBbarra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

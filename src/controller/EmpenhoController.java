@@ -13,7 +13,7 @@ import model.Entrada;
  * @author secinfor-04
  */
 public class EmpenhoController {
-    
+   private EmpenhoDAO empenhoDAO = EmpenhoDAO.getInstacia(); 
    static EmpenhoController instancia = null;      
      
      public static EmpenhoController getInstacia(){
@@ -28,7 +28,7 @@ public class EmpenhoController {
     
    public boolean persistir(Empenho empenho){
        
-      EmpenhoDAO empenhoDAO = EmpenhoDAO.getInstacia();
+     
     
       return empenhoDAO.persistir(empenho);
       
@@ -36,7 +36,7 @@ public class EmpenhoController {
    }
    public boolean editaSaldo(Empenho empenho, Entrada entrada){
        
-      EmpenhoDAO empenhoDAO = EmpenhoDAO.getInstacia();
+      
     
       return empenhoDAO.editaSaldo(empenho, entrada);
       
@@ -44,13 +44,17 @@ public class EmpenhoController {
    }
    public boolean deletar(Empenho empenho){
        
-      EmpenhoDAO empenhoDAO = EmpenhoDAO.getInstacia();
+      
     
       return empenhoDAO.deletar(empenho);
       
          
    }  
-    
+    public boolean existir(Empenho empenho){
+      
+        return empenhoDAO.existe(empenho);
+     
+    }
     
     
     

@@ -35,18 +35,21 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
     }
      public EmpenhoSearchView(String arg) {
        initComponents();
-    jbAlterar.setVisible(false);
-    jbExcluir.setVisible(false);
     jbIncluir.setVisible(false);
+       jbAlterar.setVisible(false);
+       jbExcluir.setVisible(false);
+       carregaTabela();
     
-    carregaTabela();
+    
+    
+    
    
     }
     
     
     public EmpenhoSearchView() {
         initComponents();
-        carregaTabela();
+       
     }
 
     /**
@@ -73,6 +76,7 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jlTitulo = new javax.swing.JLabel();
         jbAdicionar = new javax.swing.JButton();
+        jPBbarra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de empenho");
@@ -126,17 +130,14 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
 
         jtbEmpenhos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Número Empenho", "Valor", "Saldo", "Data", "Fornecedor", "CNPJ"
+                "Número Empenho", "Valor", "Saldo", "Data", "Fornecedor", "CNPJ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -150,7 +151,6 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         jtbEmpenhos.getColumnModel().getColumn(3).setResizable(false);
         jtbEmpenhos.getColumnModel().getColumn(4).setResizable(false);
         jtbEmpenhos.getColumnModel().getColumn(5).setResizable(false);
-        jtbEmpenhos.getColumnModel().getColumn(6).setResizable(false);
 
         jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
         jbSair.setText("Sair");
@@ -164,7 +164,7 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         jlTitulo.setText("Pesquisa de Empenho");
 
         jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
-        jbAdicionar.setText("Adicionar");
+        jbAdicionar.setText("OK");
         jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAdicionarActionPerformed(evt);
@@ -182,16 +182,19 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jlNum)
                                 .addGap(4, 4, 4)
                                 .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,15 +204,12 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbAdicionar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(659, 659, 659)
+                                .addComponent(jbAdicionar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbSair)))
-                        .addGap(0, 10, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addGap(0, 162, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jPBbarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,15 +232,17 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                     .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbAdicionar))
+                    .addComponent(jbAdicionar)
+                    .addComponent(jbSair))
                 .addGap(11, 11, 11)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jbSair))
+                .addGap(18, 18, 18)
+                .addComponent(jPBbarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         setSize(new java.awt.Dimension(766, 406));
@@ -249,18 +251,21 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
 
     private void jbIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirActionPerformed
        
-        EmpenhoEditView janelaEmpenho = EmpenhoEditView.getInstacia();
+        EmpenhoEditView janelaEmpenho = EmpenhoEditView.Instacia();
         janelaEmpenho.setVisible(true);
-        this.dispose();
+      
         // TODO add your handling code here:
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-    
-         EmpenhoEditView janelaEmpenho = EmpenhoEditView.getInstacia(seleciona());
+    if(seleciona() != null){
+         EmpenhoEditView janelaEmpenho = new EmpenhoEditView(seleciona());
         janelaEmpenho.setVisible(true);
-        this.dispose();
         
+     }else{
+            JOptionPane.showMessageDialog(rootPane, "Empenho Não selecionada!");
+        }    
+       
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
 
@@ -274,13 +279,14 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
        EmpenhoController empenhoController = EmpenhoController.getInstacia();
         
         if(seleciona() != null){
-        
+        if(JOptionPane.showConfirmDialog(null, "Deseja excluir este registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
         if(empenhoController.deletar(seleciona())){
             JOptionPane.showMessageDialog(rootPane, "Empenho Excluido com sucesso!");
                         
             carregaTabela();
         }else{
             JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir o Empenho!");
+        }
         }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Empenho Não selecionada!");
@@ -366,15 +372,19 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
                 
        DefaultTableModel modelo = (DefaultTableModel) jtbEmpenhos.getModel();
        modelo.setNumRows(0);
-       
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(empenhos.size());
+       jPBbarra.setValue(0);
+       if(empenhos.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum empenho encontrado!!", null, 2);
        for(int i = 0; i<empenhos.size();i++){
          
          empenho = empenhos.get(i);
         
-        modelo.addRow(new String[]{empenho.getId().toString(), empenho.getNumero(), Float.toString(empenho.getValor()),
+        modelo.addRow(new String[]{empenho.getNumero(), Float.toString(empenho.getValor()),
          Float.toString(empenho.getSaldo()), dataUtil.parse("dd/MM/YYYY", empenho.getData()), empenho.getIdFornecedor().getNome(), empenho.getIdFornecedor().getCnpj()});
     
-    
+    jPBbarra.setValue(i+1);
        }
       
     }
@@ -401,25 +411,25 @@ public class EmpenhoSearchView extends javax.swing.JFrame {
         
        DefaultTableModel modelo = (DefaultTableModel) jtbEmpenhos.getModel();
        modelo.setNumRows(0);
-       
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(empenhos.size());
+       jPBbarra.setValue(0);
+       if(empenhos.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum empenho encontrado!!", null, 2);
        for(int i = 0; i<empenhos.size();i++){
          
            empenho = empenhos.get(i);
-         modelo.addRow(new String[]{empenho.getId().toString(), empenho.getNumero(), Float.toString(empenho.getValor()),
+         modelo.addRow(new String[]{empenho.getNumero(), Float.toString(empenho.getValor()),
          Float.toString(empenho.getSaldo()), dataUtil.parse("dd/MM/YYYY", empenho.getData()), empenho.getIdFornecedor().getNome(), empenho.getIdFornecedor().getCnpj()});
+    jPBbarra.setValue(i+1);
     
        }
       
     }
-    
-    
-    
-    
-    
-    
-    
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar jPBbarra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

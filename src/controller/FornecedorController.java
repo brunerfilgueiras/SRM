@@ -13,7 +13,8 @@ import model.Fornecedor;
  */
 public class FornecedorController {
     static FornecedorController instancia = null;      
-     
+    private FornecedorDAO fornecedorDAO = FornecedorDAO.getInstacia();
+    
      public static FornecedorController getInstacia(){
        if(  instancia == null){
          return instancia = new FornecedorController();
@@ -24,7 +25,7 @@ public class FornecedorController {
     
     public boolean persistir(Fornecedor fornecedor){
        
-      FornecedorDAO fornecedorDAO = FornecedorDAO.getInstacia();
+    
     
       return fornecedorDAO.persistir(fornecedor);
       
@@ -34,9 +35,15 @@ public class FornecedorController {
  
    public boolean deletar(Fornecedor fornecedor){
        
-      FornecedorDAO fornecedorDAO = FornecedorDAO.getInstacia();
+      
     
       return fornecedorDAO.deletar(fornecedor);
     
    }
+   public boolean existir(Fornecedor fornecedor){
+      
+        return fornecedorDAO.existe(fornecedor);
+     
+    }
+   
 }

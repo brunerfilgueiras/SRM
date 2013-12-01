@@ -19,7 +19,7 @@ import util.DateTimeUtil;
 public class EmpenhoEditView extends javax.swing.JFrame {
 
     private  Fornecedor adicionado = Fornecedor.getInstacia();
-    private Empenho empenho = Empenho.getInstacia();
+    private Empenho empenho = new Empenho();
     
     static EmpenhoEditView instancia = null;  
       
@@ -30,28 +30,19 @@ public class EmpenhoEditView extends javax.swing.JFrame {
          return instancia;
        }
      }
-    
-     
-     public static EmpenhoEditView getInstacia(Empenho empenho){
-       if(  instancia == null){
-         return instancia = new EmpenhoEditView(empenho);
-         } else{ 
-         return instancia;
-       }
+    public static EmpenhoEditView Instacia(){
+       
+         return instancia = new EmpenhoEditView();
+         
      }
-     
-     
-     
-     
-     
      
     public EmpenhoEditView(Empenho empenho) {
         initComponents();
         jtSaldo.setEditable(false);
-        jtNumero.setEditable(false);
+        
         jtFornecedor.setEditable(false);
-        jtfData.setEditable(false);
-        jtValor.setEditable(false);
+        
+      
         jtCNPJ.setEditable(false);
         
         this.empenho = empenho;
@@ -61,6 +52,7 @@ public class EmpenhoEditView extends javax.swing.JFrame {
              
             jbIncluirFornecedor.setEnabled(false);
           jbGravar.setEnabled(false);
+          
             carregaDados(empenho);
           JOptionPane.showMessageDialog(rootPane, "Empenho já utilizado impossivel edição!!!!", null, 2);
              
@@ -84,10 +76,10 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         initComponents();
        
          jtSaldo.setEditable(false);
-        jtNumero.setEditable(false);
+        
         jtFornecedor.setEditable(false);
-        jtfData.setEditable(false);
-        jtValor.setEditable(false);
+       
+        
         jtCNPJ.setEditable(false);
         
     }
@@ -108,9 +100,7 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         jtNumero = new javax.swing.JTextField();
         jtFornecedor = new javax.swing.JTextField();
         jtCNPJ = new javax.swing.JTextField();
-        jtValor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtSaldo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtfData = new javax.swing.JFormattedTextField();
         jbGravar = new javax.swing.JButton();
@@ -119,6 +109,8 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jlCadEmpenho = new javax.swing.JLabel();
+        jtValor = new javax.swing.JFormattedTextField();
+        jtSaldo = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de empenho");
@@ -141,12 +133,6 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         jLabel3.setText("CNPJ:");
 
         jLabel4.setText("Valor:");
-
-        jtValor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtValorFocusLost(evt);
-            }
-        });
 
         jLabel5.setText("Saldo:");
 
@@ -181,6 +167,20 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         jlCadEmpenho.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlCadEmpenho.setText("Cadastro de Empenho ");
 
+        jtValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jtValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtValorFocusLost(evt);
+            }
+        });
+
+        jtSaldo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jtSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtSaldoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,11 +210,11 @@ public class EmpenhoEditView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbIncluirFornecedor))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -250,8 +250,8 @@ public class EmpenhoEditView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
+                    .addComponent(jtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,7 +276,7 @@ public class EmpenhoEditView extends javax.swing.JFrame {
         
    FornecedorSearchView janela = new FornecedorSearchView("");
            janela.setVisible(true);
-        this.setVisible(false);
+       
         
         
     }//GEN-LAST:event_jbIncluirFornecedorActionPerformed
@@ -298,37 +298,52 @@ public class EmpenhoEditView extends javax.swing.JFrame {
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
         // TODO add your handling code here:
        EmpenhoController empenhoController = EmpenhoController.getInstacia();
-        
-       
+    if(validaCaracteres()==null) {   
+    if(campoObrigatorio()== null){   
         DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
         empenho.setNumero(jtNumero.getText());
         empenho.setData(dataUtil.parse("dd/MM/YYYY", jtfData.getText()));
-        empenho.setValor(Float.parseFloat(jtValor.getText()));
-        empenho.setSaldo(Float.parseFloat(jtSaldo.getText()));
+        empenho.setValor(Float.parseFloat(jtValor.getText().replace(",", ".")));
+        empenho.setSaldo(Float.parseFloat(jtSaldo.getText().replace(",", ".")));
         empenho.setIdFornecedor(adicionado);
     
-    
+    if(empenhoController.existir(empenho)||empenho.getId()!=null){
     if(empenhoController.persistir(empenho)){
           
-          JOptionPane.showMessageDialog(null, "Fornecedor Gravado Com sucesso!", null, 1);
+          JOptionPane.showMessageDialog(null, "Empenho Gravado Com sucesso!", null, 1);
           
           this.dispose();
       }else{
           
-          JOptionPane.showMessageDialog(null, "Falha ao Salvar Fornecedor!!", null, 2);
+          JOptionPane.showMessageDialog(null, "Falha ao Salvar Empenho!!", null, 2);
       }
+    }else{
         
-     
+        JOptionPane.showMessageDialog(null, "Empenho já Cadastrado!!", null, 2);
+        
+    }
+    }else{
+        
+        JOptionPane.showMessageDialog(null, campoObrigatorio(), null, 2);
+    }  
+    }else{
+        
+        JOptionPane.showMessageDialog(null, validaCaracteres(), null, 2);
+    }
+    
 
 
 
     }//GEN-LAST:event_jbGravarActionPerformed
 
     private void jtValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtValorFocusLost
+   jtSaldo.setText(jtValor.getText());
         // TODO add your handling code here:
-        jtSaldo.setText(jtValor.getText());
-                
     }//GEN-LAST:event_jtValorFocusLost
+
+    private void jtSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtSaldoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtSaldoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,8 +393,8 @@ public class EmpenhoEditView extends javax.swing.JFrame {
       jtFornecedor.setText(empenho.getIdFornecedor().getNome());
       jtCNPJ.setText(empenho.getIdFornecedor().getCnpj());
       jtfData.setText( dataUtil.parseDate(empenho.getData()));
-      jtValor.setText(Float.toString(empenho.getValor()));
-      jtSaldo.setText(Float.toString(empenho.getSaldo()));
+      jtValor.setText(Float.toString(empenho.getValor()).replace(".", ","));
+      jtSaldo.setText(Float.toString(empenho.getSaldo()).replace(".", ","));
       jtNumero.setText(empenho.getNumero());
       
         
@@ -393,21 +408,7 @@ public class EmpenhoEditView extends javax.swing.JFrame {
        adicionado = fornecedor; 
         jtFornecedor.setText(adicionado.getNome());
         jtCNPJ.setText(adicionado.getCnpj());
-        jtNumero.setEditable(true);
-        jtfData.setEditable(true);
-        jtValor.setEditable(true);
-      if(empenho != null){
-     
-          DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
-          
-          
-      jtfData.setText( dataUtil.parseDate(empenho.getData()));
-      jtValor.setText(Float.toString(empenho.getValor()));
-      jtSaldo.setText(Float.toString(empenho.getSaldo()));
-       jtNumero.setText(empenho.getNumero());
-      } 
-      
-    
+        
           }
     
     
@@ -451,7 +452,27 @@ public class EmpenhoEditView extends javax.swing.JFrame {
     }
        }
     
-    
+    //valida campos com caracteres minimos
+    private String validaCaracteres(){
+       
+        String vazio = "Campos com poucos caracteres : ";
+       boolean msg = false;
+                     
+        if(jtNumero.getText().length()<3){
+          
+            vazio = vazio + " \n Numero ";
+            
+         msg = true; 
+        }
+             
+        if(msg){
+            
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
     
     
     
@@ -474,8 +495,8 @@ public class EmpenhoEditView extends javax.swing.JFrame {
     private javax.swing.JTextField jtCNPJ;
     private javax.swing.JTextField jtFornecedor;
     private javax.swing.JTextField jtNumero;
-    private javax.swing.JTextField jtSaldo;
-    private javax.swing.JTextField jtValor;
+    private javax.swing.JFormattedTextField jtSaldo;
+    private javax.swing.JFormattedTextField jtValor;
     private javax.swing.JFormattedTextField jtfData;
     // End of variables declaration//GEN-END:variables
 }

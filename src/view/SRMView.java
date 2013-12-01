@@ -61,16 +61,6 @@ public class SRMView extends javax.swing.JFrame {
         jbProd = new javax.swing.JButton();
         jbUsuario = new javax.swing.JButton();
         jtpPrincipal = new javax.swing.JTabbedPane();
-        jpArquivo = new javax.swing.JPanel();
-        jbLogout = new javax.swing.JButton();
-        jbSair = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jpMov = new javax.swing.JPanel();
-        jbCadEntrada = new javax.swing.JButton();
-        jbCadSaida = new javax.swing.JButton();
-        jbCadOS = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         jpCad = new javax.swing.JPanel();
         jbCadEmp = new javax.swing.JButton();
         jbCadForn = new javax.swing.JButton();
@@ -83,10 +73,20 @@ public class SRMView extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
+        jpMov = new javax.swing.JPanel();
+        jbCadEntrada = new javax.swing.JButton();
+        jbCadSaida = new javax.swing.JButton();
+        jbCadOS = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
         jpRelat = new javax.swing.JPanel();
         jcbRelatorios = new javax.swing.JComboBox();
         jlRelat = new javax.swing.JLabel();
         jbAbrirRelat = new javax.swing.JButton();
+        jpArquivo = new javax.swing.JPanel();
+        jbLogout = new javax.swing.JButton();
+        jbSair = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         jpHelp = new javax.swing.JPanel();
         jbAjuda = new javax.swing.JButton();
         jbSobre = new javax.swing.JButton();
@@ -190,115 +190,6 @@ public class SRMView extends javax.swing.JFrame {
                     .addComponent(jbUsuario))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jbLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/door_out.png"))); // NOI18N
-        jbLogout.setText("Logout");
-        jbLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLogoutActionPerformed(evt);
-            }
-        });
-
-        jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
-        jbSair.setText("Sair");
-        jbSair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbSairMouseClicked(evt);
-            }
-        });
-        jbSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSairActionPerformed(evt);
-            }
-        });
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        javax.swing.GroupLayout jpArquivoLayout = new javax.swing.GroupLayout(jpArquivo);
-        jpArquivo.setLayout(jpArquivoLayout);
-        jpArquivoLayout.setHorizontalGroup(
-            jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpArquivoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbLogout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSair)
-                .addContainerGap(718, Short.MAX_VALUE))
-        );
-        jpArquivoLayout.setVerticalGroup(
-            jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpArquivoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(jbLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1))
-                .addContainerGap())
-        );
-
-        jtpPrincipal.addTab("Arquivo", jpArquivo);
-
-        jbCadEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_put.png"))); // NOI18N
-        jbCadEntrada.setText("Entrada");
-        jbCadEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadEntradaActionPerformed(evt);
-            }
-        });
-
-        jbCadSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_remove.png"))); // NOI18N
-        jbCadSaida.setText("Saída");
-        jbCadSaida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadSaidaActionPerformed(evt);
-            }
-        });
-
-        jbCadOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table.png"))); // NOI18N
-        jbCadOS.setText("Ordem de serviço");
-        jbCadOS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadOSActionPerformed(evt);
-            }
-        });
-
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        javax.swing.GroupLayout jpMovLayout = new javax.swing.GroupLayout(jpMov);
-        jpMov.setLayout(jpMovLayout);
-        jpMovLayout.setHorizontalGroup(
-            jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpMovLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbCadEntrada)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbCadSaida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbCadOS)
-                .addContainerGap(553, Short.MAX_VALUE))
-        );
-        jpMovLayout.setVerticalGroup(
-            jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpMovLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2)
-                    .addComponent(jbCadEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(jbCadSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator3)
-                    .addComponent(jbCadOS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jtpPrincipal.addTab("Movimentação", jpMov);
 
         jbCadEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coins.png"))); // NOI18N
         jbCadEmp.setText("Empenho");
@@ -408,6 +299,66 @@ public class SRMView extends javax.swing.JFrame {
 
         jtpPrincipal.addTab("Cadastro", jpCad);
 
+        jbCadEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_put.png"))); // NOI18N
+        jbCadEntrada.setText("Entrada");
+        jbCadEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadEntradaActionPerformed(evt);
+            }
+        });
+
+        jbCadSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket_remove.png"))); // NOI18N
+        jbCadSaida.setText("Saída");
+        jbCadSaida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadSaidaActionPerformed(evt);
+            }
+        });
+
+        jbCadOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table.png"))); // NOI18N
+        jbCadOS.setText("Ordem de serviço");
+        jbCadOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadOSActionPerformed(evt);
+            }
+        });
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout jpMovLayout = new javax.swing.GroupLayout(jpMov);
+        jpMov.setLayout(jpMovLayout);
+        jpMovLayout.setHorizontalGroup(
+            jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpMovLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbCadEntrada)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadSaida)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadOS)
+                .addContainerGap(553, Short.MAX_VALUE))
+        );
+        jpMovLayout.setVerticalGroup(
+            jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpMovLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpMovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
+                    .addComponent(jbCadEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jbCadSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator3)
+                    .addComponent(jbCadOS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jtpPrincipal.addTab("Movimentação", jpMov);
+
         jcbRelatorios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Crédito Detalhado Empenho", "Entrada Produto 'B'", "Entrada Por Período", "Estoque Geral", "Empenho", "Fornecedores", "Montadora", "Mecânico", "Ordem de Serviço", "Produto Por Período", "Produtos Por Saída", "Produtos Por Montadora", "Saída Por Período" }));
 
         jlRelat.setText("Selecione o relatório:");
@@ -445,6 +396,55 @@ public class SRMView extends javax.swing.JFrame {
         );
 
         jtpPrincipal.addTab("Relatório", jpRelat);
+
+        jbLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/door_out.png"))); // NOI18N
+        jbLogout.setText("Logout");
+        jbLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLogoutActionPerformed(evt);
+            }
+        });
+
+        jbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logout.png"))); // NOI18N
+        jbSair.setText("Sair");
+        jbSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbSairMouseClicked(evt);
+            }
+        });
+        jbSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSairActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout jpArquivoLayout = new javax.swing.GroupLayout(jpArquivo);
+        jpArquivo.setLayout(jpArquivoLayout);
+        jpArquivoLayout.setHorizontalGroup(
+            jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpArquivoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbLogout)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSair)
+                .addContainerGap(718, Short.MAX_VALUE))
+        );
+        jpArquivoLayout.setVerticalGroup(
+            jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpArquivoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jbLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1))
+                .addContainerGap())
+        );
+
+        jtpPrincipal.addTab("Sistema", jpArquivo);
 
         jbAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/help.png"))); // NOI18N
         jbAjuda.setText("Ajuda");
@@ -608,15 +608,14 @@ public class SRMView extends javax.swing.JFrame {
         DateTimeUtil dataUtil = DateTimeUtil.getInstancia();
         HashMap<String,Object> map = new HashMap<String,Object>();
         
-        switch(jcbRelatorios.getSelectedIndex()){
-            case 0:{
+        switch(jcbRelatorios.getSelectedItem().toString()){
+            case "Crédito Detalhado Empenho":{
               RelatorioParametroView janelaParametro = new RelatorioParametroView(false);
               janelaParametro.setVisible(true);
-              
-                
+                         
                 break;
             }    
-           case 1:{
+           case "Entrada Produto 'B'":{
                 
                try {
           
@@ -631,14 +630,14 @@ public class SRMView extends javax.swing.JFrame {
                
                 break;
             } 
-           case 2:{
+           case "Entrada Por Período":{
            
              RelatorioPeriodoView janelaRelatorio = new RelatorioPeriodoView(2);
              janelaRelatorio.setVisible(true);
              
                 break;
             } 
-            case 3:{
+            case "Estoque Geral":{
                 
                 try {
           
@@ -653,7 +652,7 @@ public class SRMView extends javax.swing.JFrame {
                 
                 break;
             } 
-             case 4:{
+             case "Empenho":{
         try {
           
           relat.imprimeRelatorioEmpenhos();
@@ -667,7 +666,7 @@ public class SRMView extends javax.swing.JFrame {
                  
                 break;
             } 
-            case 5:{
+            case "Fornecedores":{
                 
                 try {
           
@@ -682,7 +681,7 @@ public class SRMView extends javax.swing.JFrame {
                 
                 break;
             } 
-           case 6:{
+           case "Montadora":{
                 
            try {
           
@@ -698,7 +697,7 @@ public class SRMView extends javax.swing.JFrame {
                
                 break;
             } 
-            case 7:{
+            case "Mecânico":{
                 
                 try {
           
@@ -713,7 +712,7 @@ public class SRMView extends javax.swing.JFrame {
                 
                 break;
             } 
-            case 8:{
+            case "Ordem de Serviço":{
                 
                 try {
           
@@ -728,29 +727,20 @@ public class SRMView extends javax.swing.JFrame {
                 
                 break;
             } 
-             case 9:{
+             case "Produto Por Período":{
                 
             RelatorioPeriodoView janelaRelatorio = new RelatorioPeriodoView(9);
              janelaRelatorio.setVisible(true);
                  
                 break;
             } 
-              case 10:{
+              case "Produtos Por Saída":{
                 
-                  try {
-          
-          relat.imprimeRelatorioProdutoPorSaida();
-        } catch (JRException ex) {
-           JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, relat, "Falha ao Gerar Relatório!", 2);
-            Logger.getLogger(SRMView.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-                  
+                 RelatorioPeriodoView janelaRelatorio = new RelatorioPeriodoView(10);
+             janelaRelatorio.setVisible(true);
                 break;
             } 
-            case 11:{
+            case "Produtos Por Montadora":{
                 
                 RelatorioParametroView janelaParametro = new RelatorioParametroView(true);
               janelaParametro.setVisible(true);
@@ -758,7 +748,7 @@ public class SRMView extends javax.swing.JFrame {
                 
                 break;
             } 
-            case 12:{
+            case "Saída Por Período":{
                 
                RelatorioPeriodoView janelaRelatorio = new RelatorioPeriodoView(12);
              janelaRelatorio.setVisible(true);
@@ -836,7 +826,6 @@ public class SRMView extends javax.swing.JFrame {
        jbCadProd.setVisible(false);
        jbCadForn.setVisible(false);
        jbCadEntrada.setVisible(false);
-       jcbRelatorios.setVisible(false);
        jSeparator2.setVisible(false);
        jSeparator3.setVisible(false);
        jSeparator5.setVisible(false);
@@ -861,13 +850,16 @@ public class SRMView extends javax.swing.JFrame {
          
        jbCadOS.setVisible(false);
        jbCadMec.setVisible(false);
-       jcbRelatorios.setVisible(false);       
        jbCadForn.setVisible(false);
        jbCadEmp.setVisible(false);  
        jbForn.setVisible(false);
         jbEmp.setVisible(false);
         jbUsuario.setVisible(false);
         jbMec.setVisible(false);
+        jSeparator5.setVisible(false);
+        jSeparator6.setVisible(false);
+        jSeparator7.setVisible(false);     
+        jSeparator3.setVisible(false);
        break;}
        default :{
        

@@ -8,6 +8,7 @@ import controller.EntradaController;
 import dao.EntradaDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Entrada;
 import model.Usuario;
@@ -34,7 +35,7 @@ public class EntradaSearchView extends javax.swing.JFrame {
      initComponents();  
      
      permissao(usuario);
-     carregaTabela();
+     
      
         
       }
@@ -54,7 +55,6 @@ public class EntradaSearchView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtParametro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jbConsultar = new javax.swing.JButton();
         jbIncluir = new javax.swing.JButton();
@@ -68,6 +68,8 @@ public class EntradaSearchView extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jbSair = new javax.swing.JButton();
+        jtParametro = new javax.swing.JFormattedTextField();
+        jPBbarra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de entrada");
@@ -109,10 +111,7 @@ public class EntradaSearchView extends javax.swing.JFrame {
 
         jtEntradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Número Entrada", "Data", "Nota Fiscal", "Valor", "Empenho"
@@ -158,7 +157,7 @@ public class EntradaSearchView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbConsultar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,13 +165,12 @@ public class EntradaSearchView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbAlterar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbExcluir))
+                                .addComponent(jbExcluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbSair))
                             .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbSair)
-                .addContainerGap())
+                        .addGap(0, 277, Short.MAX_VALUE))))
+            .addComponent(jPBbarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,16 +190,17 @@ public class EntradaSearchView extends javax.swing.JFrame {
                     .addComponent(jbConsultar)
                     .addComponent(jbIncluir)
                     .addComponent(jbAlterar)
-                    .addComponent(jbExcluir))
+                    .addComponent(jbExcluir)
+                    .addComponent(jbSair))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbSair)
-                .addGap(9, 9, 9))
+                .addGap(20, 20, 20)
+                .addComponent(jPBbarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         setSize(new java.awt.Dimension(746, 465));
@@ -212,15 +211,19 @@ public class EntradaSearchView extends javax.swing.JFrame {
 
         EntradaEditView janelaEntrada =  EntradaEditView.getInstacia();
         janelaEntrada.setVisible(true);
-this.dispose();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
 
+       if(seleciona() != null){ 
         EntradaEditView janelaEntrada = new EntradaEditView(seleciona());
         janelaEntrada.setVisible(true);
-this.dispose();
+}else{
+            JOptionPane.showMessageDialog(rootPane, "Entrada Não selecionado!",null , 2);
+        }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
 
@@ -232,10 +235,13 @@ this.dispose();
     private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
         // TODO add your handling code here:
         
+      if(jtParametro.getText().matches("\\d")){  
         entrada.setId(Long.parseLong(jtParametro.getText()));
         
           carregaConsulta(entrada);
-        
+      }else{
+          carregaTabela();
+      }
         
         
         
@@ -246,8 +252,25 @@ this.dispose();
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
         // TODO add your handling code here:
         
+        
         EntradaController entradaController = EntradaController.getInstacia();
-        entradaController.deletar(seleciona());
+        
+        if(seleciona() != null){
+        if(JOptionPane.showConfirmDialog(null, "Deseja excluir este registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
+        if(entradaController.deletar(seleciona())){
+            JOptionPane.showMessageDialog(rootPane, "Entrada Excluida com sucesso!");
+                        
+            carregaTabela();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir  Entrada!", null, 2);
+        }
+        }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Entrada Não selecionado!",null , 2);
+        }
+        
+        
+        
         
         
     }//GEN-LAST:event_jbExcluirActionPerformed
@@ -302,14 +325,22 @@ this.dispose();
         
        DefaultTableModel modelo = (DefaultTableModel) jtEntradas.getModel();
        modelo.setNumRows(0);
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(1);
+       jPBbarra.setValue(0);
        
-       
+    if(entrada != null){
                         
          modelo.addRow(new String[]{entrada.getId().toString(), dataUtil.parse("dd/MM/YYYY", entrada.getData()), entrada.getNumeroNota(),
              Float.toString(entrada.getValorTotal()),entrada.getIdEmpenho().getNumero()});
-         
       
-      
+            
+      jPBbarra.setValue(1);
+    }
+    else{
+    
+    JOptionPane.showMessageDialog(rootPane, "Nenhum usuario encontrado!!", null, 2); 
+    }
     }
     
    
@@ -322,7 +353,11 @@ this.dispose();
     
        DefaultTableModel modelo = (DefaultTableModel) jtEntradas.getModel();
        modelo.setNumRows(0);
-       
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(entradas.size());
+       jPBbarra.setValue(0);
+       if(entradas.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum usuario encontrado!!", null, 2);
        
        for(int i = 0; i<entradas.size();i++){
          
@@ -330,7 +365,7 @@ this.dispose();
         
          modelo.addRow(new String[]{entradas.get(i).getId().toString(), dataUtil.parse("dd/MM/YYYY", entradas.get(i).getData()), entradas.get(i).getNumeroNota(),
              Float.toString(entradas.get(i).getValorTotal()),entradas.get(i).getIdEmpenho().getNumero()});
-         
+       jPBbarra.setValue(i+1); 
        }
       
     }
@@ -370,6 +405,7 @@ this.dispose();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JProgressBar jPBbarra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -381,6 +417,6 @@ this.dispose();
     private javax.swing.JButton jbIncluir;
     private javax.swing.JButton jbSair;
     private javax.swing.JTable jtEntradas;
-    private javax.swing.JTextField jtParametro;
+    private javax.swing.JFormattedTextField jtParametro;
     // End of variables declaration//GEN-END:variables
 }

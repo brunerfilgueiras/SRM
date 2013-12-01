@@ -196,19 +196,20 @@ public class Imprimir {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + ex);
         }
     }
-     public void imprimeRelatorioProdutoPorSaida() throws JRException, Exception {
+     public void imprimeRelatorioProdutoPorSaida(HashMap Map) throws JRException, Exception {
         Connection conn =  ConnectionFactory.getSrmConnection(); //aqui no lugar do metodo conectaBanco() vc usa o seu tipo de conexão com o banco
         try {
-            HashMap Map = new HashMap();
+           
             String arquivo = null;
-            arquivo = System.getProperty("user.dir") + "/src/relatorios/ProdutoPorPeriodo.jasper";
+            arquivo = System.getProperty("user.dir") + "/src/relatorios/ProdutoPorSaida.jasper";
             JasperPrint jp = JasperFillManager.fillReport(arquivo, Map, conn);
              JasperViewer view = new JasperViewer(jp, false);
-            view.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
+             view.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
             view.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
            view.setTitle("Produtos Por Saída");
             view.setVisible(true);
-
+        
+        
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + ex);
         }

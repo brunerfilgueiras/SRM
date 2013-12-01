@@ -123,7 +123,30 @@ public class FornecedorDAO {
         
       }    
     
-    
+    public boolean existe(Fornecedor fornecedor){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+       List<Fornecedor> resultado = new ArrayList<Fornecedor>();
+       
+       try{ 
+ 
+          
+            Criteria crit = session.createCriteria(Fornecedor.class);
+            crit.add(Restrictions.ilike("cnpj", fornecedor.getCnpj()));
+            crit.add(Restrictions.ilike("nome", fornecedor.getNome()));
+            
+         return crit.list().isEmpty();
+        
+         
+         }catch(Exception e){
+        
+          return  true ;
+        }
+     
+   
+   }
     
     
     

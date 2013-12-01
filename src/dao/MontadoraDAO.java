@@ -135,7 +135,27 @@ public class MontadoraDAO {
                     
     }
     
+    public boolean existe(Montadora montadora){
+        
+        EntityManager entityManager = PersistenceUtil.getEntityManager();
+       Session session = (Session) entityManager.getDelegate();
+        
+      
+       
+       try{ 
+           
+            Criteria crit = session.createCriteria(Montadora.class);
+            crit.add(Restrictions.ilike("nome", montadora.getNome()));
+                   
+         return crit.list().isEmpty();
+        
+         
+         }catch(Exception e){
+        
+          return  true ;
+        }
     
+    }
     
     
     

@@ -25,7 +25,7 @@ public class UsuarioSearchView extends javax.swing.JFrame {
     public UsuarioSearchView(Usuario logado){
         initComponents();
         permissao(logado);
-        carregaTabela();
+        
         
     }
     
@@ -110,17 +110,14 @@ public class UsuarioSearchView extends javax.swing.JFrame {
 
         jtUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nome Completo", "Nome Guerra", "Posto / Graduação"
+                "Nome Completo", "Nome Guerra", "Posto / Graduação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -255,6 +252,9 @@ public class UsuarioSearchView extends javax.swing.JFrame {
 
         
              if(jcbParametro.getSelectedItem().equals("Login")) {  
+               if(jtParametro.getText().isEmpty())
+                 carregaTabela(); 
+                 
                 usuario = Usuario.getInstacia();
                 usuario.setNomeCompleto(null);
                 usuario.setNomeGuerra(null);
@@ -262,6 +262,8 @@ public class UsuarioSearchView extends javax.swing.JFrame {
                 carregaConsulta(usuario);       
             }else{
                  if(jcbParametro.getSelectedItem().equals("Nome Completo")){
+                  if(jtParametro.getText().isEmpty())
+                 carregaTabela();
                    usuario = Usuario.getInstacia();
                    usuario.setLogin(null);
                    usuario.setNomeGuerra(null);
@@ -269,6 +271,9 @@ public class UsuarioSearchView extends javax.swing.JFrame {
                     carregaConsulta(usuario);  
                    
                 }else{
+                    if(jtParametro.getText().isEmpty())
+                 carregaTabela(); 
+                     
                      usuario = Usuario.getInstacia();
                      usuario.setLogin(null);
                      usuario.setNomeCompleto(null);
@@ -349,6 +354,10 @@ public class UsuarioSearchView extends javax.swing.JFrame {
        jPBbarra.setMinimum(0);
        jPBbarra.setMaximum(usuarios.size());
        jPBbarra.setValue(0);
+       if(usuarios.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum usuario encontrado!!", null, 2);
+           
+           
        for(int i = 0; i<usuarios.size();i++){
                         
          modelo.addRow(new String[]{usuarios.get(i).getId().toString(), usuarios.get(i).getNomeCompleto(),
@@ -374,6 +383,9 @@ public class UsuarioSearchView extends javax.swing.JFrame {
        jPBbarra.setMinimum(0);
        jPBbarra.setMaximum(usuarios.size());
        jPBbarra.setValue(0);
+       if(usuarios.isEmpty())
+           JOptionPane.showMessageDialog(rootPane, "Nenhum usuario encontrado!!", null, 2);
+       
        for(int i = 0; i<usuarios.size();i++){
          
          usuario = usuarios.get(i);

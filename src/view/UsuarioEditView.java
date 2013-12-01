@@ -170,11 +170,11 @@ public UsuarioEditView(Usuario usuario){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGravar)
                     .addComponent(jbSair))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-368)/2, (screenSize.height-356)/2, 368, 356);
+        setSize(new java.awt.Dimension(368, 319));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
@@ -184,9 +184,7 @@ public UsuarioEditView(Usuario usuario){
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
     
      UsuarioController usuarioController = UsuarioController.getInstacia();
-       
     
-       
      
      if(campoObrigatorio()==null){
       
@@ -197,9 +195,7 @@ public UsuarioEditView(Usuario usuario){
       usuario.setNomeCompleto(jtNomeCompleto.getText());
       usuario.setNomeGuerra(jtNomeGuerra.getText());
       usuario.setSenha(jtSenha.getText()); 
-      }else{
-          JOptionPane.showMessageDialog(null, validaCaracteres(), null, 1);
-      }  
+      
         
       
      if(usuarioController.existir(usuario)){ 
@@ -212,9 +208,13 @@ public UsuarioEditView(Usuario usuario){
           
           JOptionPane.showMessageDialog(jtNomeCompleto, "Falha ao Salvar Usuario!!", null, 2);
       }
+       
      }else{
          JOptionPane.showMessageDialog(jtNomeCompleto, "Usuario já cadastrado !!", null, 2);
      }
+     }else{
+          JOptionPane.showMessageDialog(null, validaCaracteres(), null, 1);
+      } 
      }else{  
          
         JOptionPane.showMessageDialog(jtNomeCompleto, campoObrigatorio(), null, 2); 
@@ -344,7 +344,7 @@ public UsuarioEditView(Usuario usuario){
        }
     private String validaCaracteres(){
        
-        String vazio = "Campos com poucos caracteres: ";
+        String vazio = "Campos com caracteres inválidos: ";
        boolean msg = false;
        
         if(jtNomeCompleto.getText().length()<4){

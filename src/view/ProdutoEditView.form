@@ -55,7 +55,7 @@
                                       <Component id="jtNumeroPeca" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                                       <Component id="jtLocalizacao" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="jtQuantidade" min="-2" pref="115" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -109,9 +109,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -161,8 +161,6 @@
     <Component class="javax.swing.JTextField" name="jtDescricao">
     </Component>
     <Component class="javax.swing.JTextField" name="jtLocalizacao">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtQuantidade">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -215,13 +213,17 @@
     <Component class="javax.swing.JFormattedTextField" name="jtfValor">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#,##0.00" subtype="-1" type="4"/>
+          <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xa;  MaskFormatter moeda = new MaskFormatter(&quot;#######,##&quot;); &#xa;moeda.setPlaceholderCharacter(&apos;_&apos;);&#xa;  jtfValor = new JFormattedTextField(moeda); &#xa;}catch(Exception e){&#xa;&#xa;}"/>
-      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jtQuantidade">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="#0" subtype="-1" type="0"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

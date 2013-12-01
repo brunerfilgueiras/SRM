@@ -148,10 +148,10 @@ public class UsuarioDAO {
       crit.add(Restrictions.ilike("senha", usuario.getSenha()));
       resultado =  crit.list();   
         
-    if(resultado == null) {   
+    if(!resultado.isEmpty()) {   
        return resultado.get(0); 
     }else{
-       return resultado.get(0);  
+       return usuario = null;  
     }   
         
         

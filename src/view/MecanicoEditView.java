@@ -162,13 +162,7 @@ public MecanicoEditView(Mecanico mecanico) {
 
     private void jcbPostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPostoActionPerformed
         
-        
-        
-        
-        
-        
-        
-        
+             
         
         
         // TODO add your handling code here:
@@ -185,7 +179,7 @@ public MecanicoEditView(Mecanico mecanico) {
        
      
      if(campoObrigatorio()==null){
-      
+     if(validaCaracteres() == null){ 
       mecanico.setPosto((String) jcbPosto.getSelectedItem());
      
       mecanico.setNomeCompleto(jtNomeCompleto.getText());
@@ -194,7 +188,7 @@ public MecanicoEditView(Mecanico mecanico) {
         
         
       
-      
+      if(mecanicoController.existe(mecanico) || mecanico.getId()!= null){
       if(mecanicoController.persistir(mecanico)){
           
           JOptionPane.showMessageDialog(jtNomeCompleto, "Mecanico Gravado Com sucesso!", null, 1);
@@ -204,7 +198,16 @@ public MecanicoEditView(Mecanico mecanico) {
           
           JOptionPane.showMessageDialog(jtNomeCompleto, "Falha ao Salvar Mecanico!!", null, 2);
       }
-        
+      
+      }else{
+          JOptionPane.showMessageDialog(jtNomeCompleto, "Mecanico já cadastrado!!", null, 2);
+      }
+      
+      
+     }else{
+         JOptionPane.showMessageDialog(jtNomeCompleto, validaCaracteres(), null, 2);
+     }
+     
      }else{  
          
         JOptionPane.showMessageDialog(jtNomeCompleto, campoObrigatorio(), null, 2); 
@@ -267,6 +270,38 @@ public MecanicoEditView(Mecanico mecanico) {
         return vazio = null;
     }
        }
+    
+    
+    //valida caracteres
+    private String validaCaracteres(){
+       
+        String vazio = "Dados inválidos nos campos : ";
+       boolean msg = false;
+       
+        if(jtNomeCompleto.getText().length()<4){
+          
+            vazio = vazio + "\n Nome Completo ";
+            
+        msg = true; 
+        }
+        if(jtNomeGuerra.getText().length()<2){
+          
+            vazio = vazio + "\n Nome de Guerra ";
+            
+          msg = true;
+        }
+      
+                     
+        if(msg){
+        
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
+    
+    
     //carrega dados para alterar 
     private void carregaDados(Mecanico mecanico){
        

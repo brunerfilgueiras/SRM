@@ -5,7 +5,9 @@
 package view;
 
 import controller.FornecedorController;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 import model.Fornecedor;
 
 /**
@@ -27,6 +29,7 @@ public FornecedorEditView(Fornecedor fornecedor) {
 
     public FornecedorEditView() {
         initComponents();
+        this.fornecedor.setId(null);
     }
 
     /**
@@ -45,7 +48,6 @@ public FornecedorEditView(Fornecedor fornecedor) {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
-        jtCNPJ = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtContato = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -61,11 +63,26 @@ public FornecedorEditView(Fornecedor fornecedor) {
         jtNumero = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jtComplemento = new javax.swing.JTextField();
-        jtTelefone = new javax.swing.JTextField();
-        jtCEP = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
+        jtCNPJ = new javax.swing.JFormattedTextField();
+        try{
+            MaskFormatter cnpj = new MaskFormatter("##.###.###.####-##");
+            cnpj.setPlaceholderCharacter('_');
+            jtCNPJ = new JFormattedTextField(cnpj);
+        }catch(Exception e){
+
+        }
+        jtTelefone = new javax.swing.JFormattedTextField();
+        jtCEP = new javax.swing.JFormattedTextField();
+        try{
+            MaskFormatter CEP = new MaskFormatter("#####-###");
+
+            jtCEP = new JFormattedTextField(CEP);
+        }catch(Exception e){
+
+        }
 
         jLabel4.setText("jLabel4");
 
@@ -114,6 +131,19 @@ public FornecedorEditView(Fornecedor fornecedor) {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Cadastro de Fornecedores");
 
+        try{
+            MaskFormatter telefone = new MaskFormatter("(##) ####-####");
+            telefone.setPlaceholderCharacter('_');
+            jtTelefone = new JFormattedTextField(telefone);
+        }catch(Exception e){
+
+        }
+        jtTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtTelefoneActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,11 +169,11 @@ public FornecedorEditView(Fornecedor fornecedor) {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jtNome)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jtTelefone))))
+                                    .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel5)
@@ -155,27 +185,31 @@ public FornecedorEditView(Fornecedor fornecedor) {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jtRua)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                        .addComponent(jtBairro))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jLabel8))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jtCidade)
-                                        .addComponent(jtCEP)))
+                                    .addComponent(jtContato, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 163, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jtContato, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                                            .addComponent(jtBairro))
+                                        .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel8)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel12)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(0, 57, Short.MAX_VALUE)))))
+                                            .addComponent(jtCidade))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(0, 0, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(jLabel12)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(jLabel10)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
                     .addComponent(jLabel13))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -193,8 +227,8 @@ public FornecedorEditView(Fornecedor fornecedor) {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
+                    .addComponent(jtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -231,8 +265,8 @@ public FornecedorEditView(Fornecedor fornecedor) {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-466)/2, (screenSize.height-382)/2, 466, 382);
+        setSize(new java.awt.Dimension(466, 382));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
@@ -250,7 +284,8 @@ public FornecedorEditView(Fornecedor fornecedor) {
        
      
      if(campoObrigatorio()==null){
-      
+     if(validaCaracteres()==null){ 
+         
       fornecedor.setNome(jtNome.getText());
       fornecedor.setCnpj(jtCNPJ.getText());
       fornecedor.setContato(jtContato.getText());
@@ -267,7 +302,7 @@ public FornecedorEditView(Fornecedor fornecedor) {
         
         
       
-      
+      if(fornecedorController.existir(fornecedor)||fornecedor.getId()!=null){
       if(fornecedorController.persistir(fornecedor)){
           
           JOptionPane.showMessageDialog(jtNome, "Fornecedor Gravado Com sucesso!", null, 1);
@@ -277,7 +312,12 @@ public FornecedorEditView(Fornecedor fornecedor) {
           
           JOptionPane.showMessageDialog(jtNome, "Falha ao Salvar Fornecedor!!", null, 2);
       }
-        
+      }else{
+          JOptionPane.showMessageDialog(jtNome, "Fornecedor já Cadastrado!!", null, 2);
+      }
+     }else{
+        JOptionPane.showMessageDialog(jtNome, validaCaracteres(), null, 2); 
+     }   
      }else{  
          
         JOptionPane.showMessageDialog(jtNome, campoObrigatorio(), null, 2); 
@@ -294,6 +334,10 @@ public FornecedorEditView(Fornecedor fornecedor) {
         
         
     }//GEN-LAST:event_jbGravarActionPerformed
+
+    private void jtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtTelefoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,6 +405,7 @@ public FornecedorEditView(Fornecedor fornecedor) {
             
          msg = true; 
         }
+        
              
         if(msg){
             
@@ -371,7 +416,53 @@ public FornecedorEditView(Fornecedor fornecedor) {
     }
        }
     
-    
+    private String validaCaracteres(){
+       
+        String vazio = "Campo com poucos caracteres: ";
+       boolean msg = false;
+       
+        if(jtNome.getText().length()<4){
+          
+            vazio = vazio + "\n Nome ";
+            
+        msg = true; 
+        }
+            
+        
+        if(jtContato.getText().length()<4){
+          
+            vazio = vazio + " \n Contato ";
+            
+         msg = true; 
+        }
+        if(jtRua.getText().length()!=0 && jtRua.getText().length()< 2 ){
+          
+            vazio = vazio + " \n Rua ";
+            
+         msg = true; 
+        }
+        if(jtCidade.getText().length()!=0 && jtCidade.getText().length()< 2){
+          
+            vazio = vazio + " \n Cidade ";
+            
+         msg = true; 
+        }
+        if(jtBairro.getText().length()!=0 && jtBairro.getText().length()<2){
+          
+            vazio = vazio + " \n Bairro ";
+            
+         msg = true; 
+        }
+       
+        
+        if(msg){
+            
+            return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
     
     //carrega dados para alterar 
     private void carregaDados(Fornecedor fornecedor){
@@ -412,8 +503,8 @@ public FornecedorEditView(Fornecedor fornecedor) {
     private javax.swing.JButton jbGravar;
     private javax.swing.JButton jbSair;
     private javax.swing.JTextField jtBairro;
-    private javax.swing.JTextField jtCEP;
-    private javax.swing.JTextField jtCNPJ;
+    private javax.swing.JFormattedTextField jtCEP;
+    private javax.swing.JFormattedTextField jtCNPJ;
     private javax.swing.JTextField jtCidade;
     private javax.swing.JTextField jtComplemento;
     private javax.swing.JTextField jtContato;
@@ -421,6 +512,6 @@ public FornecedorEditView(Fornecedor fornecedor) {
     private javax.swing.JTextField jtNome;
     private javax.swing.JTextField jtNumero;
     private javax.swing.JTextField jtRua;
-    private javax.swing.JTextField jtTelefone;
+    private javax.swing.JFormattedTextField jtTelefone;
     // End of variables declaration//GEN-END:variables
 }

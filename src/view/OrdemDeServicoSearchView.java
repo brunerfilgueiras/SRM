@@ -6,7 +6,6 @@ package view;
 
 import controller.OrdemDeServicoController;
 import dao.OrdemDeServicoDAO;
-import java.math.BigInteger;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -34,13 +33,13 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
        jbAlterar.setVisible(false);
        jbExcluir.setVisible(false);
        carregaTabela();
+       
     } 
     
     
     public OrdemDeServicoSearchView(Usuario usuario){
       initComponents();
       permissao(usuario);
-      carregaTabela();
       jbAdicionar.setVisible(false);
     }
     
@@ -72,16 +71,11 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jbAdicionar = new javax.swing.JButton();
+        jPBbarra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de ordem de Serviço");
         setResizable(false);
-
-        jtParametro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtParametroActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Número:");
 
@@ -149,7 +143,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         jLabel2.setText("Pesquisa de ordem de Serviço");
 
         jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add (2).png"))); // NOI18N
-        jbAdicionar.setText("Adicionar");
+        jbAdicionar.setText("OK");
         jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAdicionarActionPerformed(evt);
@@ -167,29 +161,26 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbSair))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(7, 7, 7)
-                                .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbConsultar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbIncluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbAlterar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbExcluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbAdicionar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addGap(7, 7, 7)
+                        .addComponent(jtParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbConsultar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbIncluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbAdicionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbSair)))
                 .addContainerGap())
+            .addComponent(jPBbarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,44 +201,46 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
                     .addComponent(jbIncluir)
                     .addComponent(jbAlterar)
                     .addComponent(jbExcluir)
-                    .addComponent(jbAdicionar))
+                    .addComponent(jbAdicionar)
+                    .addComponent(jbSair))
                 .addGap(7, 7, 7)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSair)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPBbarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(548, 393));
+        setSize(new java.awt.Dimension(610, 393));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtParametroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtParametroActionPerformed
 
     private void jbIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirActionPerformed
 
         OrdemDeServicoEditView janelaOrdemDeServico = new OrdemDeServicoEditView();
         janelaOrdemDeServico.setVisible(true);// TODO add your handling code here:
-        this.dispose();
+      
     }//GEN-LAST:event_jbIncluirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-       OrdemDeServicoEditView janelaOrdemDeServico = new OrdemDeServicoEditView(seleciona());
+      
+      if(seleciona() != null){  
+        OrdemDeServicoEditView janelaOrdemDeServico = new OrdemDeServicoEditView(seleciona());
         janelaOrdemDeServico.setVisible(true);
-        this.dispose();
+      }else{
+            JOptionPane.showMessageDialog(rootPane, "Ordem De Servico Não selecionada!",null , 2);
+        }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlterarActionPerformed
 
     private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
         // TODO add your handling code here:
       if(jtParametro.getText().equals("")){
-       
+       carregaTabela();
           
           
           
@@ -267,13 +260,14 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         OrdemDeServicoController ordemDeServicoController =  OrdemDeServicoController.getInstacia();
        
        if(seleciona() != null){
-        
+        if(JOptionPane.showConfirmDialog(null, "Deseja excluir este registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
         if(ordemDeServicoController.deletar(seleciona())){
             JOptionPane.showMessageDialog(rootPane, "Ordem De Servico Excluida com sucesso!");
                         
             carregaTabela();
         }else{
             JOptionPane.showMessageDialog(rootPane, "Falha ao Excluir  Ordem De Servico!", null, 2);
+        }
         }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Ordem De Servico Não selecionada!",null , 2);
@@ -294,11 +288,14 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
 
     private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
         // TODO add your handling code here:
+       if(seleciona() != null){  
         SaidaEditView janelaSaida = SaidaEditView.getInstacia();
         janelaSaida.adicionarOrdemDeServico(seleciona());
         janelaSaida.setVisible(true);
         this.dispose();
-
+   }else{
+            JOptionPane.showMessageDialog(rootPane, "Ordem De Servico Não selecionada!",null , 2);
+        }
     }//GEN-LAST:event_jbAdicionarActionPerformed
 
     /**
@@ -349,14 +346,21 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         
        DefaultTableModel modelo = (DefaultTableModel) jtOrdensDeServico.getModel();
        modelo.setNumRows(0);
-       
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(ordensDeServico.size());
+       jPBbarra.setValue(0);
+     if(ordensDeServico.isEmpty())
+       JOptionPane.showMessageDialog(rootPane, "Nenhuma Ordem de Serviço encontrada!", null, 2);  
+         
+         
+         
        for(int i = 0; i<ordensDeServico.size();i++){
        
            ordemDeServico = ordensDeServico.get(i);
            
            
         modelo.addRow(new String[]{ordemDeServico.getId().toString(), ordemDeServico.getOm(), ordemDeServico.getViatura(),dataUtil.parseDate(ordemDeServico.getDataSaida()), dataUtil.parseDate(ordemDeServico.getDataEntrada())});
-     
+     jPBbarra.setValue(i+1);
     
        }
       
@@ -373,6 +377,11 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         
        DefaultTableModel modelo = (DefaultTableModel) jtOrdensDeServico.getModel();
        modelo.setNumRows(0);
+       jPBbarra.setMinimum(0);
+       jPBbarra.setMaximum(ordensDeServico.size());
+       jPBbarra.setValue(0);
+      if(ordensDeServico.isEmpty())
+       JOptionPane.showMessageDialog(rootPane, "Nenhuma Ordem de Serviço encontrada!", null, 2); 
        
        for(int i = 0; i<ordensDeServico.size();i++){
          
@@ -380,7 +389,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
         
          
              modelo.addRow(new String[]{ordemDeServico.getId().toString(), ordemDeServico.getOm(), ordemDeServico.getViatura(),dataUtil.parseDate(ordemDeServico.getDataSaida()), dataUtil.parseDate(ordemDeServico.getDataEntrada())});
-     
+     jPBbarra.setValue(i+1);
        }
              
     }
@@ -399,6 +408,7 @@ public class OrdemDeServicoSearchView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JProgressBar jPBbarra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

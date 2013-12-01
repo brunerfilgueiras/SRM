@@ -54,6 +54,8 @@ List resultado = new ArrayList();
 
         jLabel2.setText("Login:");
 
+        jtLogin.setText("vidal");
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Login.png"))); // NOI18N
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +74,13 @@ List resultado = new ArrayList();
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Sistema de Reserva de Materiais");
+
+        jtSenha.setText("123");
+        jtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtSenhaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,12 +148,18 @@ List resultado = new ArrayList();
         logado.setPerfil("Administrador");
         } 
         }else{
+            
         logado.setPerfil(null);
         logado.setLogin(jtLogin.getText());
          logado.setSenha(jtSenha.getText());    
-         logado = usuarioDAO.login(logado);   
-        if(logado.getPerfil()!= null){
+        
+        
+       
+           
+        if(usuarioDAO.login(logado)!= null){
          
+            logado = usuarioDAO.login(logado); 
+            
            SRMView janelaPrincipal = new SRMView(logado);
             janelaPrincipal.setVisible(true);
             this.dispose();
@@ -163,6 +178,10 @@ List resultado = new ArrayList();
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtSenhaActionPerformed
 
     /**
      * @param args the command line arguments

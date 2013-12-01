@@ -27,6 +27,7 @@ Montadora montadora = Montadora.getInstacia();
     
     public MontadoraEditView() {
         initComponents();
+        this.montadora.setId(null);
     }
 
     /**
@@ -124,15 +125,27 @@ Montadora montadora = Montadora.getInstacia();
 
 MontadoraController montadoraController = MontadoraController.getInstacia();
    if(campoObrigatorio()==null){    
-   montadora.setNome(jtNome.getText());
+   if(validaCaracteres()==null){
+    montadora.setNome(jtNome.getText());
    
+   if(montadoraController.existe(montadora)|| montadora.getId()!=null){ 
    if(montadoraController.persistir(montadora)){
       JOptionPane.showMessageDialog(rootPane, "Montadora Gravada Com sucesso");
       
       this.dispose();
    }else{
       JOptionPane.showMessageDialog(rootPane, "Falha ao Gravar a Montadora");
-
+   }
+   }else{
+     JOptionPane.showMessageDialog(rootPane, "Montadora já Cadastrada!!");  
+       
+   }
+   
+   
+   
+   
+   }else{
+       JOptionPane.showMessageDialog(rootPane, validaCaracteres(), null, 2);
    }
    }else{
        JOptionPane.showMessageDialog(rootPane, campoObrigatorio(), null, 2);
@@ -189,10 +202,7 @@ MontadoraController montadoraController = MontadoraController.getInstacia();
         
     }
     
-    
-    
-    
-    
+        
     // metodo que valida Campo em Branco
     private String campoObrigatorio(){
         String vazio = "Campo Obrigatorio Em Branco: ";
@@ -205,6 +215,21 @@ MontadoraController montadoraController = MontadoraController.getInstacia();
         return vazio = null;
        }
     
+    private String validaCaracteres(){
+       
+        String vazio = "Dados Inválidos no campo: ";
+       boolean msg = false;
+       
+        if(jtNome.getText().length()<2){
+          
+            vazio = vazio + "\n Nome";
+            
+           return vazio;
+        }else{
+        
+        return vazio = null;
+    }
+       }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

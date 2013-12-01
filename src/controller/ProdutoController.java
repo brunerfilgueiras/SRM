@@ -14,7 +14,7 @@ import model.Produto;
  * @author secinfor-04
  */
 public class ProdutoController {
-    
+    private ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
     static ProdutoController instancia = null;      
      
      public static ProdutoController getInstacia(){
@@ -29,7 +29,7 @@ public class ProdutoController {
     
    public boolean persistir(Produto produto){
        
-      ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
+     
     
       return produtoDAO.persistir(produto);
       
@@ -37,7 +37,7 @@ public class ProdutoController {
    }
    public boolean editaQuantidade(ItensSaida itensSaida){
        
-      ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
+      
     
       return produtoDAO.editaQuantidade(itensSaida);
       
@@ -45,7 +45,7 @@ public class ProdutoController {
    }
    public boolean editaQuantidade(ItensEntrada itensEntrada){
        
-      ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
+      
     
       return produtoDAO.editaQuantidade(itensEntrada);
       
@@ -53,17 +53,18 @@ public class ProdutoController {
    }
    public boolean deletar(Produto produto){
        
-      ProdutoDAO produtoDAO = ProdutoDAO.getInstacia();
+      
     
       return produtoDAO.deletar(produto);
       
          
    } 
     
-    
-    
-    
-    
+    public boolean existir(Produto produto){
+      
+        return produtoDAO.existe(produto);
+     
+    }
     
     
 }
